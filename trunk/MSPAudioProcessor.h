@@ -7,6 +7,9 @@
  *
  */
 
+// just a dummy test class, the idea is that you should be able to use any AudioProcessor subclass in the codebase as
+// with the other plugin wrappers
+
 #ifndef _MSPAUDIOPROCESSOR_H_
 #define _MSPAUDIOPROCESSOR_H_
 

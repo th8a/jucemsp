@@ -204,7 +204,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>A80FE5320DE9698E00AE5B01</string>
+						<string>A80FE5660DE9707F00AE5B01</string>
 						<key>history</key>
 						<array>
 							<string>A80FE5300DE9698E00AE5B01</string>
@@ -244,7 +244,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>A80FE5340DE9698E00AE5B01</string>
+						<string>A80FE5670DE9707F00AE5B01</string>
 						<key>history</key>
 						<array>
 							<string>A80FE4CC0DE95C1E00AE5B01</string>
@@ -347,7 +347,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>3</integer>
+									<integer>5</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -390,7 +390,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>juce_mspobject.cpp</string>
+								<string>MSPAudioProcessor.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -398,18 +398,18 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>juce_mspobject.cpp</string>
+										<string>MSPAudioProcessor.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>A80FE52D0DE9698E00AE5B01</string>
+										<string>A80FE5650DE9707F00AE5B01</string>
 										<key>history</key>
 										<array>
 											<string>A80FE4980DE94ECF00AE5B01</string>
 											<string>A80FE4D80DE95D6200AE5B01</string>
-											<string>A80FE5030DE95F3B00AE5B01</string>
 											<string>A80FE5040DE95F3B00AE5B01</string>
-											<string>A80FE5050DE95F3B00AE5B01</string>
+											<string>A80FE5620DE9707F00AE5B01</string>
+											<string>A80FE5630DE9707F00AE5B01</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -545,6 +545,7 @@
 											<string>A80FE50C0DE95F3B00AE5B01</string>
 											<string>A80FE50D0DE95F3B00AE5B01</string>
 											<string>A80FE50E0DE95F3B00AE5B01</string>
+											<string>A80FE5640DE9707F00AE5B01</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -740,8 +741,8 @@
 	<array>
 		<string>A80FE4E00DE95D6200AE5B01</string>
 		<string>A80FE52E0DE9698E00AE5B01</string>
-		<string>/Users/martinrobinson/development/maxmsp/my projects/juce_mspobject~/juce_mspobject.xcodeproj</string>
 		<string>A857F64B0D2C103B004DDB2C</string>
+		<string>/Users/martinrobinson/development/maxmsp/my projects/juce_mspobject~/juce_mspobject.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 83 1265 795 0 0 1440 878 </string>
@@ -760,8 +761,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -784,6 +783,8 @@
 							<string>303pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>

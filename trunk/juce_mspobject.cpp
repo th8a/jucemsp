@@ -111,11 +111,11 @@ void jucemsp_initattrs(t_class *c, AudioProcessor* juceAudioProcessor)
 //							   (method)0L, (method)butterlp_setfrequency, calcoffset(t_butterlp, attr_frequency));
 //		class_addattr(c, attr);
 		
-		char attrstr[256];
+//		char attrstr[256];
+//		sprintf(attrstr, "attr_%d", i);
 		
-		sprintf(attrstr, "attr_%d", i);
-		
-		attr = attr_offset_new(attrstr, _sym_float32, attrflags,
+		attr = attr_offset_new((char*)(const char*)juceAudioProcessor->getParameterName(i), 
+							   _sym_float32, attrflags,
 							   (method)jucemsp_attr_get, (method)jucemsp_attr_set, 
 							   calcoffset(t_jucemsp, params) + sizeof(float) * i);
 		class_addattr(c, attr);
@@ -190,20 +190,69 @@ void jucemsp_list(t_jucemsp *x, t_symbol* s, short argc, t_atom* argv)
 	x->juceAudioProcessor->setParameterNotifyingHost(index, value);
 }
 
-t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *argc, t_atom **argv)
+t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *ac, t_atom **av)
 {
-	return 0;
+	post("jucemsp_attr_get");
+	
+	if (*ac && *av) {
+		// memory passed in; use it 
+	} else { 
+		*ac = 1; // size of attr data 
+		*av = (t_atom *)getbytes(sizeof(t_atom) * 
+								 (*ac)); 
+		if (!(*av)) { 
+			*ac = 0; 
+			return MAX_ERR_OUT_OF_MEM; 
+		} 
+	} 
+	
+	t_symbol *attrName = (t_symbol*)object_method(attr, _sym_getname); 
+	
+	for(int i = 0; i < x->juceAudioProcessor->getNumParameters(); i++) {
+		
+		t_symbol *paramName = gensym((char*)(const char*)x->juceAudioProcessor->getParameterName(i));
+		
+		if(attrName == paramName) {
+			atom_setfloat(*av, x->params[i]);
+			return MAX_ERR_NONE;
+		}
+		
+	}
+	
+	return MAX_ERR_NONE; 
+	
 }
 
-t_max_err jucemsp_attr_set(t_jucemsp *x, void *attr, long argc, t_atom *argv)
+t_max_err jucemsp_attr_set(t_jucemsp *x, void *attr, long ac, t_atom *av)
 {
-	return 0;
+	post("jucemsp_attr_set");
+	
+	if (ac && av) { 
+		t_symbol *attrName = (t_symbol*)object_method(attr, _sym_getname); 
+		
+		for(int i = 0; i < x->juceAudioProcessor->getNumParameters(); i++) {
+			
+			t_symbol *paramName = gensym((char*)(const char*)x->juceAudioProcessor->getParameterName(i));
+			
+			if(attrName == paramName) {
+				x->params[i] = atom_getfloat(av);
+				x->juceAudioProcessor->setParameter(i,x->params[i]);
+				
+				return MAX_ERR_NONE;
+			}
+			
+		}
+		
+	} 
+	return MAX_ERR_NONE; 
 }
 
 
 void jucemsp_updateattr(t_jucemsp *x, int parameterIndex, float newValue)
 {
 	post("jucemsp_updateattr i=%d val=%f", parameterIndex, newValue);
+	
+	x->params[parameterIndex] = newValue;
 }
 
 
