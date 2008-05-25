@@ -204,7 +204,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>A80FE5990DE9760300AE5B01</string>
+						<string>A80FE5A30DE9783C00AE5B01</string>
 						<key>history</key>
 						<array>
 							<string>A80FE5300DE9698E00AE5B01</string>
@@ -244,7 +244,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>A80FE59A0DE9760300AE5B01</string>
+						<string>A80FE5A40DE9783C00AE5B01</string>
 						<key>history</key>
 						<array>
 							<string>A80FE4CC0DE95C1E00AE5B01</string>
@@ -300,6 +300,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -336,6 +338,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateExpansionKey</key>
 							<array>
 								<string>089C166AFE841209C02AAC07</string>
+								<string>A80FE59B0DE9780400AE5B01</string>
 								<string>08FB77ADFE841716C02AAC07</string>
 								<string>089C167CFE841241C02AAC07</string>
 								<string>19C28FB4FE9D528D11CA2CBB</string>
@@ -383,14 +386,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>juce_mspobject.cpp</string>
+								<string>commonsyms.c</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -398,19 +399,19 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>juce_mspobject.cpp</string>
+										<string>commonsyms.c</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>A80FE5980DE9760300AE5B01</string>
+										<string>A80FE5A20DE9783C00AE5B01</string>
 										<key>history</key>
 										<array>
 											<string>A80FE4980DE94ECF00AE5B01</string>
-											<string>A80FE4D80DE95D6200AE5B01</string>
 											<string>A80FE5710DE974D500AE5B01</string>
 											<string>A80FE5720DE974D500AE5B01</string>
 											<string>A80FE5950DE9760300AE5B01</string>
-											<string>A80FE5960DE9760300AE5B01</string>
+											<string>A80FE59F0DE9783C00AE5B01</string>
+											<string>A80FE5A00DE9783C00AE5B01</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -552,6 +553,7 @@
 											<string>A80FE5770DE974D500AE5B01</string>
 											<string>A80FE5880DE9757C00AE5B01</string>
 											<string>A80FE5970DE9760300AE5B01</string>
+											<string>A80FE5A10DE9783C00AE5B01</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>

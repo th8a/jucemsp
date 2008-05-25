@@ -74,6 +74,7 @@
 		089C166AFE841209C02AAC07 /* plus~ */ = {
 			isa = PBXGroup;
 			children = (
+				A80FE59B0DE9780400AE5B01 /* Juce MSP Wrapper Common */,
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
@@ -109,8 +110,6 @@
 			isa = PBXGroup;
 			children = (
 				A80FE29F0DE9395000AE5B01 /* JucePluginCharacteristics.h */,
-				08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */,
-				A80FE4AF0DE9523F00AE5B01 /* commonsyms.c */,
 				A80FE0300DE8B81700AE5B01 /* MSPAudioProcessor.h */,
 				A80FE0310DE8B81700AE5B01 /* MSPAudioProcessor.cpp */,
 			);
@@ -131,6 +130,15 @@
 				A80FDFBF0DE7FEF800AE5B01 /* libjuce.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A80FE59B0DE9780400AE5B01 /* Juce MSP Wrapper Common */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */,
+				A80FE4AF0DE9523F00AE5B01 /* commonsyms.c */,
+			);
+			name = "Juce MSP Wrapper Common";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

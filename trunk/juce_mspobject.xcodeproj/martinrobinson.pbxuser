@@ -345,6 +345,12 @@
 			A80FE5980DE9760300AE5B01 /* PBXTextBookmark */ = A80FE5980DE9760300AE5B01 /* PBXTextBookmark */;
 			A80FE5990DE9760300AE5B01 /* PBXTextBookmark */ = A80FE5990DE9760300AE5B01 /* PBXTextBookmark */;
 			A80FE59A0DE9760300AE5B01 /* PBXTextBookmark */ = A80FE59A0DE9760300AE5B01 /* PBXTextBookmark */;
+			A80FE59F0DE9783C00AE5B01 /* PBXTextBookmark */ = A80FE59F0DE9783C00AE5B01 /* PBXTextBookmark */;
+			A80FE5A00DE9783C00AE5B01 /* PBXTextBookmark */ = A80FE5A00DE9783C00AE5B01 /* PBXTextBookmark */;
+			A80FE5A10DE9783C00AE5B01 /* PBXTextBookmark */ = A80FE5A10DE9783C00AE5B01 /* PBXTextBookmark */;
+			A80FE5A20DE9783C00AE5B01 /* PBXTextBookmark */ = A80FE5A20DE9783C00AE5B01 /* PBXTextBookmark */;
+			A80FE5A30DE9783C00AE5B01 /* PBXTextBookmark */ = A80FE5A30DE9783C00AE5B01 /* PBXTextBookmark */;
+			A80FE5A40DE9783C00AE5B01 /* PBXTextBookmark */ = A80FE5A40DE9783C00AE5B01 /* PBXTextBookmark */;
 		};
 		sourceControlManager = A857F6410D2C0FF4004DDB2C /* Source Control */;
 		userBuildSettings = {
@@ -2534,9 +2540,9 @@
 	};
 	A80FE4AF0DE9523F00AE5B01 /* commonsyms.c */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1010, 4578}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1048, 4578}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {1010, 593}}";
+			sepNavVisRect = "{{0, 0}, {1048, 593}}";
 		};
 	};
 	A80FE4B40DE9526500AE5B01 /* PBXTextBookmark */ = {
@@ -3531,6 +3537,66 @@
 		vrLoc = 0;
 	};
 	A80FE59A0DE9760300AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A80FE0310DE8B81700AE5B01 /* MSPAudioProcessor.cpp */;
+		name = sendChangeMessage;
+		rLen = 17;
+		rLoc = 1787;
+		rType = 0;
+		vrLen = 1408;
+		vrLoc = 571;
+	};
+	A80FE59F0DE9783C00AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		name = "juce_mspobject.cpp: 238";
+		rLen = 0;
+		rLoc = 7311;
+		rType = 0;
+		vrLen = 1288;
+		vrLoc = 6155;
+	};
+	A80FE5A00DE9783C00AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A80FE4AF0DE9523F00AE5B01 /* commonsyms.c */;
+		name = "commonsyms.c: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 874;
+		vrLoc = 0;
+	};
+	A80FE5A10DE9783C00AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		name = "juce_mspobject.cpp: 238";
+		rLen = 0;
+		rLoc = 7311;
+		rType = 0;
+		vrLen = 1288;
+		vrLoc = 6155;
+	};
+	A80FE5A20DE9783C00AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A80FE4AF0DE9523F00AE5B01 /* commonsyms.c */;
+		name = "commonsyms.c: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 874;
+		vrLoc = 0;
+	};
+	A80FE5A30DE9783C00AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A80FE5310DE9698E00AE5B01 /* ext_obex.h */;
+		name = "#define calcoffset(x,y) ((long)(&(((x *)0L)->y)))";
+		rLen = 50;
+		rLoc = 1165;
+		rType = 0;
+		vrLen = 1397;
+		vrLoc = 0;
+	};
+	A80FE5A40DE9783C00AE5B01 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = A80FE0310DE8B81700AE5B01 /* MSPAudioProcessor.cpp */;
 		name = sendChangeMessage;
