@@ -11,6 +11,7 @@ typedef struct _plus
     t_pxobject x_obj;
 	
 	AudioProcessor* juceAudioProcessor;
+	float* inputChannels[32]; // need to make this dynamic
 	float* outputChannels[32]; // need to make this dynamic
 	
 	AudioSampleBuffer bufferSpace;
@@ -42,10 +43,10 @@ int main(void)
 
 t_int *offset_perform(t_int *w)
 {
-    t_float *in = (t_float *)(w[1]);
-    t_float *out = (t_float *)(w[2]);
-	t_plus *x = (t_plus *)(w[3]);
-	int n = (int)(w[4]);
+//    t_float *in = (t_float *)(w[1]);
+//    t_float *out = (t_float *)(w[2]);
+	t_plus *x = (t_plus *)(w[1]);
+	int n = (int)(w[2]);
 	
 //	if (x->x_obj.z_disabled)
 //		goto out;
@@ -59,26 +60,27 @@ t_int *offset_perform(t_int *w)
 	
 	//AudioSampleBuffer buffer(x->channels, 2, n);
 	
-	x->bufferSpace.copyFrom(0, 0, in, n);
+	// need to iterate through input channels
+	x->bufferSpace.copyFrom(0, 0, x->inputChannels[0], n);
 	
 	x->juceAudioProcessor->processBlock(x->bufferSpace, x->midiEvents);
 	
-	AudioSampleBuffer tempBuffer(x->outputChannels, x->juceAudioProcessor->getNumOutputChannels(), n);
+	AudioSampleBuffer outputBuffer(x->outputChannels, x->juceAudioProcessor->getNumOutputChannels(), n);
 	
-	// iterate through output channels?
-	
-	tempBuffer.copyFrom(0, 0, x->bufferSpace, 0, 0, n);
+	// need to iterate through output channels
+	outputBuffer.copyFrom(0, 0, x->bufferSpace, 0, 0, n);
 	
 	
 out:
-    return (w+5);
+    return (w+3);
 }
 
 
 
 void plus_dsp(t_plus *x, t_signal **sp, short *count)
 {
-	dsp_add(offset_perform, 4, sp[0]->s_vec, sp[1]->s_vec, x, sp[0]->s_n);
+	//dsp_add(offset_perform, 4, sp[0]->s_vec, sp[1]->s_vec, x, sp[0]->s_n);
+	dsp_add(offset_perform, 2, x, sp[0]->s_n);
 	
 	post("input=%p output=%p", sp[0]->s_vec, sp[1]->s_vec);
 	
@@ -90,7 +92,10 @@ void plus_dsp(t_plus *x, t_signal **sp, short *count)
 								x->juceAudioProcessor->getNumOutputChannels()),
 						   sp[0]->s_n);
 	
-	// keep a record of an array of out output channels 
+	// keep a record of an array of our output channels 
+	x->inputChannels[0] = sp[0]->s_vec;
+	
+	// keep a record of an array of our output channels 
 	x->outputChannels[0] = sp[1]->s_vec;
 	
 	x->juceAudioProcessor->prepareToPlay(sp[0]->s_sr, sp[0]->s_n);
