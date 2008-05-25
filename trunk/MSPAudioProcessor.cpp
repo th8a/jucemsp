@@ -67,7 +67,7 @@ void MSPAudioProcessor::setParameter (int index, float newValue)
 			
 			post("MSPAudioProcessor::setParameter %d = %f", index, newValue);
 			
-            //sendChangeMessage (this); // do we need to use this to send to MaxMSP outlets?
+            sendChangeMessage (this);
         }
     }
 }
@@ -75,7 +75,7 @@ void MSPAudioProcessor::setParameter (int index, float newValue)
 const String MSPAudioProcessor::getParameterName (int index)
 {
 	if (index == 0)
-        return String (gain, 2);
+        return T("gain");
 	
     return String::empty;
 }

@@ -10,7 +10,8 @@
 #ifndef _MSPAUDIOPROCESSOR_H_
 #define _MSPAUDIOPROCESSOR_H_
 
-class MSPAudioProcessor  : public AudioProcessor
+class MSPAudioProcessor  :	public AudioProcessor,
+							public ChangeBroadcaster
 {
 public:
 	MSPAudioProcessor();
