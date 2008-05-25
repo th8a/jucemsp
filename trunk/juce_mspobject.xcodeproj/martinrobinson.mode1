@@ -190,6 +190,46 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
+				<string>A80FE52E0DE9698E00AE5B01</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>ext_obex.h</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>A80FE52F0DE9698E00AE5B01</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>ext_obex.h</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>A80FE5320DE9698E00AE5B01</string>
+						<key>history</key>
+						<array>
+							<string>A80FE5300DE9698E00AE5B01</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {943, 774}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>15 58 943 815 0 0 1440 878 </string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
 				<string>A80FE4E00DE95D6200AE5B01</string>
 				<key>PBXProjectModuleLabel</key>
 				<string>MSPAudioProcessor.cpp</string>
@@ -204,7 +244,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>A80FE5130DE95F6700AE5B01</string>
+						<string>A80FE5340DE9698E00AE5B01</string>
 						<key>history</key>
 						<array>
 							<string>A80FE4CC0DE95C1E00AE5B01</string>
@@ -362,7 +402,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>A80FE5120DE95F6700AE5B01</string>
+										<string>A80FE52D0DE9698E00AE5B01</string>
 										<key>history</key>
 										<array>
 											<string>A80FE4980DE94ECF00AE5B01</string>
@@ -698,9 +738,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>A857F64B0D2C103B004DDB2C</string>
 		<string>A80FE4E00DE95D6200AE5B01</string>
+		<string>A80FE52E0DE9698E00AE5B01</string>
 		<string>/Users/martinrobinson/development/maxmsp/my projects/juce_mspobject~/juce_mspobject.xcodeproj</string>
+		<string>A857F64B0D2C103B004DDB2C</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 83 1265 795 0 0 1440 878 </string>
@@ -726,7 +767,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MSPAudioProcessor.cpp</string>
+								<string>juce_mspobject.cpp</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -793,7 +834,7 @@
 			<key>WindowToolGUID</key>
 			<string>A857F64B0D2C103B004DDB2C</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

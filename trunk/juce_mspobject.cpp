@@ -26,12 +26,17 @@ typedef struct _jucemsp
 	AudioSampleBuffer bufferSpace;
 	
 	MidiBuffer midiEvents;
-		
+	
+	float params[1];
+	//.. extra space will be alloacted for the number of params
 } t_jucemsp;
 
+void jucemsp_initattrs(t_class *c, AudioProcessor* juceAudioProcessor);
 t_int *jucemsp_perform(t_int *w);
 void jucemsp_list(t_jucemsp *x, t_symbol* s, short argc, t_atom* argv);
 void jucemsp_updateattr(t_jucemsp *x, int parameterIndex, float newValue);
+t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *argc, t_atom **argv); 
+t_max_err jucemsp_attr_set(t_jucemsp *x, void *attr, long argc, t_atom *argv); 
 void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count);
 void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s);
 void *jucemsp_new(t_symbol *s, long argc, t_atom *argv);
@@ -61,12 +66,14 @@ int main(void)
 	long attrflags = 0;
 	t_class *c;
 	t_object *attr;
+	AudioProcessor* juceAudioProcessor = createPluginFilter(); // a dummy so we can inspect it
 	
 	common_symbols_init();
 	
 	// Define our class
 	c = class_new("juce_mspobject~",(method)jucemsp_new, (method)jucemsp_free, 
-				  (short)sizeof(t_jucemsp), (method)0L, 
+				  (short)sizeof(t_jucemsp) + ((juceAudioProcessor->getNumParameters()-1) * sizeof(float)), 
+				  (method)0L, 
 				  A_GIMME, 0);
 		
 	class_obexoffset_set(c, calcoffset(t_jucemsp, obex));
@@ -78,6 +85,9 @@ int main(void)
 	class_addmethod(c, (method)object_obex_dumpout,  "dumpout",		A_CANT,0);  
 	class_addmethod(c, (method)object_obex_quickref, "quickref",	A_CANT, 0);
 	
+	// generate some attrs from the plugin params
+	jucemsp_initattrs(c, juceAudioProcessor);
+	
 	// Setup our class to work with MSP
 	class_dspinit(c);
 	
@@ -86,10 +96,33 @@ int main(void)
 	jucemsp_class = c;
 	
 	
-	
+	delete juceAudioProcessor; // delete the dummy
 	return 0;
 }
 
+void jucemsp_initattrs(t_class *c, AudioProcessor* juceAudioProcessor)
+{
+	long attrflags = 0;
+	t_object *attr;
+	
+	for(int i = 0; i < juceAudioProcessor->getNumParameters(); i++) {
+		post("param %d", i);
+//		attr = attr_offset_new("frequency", _sym_float32, attrflags,
+//							   (method)0L, (method)butterlp_setfrequency, calcoffset(t_butterlp, attr_frequency));
+//		class_addattr(c, attr);
+		
+		char attrstr[256];
+		
+		sprintf(attrstr, "attr_%d", i);
+		
+		attr = attr_offset_new(attrstr, _sym_float32, attrflags,
+							   (method)jucemsp_attr_get, (method)jucemsp_attr_set, 
+							   calcoffset(t_jucemsp, params) + sizeof(float) * i);
+		class_addattr(c, attr);
+	}
+	
+	
+}
 
 t_int *jucemsp_perform(t_int *w)
 {
@@ -157,10 +190,22 @@ void jucemsp_list(t_jucemsp *x, t_symbol* s, short argc, t_atom* argv)
 	x->juceAudioProcessor->setParameterNotifyingHost(index, value);
 }
 
+t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *argc, t_atom **argv)
+{
+	return 0;
+}
+
+t_max_err jucemsp_attr_set(t_jucemsp *x, void *attr, long argc, t_atom *argv)
+{
+	return 0;
+}
+
+
 void jucemsp_updateattr(t_jucemsp *x, int parameterIndex, float newValue)
 {
 	post("jucemsp_updateattr i=%d val=%f", parameterIndex, newValue);
 }
+
 
 void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s)
 {

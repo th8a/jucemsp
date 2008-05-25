@@ -290,6 +290,14 @@
 			A80FE5100DE95F3B00AE5B01 /* PBXTextBookmark */ = A80FE5100DE95F3B00AE5B01 /* PBXTextBookmark */;
 			A80FE5120DE95F6700AE5B01 /* PBXTextBookmark */ = A80FE5120DE95F6700AE5B01 /* PBXTextBookmark */;
 			A80FE5130DE95F6700AE5B01 /* PBXTextBookmark */ = A80FE5130DE95F6700AE5B01 /* PBXTextBookmark */;
+			A80FE5240DE967B500AE5B01 /* PBXTextBookmark */ = A80FE5240DE967B500AE5B01 /* PBXTextBookmark */;
+			A80FE5250DE967B500AE5B01 /* PBXTextBookmark */ = A80FE5250DE967B500AE5B01 /* PBXTextBookmark */;
+			A80FE5260DE967B500AE5B01 /* PBXTextBookmark */ = A80FE5260DE967B500AE5B01 /* PBXTextBookmark */;
+			A80FE5270DE967B500AE5B01 /* PBXTextBookmark */ = A80FE5270DE967B500AE5B01 /* PBXTextBookmark */;
+			A80FE52D0DE9698E00AE5B01 /* PBXTextBookmark */ = A80FE52D0DE9698E00AE5B01 /* PBXTextBookmark */;
+			A80FE5300DE9698E00AE5B01 /* PBXTextBookmark */ = A80FE5300DE9698E00AE5B01 /* PBXTextBookmark */;
+			A80FE5320DE9698E00AE5B01 /* PBXTextBookmark */ = A80FE5320DE9698E00AE5B01 /* PBXTextBookmark */;
+			A80FE5340DE9698E00AE5B01 /* PBXTextBookmark */ = A80FE5340DE9698E00AE5B01 /* PBXTextBookmark */;
 		};
 		sourceControlManager = A857F6410D2C0FF4004DDB2C /* Source Control */;
 		userBuildSettings = {
@@ -297,9 +305,9 @@
 	};
 	08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1010, 3136}}";
-			sepNavSelRange = "{4422, 0}";
-			sepNavVisRect = "{{0, 1865}, {1010, 593}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1010, 3766}}";
+			sepNavSelRange = "{3828, 0}";
+			sepNavVisRect = "{{0, 1209}, {1010, 593}}";
 			sepNavWindowFrame = "{{15, 2}, {943, 871}}";
 		};
 	};
@@ -319,7 +327,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "mspobject.c: 28";
 		rLen = 0;
-		rLoc = 1656;
+		rLoc = 1968;
 		rType = 0;
 		vrLen = 960;
 		vrLoc = 0;
@@ -329,7 +337,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "mspobject.c: 28";
 		rLen = 0;
-		rLoc = 1656;
+		rLoc = 1968;
 		rType = 0;
 		vrLen = 960;
 		vrLoc = 0;
@@ -339,7 +347,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 28";
 		rLen = 0;
-		rLoc = 1656;
+		rLoc = 1968;
 		rType = 0;
 		vrLen = 960;
 		vrLoc = 0;
@@ -364,7 +372,7 @@
 		comments = "error: 'x' was not declared in this scope";
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		rLen = 1;
-		rLoc = 215;
+		rLoc = 260;
 		rType = 1;
 	};
 	A80FE0400DE8B86F00AE5B01 /* PBXTextBookmark */ = {
@@ -372,7 +380,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "delete x->juceAudioProcessor;";
 		rLen = 168;
-		rLoc = 6020;
+		rLoc = 7499;
 		rType = 0;
 		vrLen = 283;
 		vrLoc = 2342;
@@ -425,7 +433,7 @@
 		comments = "error: cannot convert 'float' to 't_plus*' for argument '1' to 'void plus_float(t_plus*, double)'";
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		rLen = 0;
-		rLoc = 176;
+		rLoc = 221;
 		rType = 1;
 	};
 	A80FE1A20DE8C38C00AE5B01 /* PBXTextBookmark */ = {
@@ -433,7 +441,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "delete x->juceAudioProcessor;";
 		rLen = 168;
-		rLoc = 6020;
+		rLoc = 7499;
 		rType = 0;
 		vrLen = 283;
 		vrLoc = 2342;
@@ -689,7 +697,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 101";
 		rLen = 0;
-		rLoc = 4906;
+		rLoc = 6385;
 		rType = 0;
 		vrLen = 338;
 		vrLoc = 1918;
@@ -699,7 +707,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 51";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 3987;
 		rType = 0;
 		vrLen = 1004;
 		vrLoc = 364;
@@ -729,7 +737,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: plus_free";
 		rLen = 0;
-		rLoc = 1247;
+		rLoc = 1559;
 		rType = 0;
 		vrLen = 976;
 		vrLoc = 0;
@@ -1089,7 +1097,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 99";
 		rLen = 0;
-		rLoc = 4906;
+		rLoc = 6385;
 		rType = 0;
 		vrLen = 778;
 		vrLoc = 1415;
@@ -1129,7 +1137,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 64";
 		rLen = 0;
-		rLoc = 4056;
+		rLoc = 5343;
 		rType = 0;
 		vrLen = 862;
 		vrLoc = 1013;
@@ -1179,7 +1187,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = dsp;
 		rLen = 3;
-		rLoc = 3289;
+		rLoc = 4576;
 		rType = 0;
 		vrLen = 862;
 		vrLoc = 1013;
@@ -1219,7 +1227,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = dsp;
 		rLen = 3;
-		rLoc = 3289;
+		rLoc = 4576;
 		rType = 0;
 		vrLen = 862;
 		vrLoc = 1013;
@@ -1249,7 +1257,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = dsp;
 		rLen = 3;
-		rLoc = 3289;
+		rLoc = 4576;
 		rType = 0;
 		vrLen = 1019;
 		vrLoc = 345;
@@ -1279,7 +1287,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 55";
 		rLen = 0;
-		rLoc = 2937;
+		rLoc = 4224;
 		rType = 0;
 		vrLen = 974;
 		vrLoc = 336;
@@ -1299,7 +1307,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 58";
 		rLen = 0;
-		rLoc = 2937;
+		rLoc = 4224;
 		rType = 0;
 		vrLen = 964;
 		vrLoc = 436;
@@ -1329,7 +1337,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 51";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 3987;
 		rType = 0;
 		vrLen = 1004;
 		vrLoc = 364;
@@ -1379,7 +1387,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 51";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 3987;
 		rType = 0;
 		vrLen = 924;
 		vrLoc = 1181;
@@ -1429,7 +1437,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 51";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 3987;
 		rType = 0;
 		vrLen = 924;
 		vrLoc = 1181;
@@ -1459,7 +1467,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 51";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 3987;
 		rType = 0;
 		vrLen = 924;
 		vrLoc = 1181;
@@ -1509,7 +1517,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 51";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 3987;
 		rType = 0;
 		vrLen = 885;
 		vrLoc = 1497;
@@ -1549,7 +1557,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 51";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 3987;
 		rType = 0;
 		vrLen = 970;
 		vrLoc = 1367;
@@ -1579,7 +1587,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 51";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 3987;
 		rType = 0;
 		vrLen = 885;
 		vrLoc = 1497;
@@ -1619,7 +1627,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 51";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 3987;
 		rType = 0;
 		vrLen = 885;
 		vrLoc = 1497;
@@ -1649,7 +1657,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 51";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 3987;
 		rType = 0;
 		vrLen = 885;
 		vrLoc = 1497;
@@ -1679,7 +1687,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 78";
 		rLen = 0;
-		rLoc = 4056;
+		rLoc = 5343;
 		rType = 0;
 		vrLen = 879;
 		vrLoc = 1566;
@@ -1689,7 +1697,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 78";
 		rLen = 0;
-		rLoc = 4056;
+		rLoc = 5343;
 		rType = 0;
 		vrLen = 766;
 		vrLoc = 1681;
@@ -1709,7 +1717,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 78";
 		rLen = 0;
-		rLoc = 4056;
+		rLoc = 5343;
 		rType = 0;
 		vrLen = 766;
 		vrLoc = 1681;
@@ -1749,7 +1757,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 78";
 		rLen = 0;
-		rLoc = 4056;
+		rLoc = 5343;
 		rType = 0;
 		vrLen = 876;
 		vrLoc = 1339;
@@ -1769,7 +1777,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 78";
 		rLen = 0;
-		rLoc = 4056;
+		rLoc = 5343;
 		rType = 0;
 		vrLen = 876;
 		vrLoc = 1339;
@@ -1789,7 +1797,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 78";
 		rLen = 0;
-		rLoc = 4056;
+		rLoc = 5343;
 		rType = 0;
 		vrLen = 876;
 		vrLoc = 1339;
@@ -1819,7 +1827,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 53";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 3987;
 		rType = 0;
 		vrLen = 972;
 		vrLoc = 626;
@@ -1849,7 +1857,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 58";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 3987;
 		rType = 0;
 		vrLen = 971;
 		vrLoc = 626;
@@ -1859,7 +1867,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 58";
 		rLen = 0;
-		rLoc = 2700;
+		rLoc = 3987;
 		rType = 0;
 		vrLen = 971;
 		vrLoc = 626;
@@ -1929,7 +1937,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 117";
 		rLen = 0;
-		rLoc = 6156;
+		rLoc = 7635;
 		rType = 0;
 		vrLen = 781;
 		vrLoc = 1713;
@@ -1939,7 +1947,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 117";
 		rLen = 0;
-		rLoc = 6044;
+		rLoc = 7523;
 		rType = 0;
 		vrLen = 782;
 		vrLoc = 1713;
@@ -1949,7 +1957,7 @@
 		comments = "error: cannot convert 't_plus*' to 't_pxobject*' for argument '1' to 'void z_dsp_free(t_pxobject*)'";
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		rLen = 1;
-		rLoc = 215;
+		rLoc = 260;
 		rType = 1;
 	};
 	A80FE28C0DE9373700AE5B01 /* PBXTextBookmark */ = {
@@ -1957,7 +1965,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 119";
 		rLen = 0;
-		rLoc = 6042;
+		rLoc = 7521;
 		rType = 0;
 		vrLen = 311;
 		vrLoc = 2258;
@@ -1987,7 +1995,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 117";
 		rLen = 0;
-		rLoc = 6044;
+		rLoc = 7523;
 		rType = 0;
 		vrLen = 1039;
 		vrLoc = 0;
@@ -1997,7 +2005,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 117";
 		rLen = 0;
-		rLoc = 6044;
+		rLoc = 7523;
 		rType = 0;
 		vrLen = 1039;
 		vrLoc = 0;
@@ -2047,7 +2055,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 72";
 		rLen = 0;
-		rLoc = 3384;
+		rLoc = 4671;
 		rType = 0;
 		vrLen = 843;
 		vrLoc = 1071;
@@ -2057,7 +2065,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 72";
 		rLen = 0;
-		rLoc = 3384;
+		rLoc = 4671;
 		rType = 0;
 		vrLen = 843;
 		vrLoc = 1071;
@@ -2077,7 +2085,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 72";
 		rLen = 0;
-		rLoc = 3384;
+		rLoc = 4671;
 		rType = 0;
 		vrLen = 843;
 		vrLoc = 1071;
@@ -2134,7 +2142,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = setPlayConfigDetails;
 		rLen = 0;
-		rLoc = 3386;
+		rLoc = 4673;
 		rType = 0;
 		vrLen = 978;
 		vrLoc = 1004;
@@ -2184,7 +2192,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 62";
 		rLen = 0;
-		rLoc = 2932;
+		rLoc = 4219;
 		rType = 0;
 		vrLen = 1058;
 		vrLoc = 965;
@@ -2194,7 +2202,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 66";
 		rLen = 0;
-		rLoc = 2994;
+		rLoc = 4281;
 		rType = 0;
 		vrLen = 1109;
 		vrLoc = 1136;
@@ -2204,7 +2212,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 70";
 		rLen = 0;
-		rLoc = 3247;
+		rLoc = 4534;
 		rType = 0;
 		vrLen = 794;
 		vrLoc = 2484;
@@ -2214,7 +2222,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 64";
 		rLen = 0;
-		rLoc = 2875;
+		rLoc = 4162;
 		rType = 0;
 		vrLen = 1125;
 		vrLoc = 1738;
@@ -2224,7 +2232,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 63";
 		rLen = 0;
-		rLoc = 3230;
+		rLoc = 4517;
 		rType = 0;
 		vrLen = 1280;
 		vrLoc = 769;
@@ -2234,7 +2242,7 @@
 		comments = "error: expected primary-expression before ')' token";
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		rLen = 0;
-		rLoc = 176;
+		rLoc = 221;
 		rType = 1;
 	};
 	A80FE47B0DE94B7800AE5B01 /* PBXTextBookmark */ = {
@@ -2242,7 +2250,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 139";
 		rLen = 0;
-		rLoc = 4906;
+		rLoc = 6385;
 		rType = 0;
 		vrLen = 429;
 		vrLoc = 3604;
@@ -2282,7 +2290,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 75";
 		rLen = 0;
-		rLoc = 3384;
+		rLoc = 4671;
 		rType = 0;
 		vrLen = 1363;
 		vrLoc = 1726;
@@ -2302,7 +2310,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 75";
 		rLen = 0;
-		rLoc = 3384;
+		rLoc = 4671;
 		rType = 0;
 		vrLen = 1319;
 		vrLoc = 1726;
@@ -2342,7 +2350,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 89";
 		rLen = 0;
-		rLoc = 3577;
+		rLoc = 4864;
 		rType = 0;
 		vrLen = 1219;
 		vrLoc = 0;
@@ -2352,7 +2360,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 135";
 		rLen = 0;
-		rLoc = 4906;
+		rLoc = 6385;
 		rType = 0;
 		vrLen = 1101;
 		vrLoc = 3171;
@@ -2392,7 +2400,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 135";
 		rLen = 0;
-		rLoc = 4906;
+		rLoc = 6385;
 		rType = 0;
 		vrLen = 1294;
 		vrLoc = 1735;
@@ -2402,7 +2410,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 135";
 		rLen = 0;
-		rLoc = 4906;
+		rLoc = 6385;
 		rType = 0;
 		vrLen = 1294;
 		vrLoc = 1735;
@@ -2442,7 +2450,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 163";
 		rLen = 0;
-		rLoc = 4906;
+		rLoc = 6385;
 		rType = 0;
 		vrLen = 988;
 		vrLoc = 3781;
@@ -2452,7 +2460,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: jucemsp_list";
 		rLen = 0;
-		rLoc = 4128;
+		rLoc = 5415;
 		rType = 0;
 		vrLen = 1228;
 		vrLoc = 2442;
@@ -2462,7 +2470,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 124";
 		rLen = 0;
-		rLoc = 4341;
+		rLoc = 5628;
 		rType = 0;
 		vrLen = 1230;
 		vrLoc = 2442;
@@ -2472,7 +2480,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: jucemsp_list";
 		rLen = 0;
-		rLoc = 883;
+		rLoc = 1033;
 		rType = 0;
 		vrLen = 1350;
 		vrLoc = 1212;
@@ -2489,7 +2497,7 @@
 		comments = "warning: unused variable 'attr'";
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		rLen = 1;
-		rLoc = 62;
+		rLoc = 67;
 		rType = 1;
 	};
 	A80FE4B50DE9526500AE5B01 /* PBXTextBookmark */ = {
@@ -2497,7 +2505,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 44";
 		rLen = 0;
-		rLoc = 1656;
+		rLoc = 1968;
 		rType = 0;
 		vrLen = 460;
 		vrLoc = 1228;
@@ -2527,7 +2535,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 207";
 		rLen = 0;
-		rLoc = 5916;
+		rLoc = 7395;
 		rType = 0;
 		vrLen = 1404;
 		vrLoc = 0;
@@ -2537,7 +2545,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 207";
 		rLen = 0;
-		rLoc = 5916;
+		rLoc = 7395;
 		rType = 0;
 		vrLen = 1404;
 		vrLoc = 0;
@@ -2567,7 +2575,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 207";
 		rLen = 0;
-		rLoc = 5916;
+		rLoc = 7395;
 		rType = 0;
 		vrLen = 1404;
 		vrLoc = 0;
@@ -2577,7 +2585,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 61";
 		rLen = 0;
-		rLoc = 1917;
+		rLoc = 2391;
 		rType = 0;
 		vrLen = 1006;
 		vrLoc = 1408;
@@ -2587,7 +2595,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 71";
 		rLen = 0;
-		rLoc = 2437;
+		rLoc = 3003;
 		rType = 0;
 		vrLen = 1019;
 		vrLoc = 1408;
@@ -2597,7 +2605,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 214";
 		rLen = 0;
-		rLoc = 5941;
+		rLoc = 7420;
 		rType = 0;
 		vrLen = 1215;
 		vrLoc = 5023;
@@ -2611,7 +2619,7 @@
 		comments = "warning: invalid access to non-static data member '_jucemsp::obex' of NULL object";
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		rLen = 1;
-		rLoc = 71;
+		rLoc = 78;
 		rType = 1;
 	};
 	A80FE4D20DE95C9300AE5B01 /* PBXTextBookmark */ = {
@@ -2619,7 +2627,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "class_obexoffset_set(c, calcoffset(t_jucemsp, obex));";
 		rLen = 55;
-		rLoc = 1919;
+		rLoc = 2393;
 		rType = 0;
 		vrLen = 759;
 		vrLoc = 1696;
@@ -2639,7 +2647,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 218";
 		rLen = 0;
-		rLoc = 6156;
+		rLoc = 7635;
 		rType = 0;
 		vrLen = 1181;
 		vrLoc = 492;
@@ -2659,7 +2667,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 191";
 		rLen = 0;
-		rLoc = 5037;
+		rLoc = 6516;
 		rType = 0;
 		vrLen = 1049;
 		vrLoc = 5287;
@@ -2679,7 +2687,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 218";
 		rLen = 0;
-		rLoc = 6156;
+		rLoc = 7635;
 		rType = 0;
 		vrLen = 1181;
 		vrLoc = 492;
@@ -2719,7 +2727,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "class_obexoffset_set(c, calcoffset(t_jucemsp, obex));";
 		rLen = 55;
-		rLoc = 1919;
+		rLoc = 2393;
 		rType = 0;
 		vrLen = 759;
 		vrLoc = 1696;
@@ -2737,7 +2745,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "class_obexoffset_set(c, calcoffset(t_jucemsp, obex));";
 		rLen = 55;
-		rLoc = 1919;
+		rLoc = 2393;
 		rType = 0;
 		vrLen = 759;
 		vrLoc = 1696;
@@ -2797,7 +2805,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 218";
 		rLen = 0;
-		rLoc = 6156;
+		rLoc = 7635;
 		rType = 0;
 		vrLen = 984;
 		vrLoc = 3986;
@@ -2897,12 +2905,100 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 157";
 		rLen = 0;
-		rLoc = 4422;
+		rLoc = 5709;
 		rType = 0;
 		vrLen = 1165;
 		vrLoc = 3741;
 	};
 	A80FE5130DE95F6700AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A80FE0310DE8B81700AE5B01 /* MSPAudioProcessor.cpp */;
+		name = sendChangeMessage;
+		rLen = 17;
+		rLoc = 1860;
+		rType = 0;
+		vrLen = 1470;
+		vrLoc = 574;
+	};
+	A80FE5240DE967B500AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A80FE0310DE8B81700AE5B01 /* MSPAudioProcessor.cpp */;
+		name = "MSPAudioProcessor.cpp: 70";
+		rLen = 0;
+		rLoc = 1860;
+		rType = 0;
+		vrLen = 425;
+		vrLoc = 1618;
+	};
+	A80FE5250DE967B500AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "warning: control reaches end of non-void function";
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		rLen = 1;
+		rLoc = 195;
+		rType = 1;
+	};
+	A80FE5260DE967B500AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A80FE0310DE8B81700AE5B01 /* MSPAudioProcessor.cpp */;
+		name = "MSPAudioProcessor.cpp: 70";
+		rLen = 0;
+		rLoc = 1860;
+		rType = 0;
+		vrLen = 425;
+		vrLoc = 1618;
+	};
+	A80FE5270DE967B500AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		name = "juce_mspobject.cpp: 193";
+		rLen = 0;
+		rLoc = 5914;
+		rType = 0;
+		vrLen = 506;
+		vrLoc = 5430;
+	};
+	A80FE52D0DE9698E00AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		name = "juce_mspobject.cpp: 121";
+		rLen = 0;
+		rLoc = 3828;
+		rType = 0;
+		vrLen = 1040;
+		vrLoc = 2871;
+	};
+	A80FE5300DE9698E00AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A80FE5310DE9698E00AE5B01 /* ext_obex.h */;
+		rLen = 1;
+		rLoc = 46;
+		rType = 1;
+	};
+	A80FE5310DE9698E00AE5B01 /* ext_obex.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = ext_obex.h;
+		path = "/Users/martinrobinson/development/maxmsp/c74support/max-includes/ext_obex.h";
+		sourceTree = "<absolute>";
+	};
+	A80FE5320DE9698E00AE5B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A80FE5330DE9698E00AE5B01 /* ext_obex.h */;
+		name = "#define calcoffset(x,y) ((long)(&(((x *)0L)->y)))";
+		rLen = 50;
+		rLoc = 1165;
+		rType = 0;
+		vrLen = 1397;
+		vrLoc = 0;
+	};
+	A80FE5330DE9698E00AE5B01 /* ext_obex.h */ = {
+		isa = PBXFileReference;
+		name = ext_obex.h;
+		path = "/Users/martinrobinson/development/maxmsp/c74support/max-includes/ext_obex.h";
+		sourceTree = "<absolute>";
+	};
+	A80FE5340DE9698E00AE5B01 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = A80FE0310DE8B81700AE5B01 /* MSPAudioProcessor.cpp */;
 		name = sendChangeMessage;
