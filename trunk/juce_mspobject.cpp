@@ -2,11 +2,11 @@
 #include "ext.h"
 #include "z_dsp.h"
 
-void *plus_class;
+void *jucemsp_class;
 
 extern AudioProcessor* JUCE_CALLTYPE createPluginFilter();
 
-typedef struct _plus
+typedef struct _jucemsp
 {
     t_pxobject x_obj;
 	
@@ -18,69 +18,59 @@ typedef struct _plus
 	
 	MidiBuffer midiEvents;
 		
-} t_plus;
+} t_jucemsp;
 
-t_int *offset_perform(t_int *w);
-void plus_float(t_plus *x, double f);
-void plus_int(t_plus *x, long n);
-void plus_dsp(t_plus *x, t_signal **sp, short *count);
-void plus_assist(t_plus *x, void *b, long m, long a, char *s);
-void *plus_new(double val);
-void plus_free(t_plus *x);
+t_int *jucemsp_perform(t_int *w);
+void jucemsp_float(t_jucemsp *x, double f);
+void jucemsp_int(t_jucemsp *x, long n);
+void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count);
+void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s);
+void *jucemsp_new(double val);
+void jucemsp_free(t_jucemsp *x);
 
 
 int main(void)
 {
-	setup((t_messlist **)&plus_class, (method)plus_new, (method)plus_free, (short)sizeof(t_plus), 0L, A_DEFFLOAT, 0);
+	setup((t_messlist **)&jucemsp_class, (method)jucemsp_new, (method)jucemsp_free, (short)sizeof(t_jucemsp), 0L, A_DEFFLOAT, 0);
 	dsp_initclass();
-	addmess((method)plus_dsp, "dsp", A_CANT, 0);
-	addfloat((method)plus_float);
-	addint((method)plus_int);
-	addmess((method)plus_assist,"assist",A_CANT,0);
+	addmess((method)jucemsp_dsp, "dsp", A_CANT, 0);
+	addfloat((method)jucemsp_float);
+	addint((method)jucemsp_int);
+	addmess((method)jucemsp_assist,"assist",A_CANT,0);
 	
 	return 0;
 }
 
-t_int *offset_perform(t_int *w)
+t_int *jucemsp_perform(t_int *w)
 {
-//    t_float *in = (t_float *)(w[1]);
-//    t_float *out = (t_float *)(w[2]);
-	t_plus *x = (t_plus *)(w[1]);
-	int n = (int)(w[2]);
+	t_jucemsp *x = (t_jucemsp *)(w[1]);
+	int numSamples = (int)(w[2]);
 	
-//	if (x->x_obj.z_disabled)
-//		goto out;
-	
-    //while (n--) *out++ = val + *in++; 
-	
-	//while (n--) *out++ = *in++; 
-	
-//	x->channels[0] = in;
-//	x->channels[1] = out;
-	
-	//AudioSampleBuffer buffer(x->channels, 2, n);
-	
-	// need to iterate through input channels
-	x->bufferSpace.copyFrom(0, 0, x->inputChannels[0], n);
+	if (x->x_obj.z_disabled)
+		return (w+3);
+		
+	// iterate through input channels
+	for(int i = 0; i < x->juceAudioProcessor->getNumInputChannels(); i++) {
+		x->bufferSpace.copyFrom(i, 0, x->inputChannels[i], numSamples);
+	}
 	
 	x->juceAudioProcessor->processBlock(x->bufferSpace, x->midiEvents);
 	
-	AudioSampleBuffer outputBuffer(x->outputChannels, x->juceAudioProcessor->getNumOutputChannels(), n);
+	AudioSampleBuffer outputBuffer(x->outputChannels, x->juceAudioProcessor->getNumOutputChannels(), numSamples);
 	
 	// need to iterate through output channels
-	outputBuffer.copyFrom(0, 0, x->bufferSpace, 0, 0, n);
+	for(int i = 0; i < x->juceAudioProcessor->getNumOutputChannels(); i++) {
+		outputBuffer.copyFrom(i, 0, x->bufferSpace, i, 0, numSamples);
+	}
 	
-	
-out:
     return (w+3);
 }
 
 
 
-void plus_dsp(t_plus *x, t_signal **sp, short *count)
+void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count)
 {
-	//dsp_add(offset_perform, 4, sp[0]->s_vec, sp[1]->s_vec, x, sp[0]->s_n);
-	dsp_add(offset_perform, 2, x, sp[0]->s_n);
+	dsp_add(jucemsp_perform, 2, x, sp[0]->s_n);
 	
 	post("input=%p output=%p", sp[0]->s_vec, sp[1]->s_vec);
 	
@@ -104,18 +94,17 @@ void plus_dsp(t_plus *x, t_signal **sp, short *count)
 
 // this routine covers both inlets. It doesn't matter which one is involved
 
-void plus_float(t_plus *x, double f)
+void jucemsp_float(t_jucemsp *x, double f)
 {
-	//post("plus_float=%f", f);
 	x->juceAudioProcessor->setParameter(0, f);
 }
 
-void plus_int(t_plus *x, long n)
+void jucemsp_int(t_jucemsp *x, long n)
 {
-	plus_float(x,(double)n);
+	jucemsp_float(x,(double)n);
 }
 
-void plus_assist(t_plus *x, void *b, long m, long a, char *s)
+void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s)
 {
 //	if (m==ASSIST_INLET) {
 //		switch (a) {
@@ -128,20 +117,20 @@ void plus_assist(t_plus *x, void *b, long m, long a, char *s)
 //	}
 }
 
-void *plus_new(double val)
+void *jucemsp_new(double val)
 {
-    t_plus *x = (t_plus *)newobject(plus_class);
+    t_jucemsp *x = (t_jucemsp *)newobject(jucemsp_class);
     dsp_setup((t_pxobject *)x,1);
     outlet_new((t_pxobject *)x, "signal");
 	
 	x->juceAudioProcessor = createPluginFilter();
 	
-	plus_float(x, val);
+	jucemsp_float(x, val);
 		
     return (x);
 }
 
-void plus_free(t_plus *x)
+void jucemsp_free(t_jucemsp *x)
 {
 	dsp_free((t_pxobject*)x);
 	delete x->juceAudioProcessor;
