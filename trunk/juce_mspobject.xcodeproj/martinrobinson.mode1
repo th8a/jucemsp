@@ -273,7 +273,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {186, 749}}</string>
+							<string>{{0, 0}, {186, 736}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -285,14 +285,14 @@
 					<key>GeometryConfiguration</key>
 					<dict>
 						<key>Frame</key>
-						<string>{{0, 0}, {203, 767}}</string>
+						<string>{{0, 0}, {203, 754}}</string>
 						<key>GroupTreeTableConfiguration</key>
 						<array>
 							<string>MainColumn</string>
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>0 70 977 808 0 0 1440 878 </string>
+						<string>0 83 1265 795 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -322,13 +322,13 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>A80FE46F0DE948F600AE5B01</string>
+										<string>A80FE48D0DE94C9D00AE5B01</string>
 										<key>history</key>
 										<array>
 											<string>A80FE4250DE93DB500AE5B01</string>
-											<string>A80FE4260DE93DB500AE5B01</string>
-											<string>A80FE4270DE93DB500AE5B01</string>
-											<string>A80FE4280DE93DB500AE5B01</string>
+											<string>A80FE47F0DE94C1900AE5B01</string>
+											<string>A80FE4800DE94C1900AE5B01</string>
+											<string>A80FE4810DE94C1900AE5B01</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -438,6 +438,12 @@
 											<string>A80FE4290DE93DB500AE5B01</string>
 											<string>A80FE42A0DE93DB500AE5B01</string>
 											<string>A80FE42B0DE93DB500AE5B01</string>
+											<string>A80FE4820DE94C1900AE5B01</string>
+											<string>A80FE4830DE94C1900AE5B01</string>
+											<string>A80FE4840DE94C1900AE5B01</string>
+											<string>A80FE4850DE94C1900AE5B01</string>
+											<string>A80FE4860DE94C1900AE5B01</string>
+											<string>A80FE4870DE94C1900AE5B01</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -449,14 +455,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {769, 638}}</string>
+								<string>{{0, 0}, {1057, 625}}</string>
 								<key>RubberWindowFrame</key>
-								<string>0 70 977 808 0 0 1440 878 </string>
+								<string>0 83 1265 795 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>638pt</string>
+							<string>625pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -469,9 +475,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 643}, {769, 124}}</string>
+								<string>{{0, 630}, {1057, 124}}</string>
 								<key>RubberWindowFrame</key>
-								<string>0 70 977 808 0 0 1440 878 </string>
+								<string>0 83 1265 795 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -480,7 +486,7 @@
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>769pt</string>
+					<string>1057pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -635,7 +641,7 @@
 		<string>/Users/martinrobinson/development/maxmsp/my projects/juce_mspobject~/juce_mspobject.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>0 70 977 808 0 0 1440 878 </string>
+	<string>0 83 1265 795 0 0 1440 878 </string>
 	<key>WindowTools</key>
 	<array>
 		<dict>

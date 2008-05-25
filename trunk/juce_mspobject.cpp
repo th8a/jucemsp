@@ -1,9 +1,11 @@
 #include "../../../juce_code/juce/juce.h"
+#include "JucePluginCharacteristics.h"
 #include "ext.h"
 #include "z_dsp.h"
 
 void *jucemsp_class;
 
+static const short channelConfigs[][2] = { JucePlugin_PreferredChannelConfigurations };
 extern AudioProcessor* JUCE_CALLTYPE createPluginFilter();
 
 typedef struct _jucemsp
@@ -72,28 +74,31 @@ void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count)
 {
 	dsp_add(jucemsp_perform, 2, x, sp[0]->s_n);
 	
-	post("input=%p output=%p", sp[0]->s_vec, sp[1]->s_vec);
+	//post("input=%p output=%p", sp[0]->s_vec, sp[1]->s_vec);
 	
-	x->juceAudioProcessor->setPlayConfigDetails(1, // num inputs
-												1, // num outputs
-												sp[0]->s_sr, sp[0]->s_n);
 	// setup our intermediate buffers
 	x->bufferSpace.setSize(jmax(x->juceAudioProcessor->getNumInputChannels(), 
 								x->juceAudioProcessor->getNumOutputChannels()),
 						   sp[0]->s_n);
 	
-	// keep a record of an array of our output channels 
-	x->inputChannels[0] = sp[0]->s_vec;
+	int signalIndex = 0;
+	
+	// keep a record of an array of our input channels
+	for(int i = 0; i < x->juceAudioProcessor->getNumInputChannels(); i++, signalIndex++) {
+		x->inputChannels[i] = sp[signalIndex]->s_vec;
+	}
 	
 	// keep a record of an array of our output channels 
-	x->outputChannels[0] = sp[1]->s_vec;
+	for(int i = 0; i < x->juceAudioProcessor->getNumOutputChannels(); i++, signalIndex++) {
+		x->outputChannels[i] = sp[signalIndex]->s_vec;
+	}
 	
 	x->juceAudioProcessor->prepareToPlay(sp[0]->s_sr, sp[0]->s_n);
 }
 
 
 // this routine covers both inlets. It doesn't matter which one is involved
-
+// make the parameters set via a list [index value] like the vst~ object
 void jucemsp_float(t_jucemsp *x, double f)
 {
 	x->juceAudioProcessor->setParameter(0, f);
@@ -120,11 +125,24 @@ void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s)
 void *jucemsp_new(double val)
 {
     t_jucemsp *x = (t_jucemsp *)newobject(jucemsp_class);
-    dsp_setup((t_pxobject *)x,1);
-    outlet_new((t_pxobject *)x, "signal");
 	
 	x->juceAudioProcessor = createPluginFilter();
 	
+	// using the first (zeroth) channel configs from "JucePluginCharacteristics.h"
+	// must think of an elegant way to select these in MaxMSP
+	x->juceAudioProcessor->setPlayConfigDetails(channelConfigs[0][0], // num inputs
+												channelConfigs[0][1], // num outputs
+												sys_getsr(), sys_getblksize());
+	
+	// inputs
+    dsp_setup((t_pxobject *)x,  x->juceAudioProcessor->getNumInputChannels());
+	
+	// outputs
+	for(int i = 0; i < x->juceAudioProcessor->getNumOutputChannels(); i++) {
+		outlet_new((t_pxobject *)x, "signal");
+	}
+	
+	// get rid of this later...
 	jucemsp_float(x, val);
 		
     return (x);
