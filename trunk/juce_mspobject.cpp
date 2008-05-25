@@ -66,12 +66,15 @@ int main(void)
 	long attrflags = 0;
 	t_class *c;
 	t_object *attr;
-	AudioProcessor* juceAudioProcessor = createPluginFilter(); // a dummy so we can inspect it
+	
+	// a dummy so we can inspect it (it won't know the channel configs but we don't need that here)
+	AudioProcessor* juceAudioProcessor = createPluginFilter(); 
 	
 	common_symbols_init();
 	
 	// Define our class
 	c = class_new("juce_mspobject~",(method)jucemsp_new, (method)jucemsp_free, 
+				  // vaiable size float array for the last member of the struct
 				  (short)sizeof(t_jucemsp) + ((juceAudioProcessor->getNumParameters()-1) * sizeof(float)), 
 				  (method)0L, 
 				  A_GIMME, 0);
@@ -105,19 +108,14 @@ void jucemsp_initattrs(t_class *c, AudioProcessor* juceAudioProcessor)
 	long attrflags = 0;
 	t_object *attr;
 	
-	for(int i = 0; i < juceAudioProcessor->getNumParameters(); i++) {
-		post("param %d", i);
-//		attr = attr_offset_new("frequency", _sym_float32, attrflags,
-//							   (method)0L, (method)butterlp_setfrequency, calcoffset(t_butterlp, attr_frequency));
-//		class_addattr(c, attr);
-		
-//		char attrstr[256];
-//		sprintf(attrstr, "attr_%d", i);
-		
-		attr = attr_offset_new((char*)(const char*)juceAudioProcessor->getParameterName(i), 
+	for(int i = 0; i < juceAudioProcessor->getNumParameters(); i++) {		
+		attr = attr_offset_new((char*)(const char*)
+							   (juceAudioProcessor->getParameterName(i).replaceCharacter (' ', '_')
+																	   .replaceCharacter ('.', '_')
+																	   .retainCharacters (T("abcdefghijklmnopqrstuvwxyz_0123456789"))), 
 							   _sym_float32, attrflags,
 							   (method)jucemsp_attr_get, (method)jucemsp_attr_set, 
-							   calcoffset(t_jucemsp, params) + sizeof(float) * i);
+							   calcoffset(t_jucemsp, params) + sizeof(float) * i); 
 		class_addattr(c, attr);
 	}
 	
@@ -185,15 +183,13 @@ void jucemsp_list(t_jucemsp *x, t_symbol* s, short argc, t_atom* argv)
 	
 	if(index >= x->juceAudioProcessor->getNumParameters()) return;
 	
-	float value = argv[1].a_w.w_float;
+	float value = jlimit(0.f, 1.f, argv[1].a_w.w_float);
 	
 	x->juceAudioProcessor->setParameterNotifyingHost(index, value);
 }
 
 t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *ac, t_atom **av)
-{
-	post("jucemsp_attr_get");
-	
+{	
 	if (*ac && *av) {
 		// memory passed in; use it 
 	} else { 
@@ -210,7 +206,10 @@ t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *ac, t_atom **av)
 	
 	for(int i = 0; i < x->juceAudioProcessor->getNumParameters(); i++) {
 		
-		t_symbol *paramName = gensym((char*)(const char*)x->juceAudioProcessor->getParameterName(i));
+		t_symbol *paramName = gensym((char*)(const char*)
+									 (x->juceAudioProcessor->getParameterName(i).replaceCharacter (' ', '_')
+																				.replaceCharacter ('.', '_')
+																				.retainCharacters (T("abcdefghijklmnopqrstuvwxyz_0123456789"))));
 		
 		if(attrName == paramName) {
 			atom_setfloat(*av, x->params[i]);
@@ -224,18 +223,19 @@ t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *ac, t_atom **av)
 }
 
 t_max_err jucemsp_attr_set(t_jucemsp *x, void *attr, long ac, t_atom *av)
-{
-	post("jucemsp_attr_set");
-	
+{	
 	if (ac && av) { 
 		t_symbol *attrName = (t_symbol*)object_method(attr, _sym_getname); 
 		
 		for(int i = 0; i < x->juceAudioProcessor->getNumParameters(); i++) {
 			
-			t_symbol *paramName = gensym((char*)(const char*)x->juceAudioProcessor->getParameterName(i));
+			t_symbol *paramName = gensym((char*)(const char*)
+										 (x->juceAudioProcessor->getParameterName(i).replaceCharacter (' ', '_')
+																					.replaceCharacter ('.', '_')
+																					.retainCharacters (T("abcdefghijklmnopqrstuvwxyz_0123456789"))));
 			
 			if(attrName == paramName) {
-				x->params[i] = atom_getfloat(av);
+				x->params[i] = jlimit(0.f, 1.f, atom_getfloat(av));
 				x->juceAudioProcessor->setParameter(i,x->params[i]);
 				
 				return MAX_ERR_NONE;
@@ -249,9 +249,7 @@ t_max_err jucemsp_attr_set(t_jucemsp *x, void *attr, long ac, t_atom *av)
 
 
 void jucemsp_updateattr(t_jucemsp *x, int parameterIndex, float newValue)
-{
-	post("jucemsp_updateattr i=%d val=%f", parameterIndex, newValue);
-	
+{	
 	x->params[parameterIndex] = newValue;
 }
 

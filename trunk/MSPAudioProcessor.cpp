@@ -65,8 +65,6 @@ void MSPAudioProcessor::setParameter (int index, float newValue)
         if (gain != newValue) {
             gain = newValue;
 			
-			post("MSPAudioProcessor::setParameter %d = %f", index, newValue);
-			
             sendChangeMessage (this);
         }
     }
@@ -75,7 +73,7 @@ void MSPAudioProcessor::setParameter (int index, float newValue)
 const String MSPAudioProcessor::getParameterName (int index)
 {
 	if (index == 0)
-        return T("gain");
+        return T("gain control");
 	
     return String::empty;
 }
