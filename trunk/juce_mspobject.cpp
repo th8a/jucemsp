@@ -2,8 +2,11 @@
 #include "JucePluginCharacteristics.h"
 #include "ext.h"
 #include "z_dsp.h"
+#include "ext_strings.h"     // String Functions
+#include "commonsyms.h"      // Common symbols used by the Max 4.5 API
+#include "ext_obex.h"        // Max Object Extensions
 
-void *jucemsp_class;
+t_class *jucemsp_class;
 
 static const short channelConfigs[][2] = { JucePlugin_PreferredChannelConfigurations };
 extern AudioProcessor* JUCE_CALLTYPE createPluginFilter();
@@ -11,6 +14,7 @@ extern AudioProcessor* JUCE_CALLTYPE createPluginFilter();
 typedef struct _jucemsp
 {
     t_pxobject x_obj;
+	void        *obex;       // Pointer to Obex object
 	
 	AudioProcessor* juceAudioProcessor;
 	float* inputChannels[32]; // need to make this dynamic
@@ -30,16 +34,51 @@ void *jucemsp_new(void);
 void jucemsp_free(t_jucemsp *x);
 
 
+//int main(void)
+//{
+//	setup((t_messlist **)&jucemsp_class, (method)jucemsp_new, (method)jucemsp_free, (short)sizeof(t_jucemsp), 0L, 0);
+//	dsp_initclass();
+//	addmess((method)jucemsp_dsp, "dsp", A_CANT, 0);
+//	addmess((method)jucemsp_list,"list",A_GIMME,0);
+//	addmess((method)jucemsp_assist,"assist",A_CANT,0);
+//	
+//	return 0;
+//}
+
 int main(void)
 {
-	setup((t_messlist **)&jucemsp_class, (method)jucemsp_new, (method)jucemsp_free, (short)sizeof(t_jucemsp), 0L, 0);
-	dsp_initclass();
-	addmess((method)jucemsp_dsp, "dsp", A_CANT, 0);
-	addmess((method)jucemsp_list,"list",A_GIMME,0);
-	addmess((method)jucemsp_assist,"assist",A_CANT,0);
+	long attrflags = 0;
+	t_class *c;
+	t_object *attr;
+	
+	common_symbols_init();
+	
+	// Define our class
+	c = class_new("juce_mspobject~",(method)jucemsp_new, (method)jucemsp_free, 
+				  (short)sizeof(t_jucemsp), (method)0L, 
+				  0); // no args
+		
+	class_obexoffset_set(c, calcoffset(t_jucemsp, obex));
+	
+	// Make methods accessible for our class: 
+	class_addmethod(c, (method)jucemsp_dsp,          "dsp",			A_CANT, 0L);
+	class_addmethod(c, (method)jucemsp_list,         "list",		A_GIMME, 0L);        
+	class_addmethod(c, (method)jucemsp_assist,       "assist",		A_CANT, 0L); 
+	class_addmethod(c, (method)object_obex_dumpout,  "dumpout",		A_CANT,0);  
+	class_addmethod(c, (method)object_obex_quickref, "quickref",	A_CANT, 0);
+	
+	// Setup our class to work with MSP
+	class_dspinit(c);
+	
+	// Finalize our class
+	class_register(CLASS_BOX, c);
+	jucemsp_class = c;
+	
+	
 	
 	return 0;
 }
+
 
 t_int *jucemsp_perform(t_int *w)
 {
@@ -120,28 +159,61 @@ void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s)
 //	}
 }
 
+
+//void *jucemsp_new(void)
+//{
+//    t_jucemsp *x = (t_jucemsp *)newobject(jucemsp_class);
+//	
+//	x->juceAudioProcessor = createPluginFilter();
+//	
+//	// using the first (zeroth) channel configs from "JucePluginCharacteristics.h"
+//	// must think of an elegant way to select these in MaxMSP
+//	x->juceAudioProcessor->setPlayConfigDetails(channelConfigs[0][0], // num inputs
+//												channelConfigs[0][1], // num outputs
+//												sys_getsr(), sys_getblksize());
+//	
+//	// inputs
+//    dsp_setup((t_pxobject *)x,  x->juceAudioProcessor->getNumInputChannels());
+//	
+//	// outputs
+//	for(int i = 0; i < x->juceAudioProcessor->getNumOutputChannels(); i++) {
+//		outlet_new((t_pxobject *)x, "signal");
+//	}
+//			
+//    return (x);
+//}
+
 void *jucemsp_new(void)
 {
-    t_jucemsp *x = (t_jucemsp *)newobject(jucemsp_class);
+	t_jucemsp *x;
 	
-	x->juceAudioProcessor = createPluginFilter();
-	
-	// using the first (zeroth) channel configs from "JucePluginCharacteristics.h"
-	// must think of an elegant way to select these in MaxMSP
-	x->juceAudioProcessor->setPlayConfigDetails(channelConfigs[0][0], // num inputs
-												channelConfigs[0][1], // num outputs
-												sys_getsr(), sys_getblksize());
-	
-	// inputs
-    dsp_setup((t_pxobject *)x,  x->juceAudioProcessor->getNumInputChannels());
-	
-	// outputs
-	for(int i = 0; i < x->juceAudioProcessor->getNumOutputChannels(); i++) {
-		outlet_new((t_pxobject *)x, "signal");
+	x = (t_jucemsp *)object_alloc(jucemsp_class);
+	if(x){
+		object_obex_store((void *)x, _sym_dumpout, 
+						  (t_object *)outlet_new(x,NULL));
+		
+		x->juceAudioProcessor = createPluginFilter();
+		
+		// using the first (zeroth) channel configs from "JucePluginCharacteristics.h"
+		// must think of an elegant way to select these in MaxMSP
+		x->juceAudioProcessor->setPlayConfigDetails(channelConfigs[0][0], // num inputs
+													channelConfigs[0][1], // num outputs
+													sys_getsr(), sys_getblksize());
+		
+		// inputs
+		dsp_setup((t_pxobject *)x,  x->juceAudioProcessor->getNumInputChannels());
+		
+		// outputs
+		for(int i = 0; i < x->juceAudioProcessor->getNumOutputChannels(); i++) {
+			outlet_new((t_pxobject *)x, "signal");
+		}
+		
 	}
-			
-    return (x);
+	
+	return(x);                     // return pointer to the new instance 
 }
+	
+
 
 void jucemsp_free(t_jucemsp *x)
 {
