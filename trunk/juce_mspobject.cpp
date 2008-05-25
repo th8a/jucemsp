@@ -23,21 +23,23 @@ typedef struct _jucemsp
 } t_jucemsp;
 
 t_int *jucemsp_perform(t_int *w);
-void jucemsp_float(t_jucemsp *x, double f);
-void jucemsp_int(t_jucemsp *x, long n);
+//void jucemsp_float(t_jucemsp *x, double f);
+//void jucemsp_int(t_jucemsp *x, long n);
+void jucemsp_list(t_jucemsp *x, t_symbol* s, short argc, t_atom* argv);
 void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count);
 void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s);
-void *jucemsp_new(double val);
+void *jucemsp_new(void);
 void jucemsp_free(t_jucemsp *x);
 
 
 int main(void)
 {
-	setup((t_messlist **)&jucemsp_class, (method)jucemsp_new, (method)jucemsp_free, (short)sizeof(t_jucemsp), 0L, A_DEFFLOAT, 0);
+	setup((t_messlist **)&jucemsp_class, (method)jucemsp_new, (method)jucemsp_free, (short)sizeof(t_jucemsp), 0L, 0);
 	dsp_initclass();
 	addmess((method)jucemsp_dsp, "dsp", A_CANT, 0);
-	addfloat((method)jucemsp_float);
-	addint((method)jucemsp_int);
+//	addfloat((method)jucemsp_float);
+//	addint((method)jucemsp_int);
+	addmess((method)jucemsp_list,"list",A_GIMME,0);
 	addmess((method)jucemsp_assist,"assist",A_CANT,0);
 	
 	return 0;
@@ -99,14 +101,29 @@ void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count)
 
 // this routine covers both inlets. It doesn't matter which one is involved
 // make the parameters set via a list [index value] like the vst~ object
-void jucemsp_float(t_jucemsp *x, double f)
+//void jucemsp_float(t_jucemsp *x, double f)
+//{
+//	x->juceAudioProcessor->setParameter(0, f);
+//}
+//
+//void jucemsp_int(t_jucemsp *x, long n)
+//{
+//	jucemsp_float(x,(double)n);
+//}
+	
+void jucemsp_list(t_jucemsp *x, t_symbol* s, short argc, t_atom* argv)
 {
-	x->juceAudioProcessor->setParameter(0, f);
-}
-
-void jucemsp_int(t_jucemsp *x, long n)
-{
-	jucemsp_float(x,(double)n);
+	if(argc != 2) return;
+	if(argv[0].a_type != A_LONG) return;
+	if(argv[1].a_type != A_FLOAT) return;
+	
+	int index = argv[0].a_w.w_long;
+	
+	if(index >= x->juceAudioProcessor->getNumParameters()) return;
+	
+	float value = argv[1].a_w.w_float;
+	
+	x->juceAudioProcessor->setParameter(index, value);
 }
 
 void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s)
@@ -122,7 +139,7 @@ void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s)
 //	}
 }
 
-void *jucemsp_new(double val)
+void *jucemsp_new(void)
 {
     t_jucemsp *x = (t_jucemsp *)newobject(jucemsp_class);
 	
@@ -143,7 +160,7 @@ void *jucemsp_new(double val)
 	}
 	
 	// get rid of this later...
-	jucemsp_float(x, val);
+	// jucemsp_float(x, val);
 		
     return (x);
 }

@@ -117,7 +117,7 @@
     AudioProcessor::getNumOutputChannels() and AudioFilterBase::getNumInputChannels()
     methods.
 */
-#define JucePlugin_PreferredChannelConfigurations   { 1, 1 }
+#define JucePlugin_PreferredChannelConfigurations   { 2, 2 }
 
 //==============================================================================
 /** Set this value to 1 if your plugin is a synth, or 0 if it isn't.

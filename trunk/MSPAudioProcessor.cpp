@@ -43,7 +43,7 @@ void MSPAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer& midi
 //        buffer.clear (i, 0, buffer.getNumSamples());
 //    }
 	
-    for (int channel = 0; channel < 1; ++channel)
+    for (int channel = 0; channel < getNumInputChannels(); ++channel)
     {
         buffer.applyGain (channel, 0, buffer.getNumSamples(), gain);
     }
