@@ -23,8 +23,6 @@ typedef struct _jucemsp
 } t_jucemsp;
 
 t_int *jucemsp_perform(t_int *w);
-//void jucemsp_float(t_jucemsp *x, double f);
-//void jucemsp_int(t_jucemsp *x, long n);
 void jucemsp_list(t_jucemsp *x, t_symbol* s, short argc, t_atom* argv);
 void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count);
 void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s);
@@ -37,8 +35,6 @@ int main(void)
 	setup((t_messlist **)&jucemsp_class, (method)jucemsp_new, (method)jucemsp_free, (short)sizeof(t_jucemsp), 0L, 0);
 	dsp_initclass();
 	addmess((method)jucemsp_dsp, "dsp", A_CANT, 0);
-//	addfloat((method)jucemsp_float);
-//	addint((method)jucemsp_int);
 	addmess((method)jucemsp_list,"list",A_GIMME,0);
 	addmess((method)jucemsp_assist,"assist",A_CANT,0);
 	
@@ -75,9 +71,7 @@ t_int *jucemsp_perform(t_int *w)
 void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count)
 {
 	dsp_add(jucemsp_perform, 2, x, sp[0]->s_n);
-	
-	//post("input=%p output=%p", sp[0]->s_vec, sp[1]->s_vec);
-	
+		
 	// setup our intermediate buffers
 	x->bufferSpace.setSize(jmax(x->juceAudioProcessor->getNumInputChannels(), 
 								x->juceAudioProcessor->getNumOutputChannels()),
@@ -97,19 +91,6 @@ void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count)
 	
 	x->juceAudioProcessor->prepareToPlay(sp[0]->s_sr, sp[0]->s_n);
 }
-
-
-// this routine covers both inlets. It doesn't matter which one is involved
-// make the parameters set via a list [index value] like the vst~ object
-//void jucemsp_float(t_jucemsp *x, double f)
-//{
-//	x->juceAudioProcessor->setParameter(0, f);
-//}
-//
-//void jucemsp_int(t_jucemsp *x, long n)
-//{
-//	jucemsp_float(x,(double)n);
-//}
 	
 void jucemsp_list(t_jucemsp *x, t_symbol* s, short argc, t_atom* argv)
 {
@@ -158,10 +139,7 @@ void *jucemsp_new(void)
 	for(int i = 0; i < x->juceAudioProcessor->getNumOutputChannels(); i++) {
 		outlet_new((t_pxobject *)x, "signal");
 	}
-	
-	// get rid of this later...
-	// jucemsp_float(x, val);
-		
+			
     return (x);
 }
 
