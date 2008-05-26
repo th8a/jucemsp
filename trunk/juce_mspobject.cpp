@@ -174,7 +174,7 @@ int main(void)
 										.retainCharacters (T(VALIDCHARS));
 	className << "~";
 	
-	post("Juce MSP Wrapper: '%s' plugin loaded as an object named'%s'", JucePlugin_Name, (char*)(const char*)className);
+	post("Juce MSP Wrapper: '%s' plugin loaded as '%s'", JucePlugin_Name, (char*)(const char*)className);
 	
 	c = class_new((char*)(const char*)className,(method)jucemsp_new, (method)jucemsp_free, 
 				  // vaiable size float array for the last member of the struct
@@ -422,7 +422,7 @@ void jucemsp_dblclick(t_jucemsp *x)
 		syswindow_hide(wind_syswind(x->window));
 		
 		x->juceEditorComp = x->juceAudioProcessor->createEditorIfNeeded();
-		x->juceEditorComp->setBounds(50, 50, 300, 100);
+		//x->juceEditorComp->setBounds(50, 50, 300, 100); don't do this, the editor should already be set
 		
 		const int w = x->juceEditorComp->getWidth();
 		const int h = x->juceEditorComp->getHeight();
