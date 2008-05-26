@@ -28,7 +28,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = A80FDFBA0DE7FEF800AE5B01 /* Juce.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libjuce.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = Juce;
 		};
 /* End PBXContainerItemProxy section */

@@ -30,9 +30,9 @@ typedef struct _jucemsp
 	float* inputChannels[32]; // need to make this dynamic
 	float* outputChannels[32]; // need to make this dynamic
 	
-	AudioSampleBuffer bufferSpace;
+	AudioSampleBuffer* bufferSpace;
 	
-	MidiBuffer midiEvents;
+	MidiBuffer* midiEvents;
 	
 	float params[1];
 	//.. extra space will be alloacted for the number of params
@@ -41,10 +41,11 @@ typedef struct _jucemsp
 #pragma mark -
 #pragma mark t_jucemsp function prototypes 
 
-void jucemsp_initattrs(t_class *c, AudioProcessor* juceAudioProcessor);
+void jucemsp_setupattrs(t_class *c, AudioProcessor* juceAudioProcessor);
 t_int *jucemsp_perform(t_int *w);
 void jucemsp_midievent(t_jucemsp *x, int byte1, int byte2, int byte3);
 void jucemsp_list(t_jucemsp *x, t_symbol* s, short argc, t_atom* argv);
+void jucemsp_initparameterattrs(t_jucemsp *x);
 void jucemsp_updateattr(t_jucemsp *x, int parameterIndex, float newValue);
 t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *argc, t_atom **argv); 
 t_max_err jucemsp_attr_set(t_jucemsp *x, void *attr, long argc, t_atom *argv); 
@@ -116,7 +117,7 @@ int main(void)
 	class_addmethod(c, (method)object_obex_quickref, "quickref",	A_CANT, 0);
 	
 	// generate some attrs from the plugin params
-	jucemsp_initattrs(c, juceAudioProcessor);
+	jucemsp_setupattrs(c, juceAudioProcessor);
 	
 	// Setup our class to work with MSP
 	class_dspinit(c);
@@ -130,17 +131,20 @@ int main(void)
 	return 0;
 }
 
-void jucemsp_initattrs(t_class *c, AudioProcessor* juceAudioProcessor)
+void jucemsp_setupattrs(t_class *c, AudioProcessor* juceAudioProcessor)
 {
 	long attrflags = 0;
 	t_object *attr;
 	
+	// plugin name attribute
 	attr = attr_offset_new("name", 
 						   _sym_symbol, ATTR_SET_OPAQUE_USER,
 						   (method)0L, (method)0L, 
 						   calcoffset(t_jucemsp, name)); 
 	class_addattr(c, attr);
 	
+	
+	// plugin parameter attributes
 	for(int i = 0; i < juceAudioProcessor->getNumParameters(); i++) {		
 		attr = attr_offset_new((char*)(const char*)
 							   (juceAudioProcessor->getParameterName(i).replaceCharacter (' ', '_')
@@ -165,20 +169,38 @@ t_int *jucemsp_perform(t_int *w)
 		
 	// iterate through input channels
 	for(int i = 0; i < x->juceAudioProcessor->getNumInputChannels(); i++) {
-		x->bufferSpace.copyFrom(i, 0, x->inputChannels[i], numSamples);
+		x->bufferSpace->copyFrom(i, 0, x->inputChannels[i], numSamples);
 	}
 	
-	x->juceAudioProcessor->processBlock(x->bufferSpace, x->midiEvents);
+	x->juceAudioProcessor->processBlock(*x->bufferSpace, *x->midiEvents);
+
+//	 midioutput...
+//		if (! midiEvents.isEmpty())
+//		{
+//	#if JucePlugin_ProducesMidiOutput
+//			const JUCE_NAMESPACE::uint8* midiEventData;
+//			int midiEventSize, midiEventPosition;
+//			MidiBuffer::Iterator i (midiEvents);
+//			
+//			while (i.getNextEvent (midiEventData, midiEventSize, midiEventPosition))
+//			{
+//				jassert (((unsigned int) midiEventPosition) < (unsigned int) numSamples);
+//				
+//				
+//				
+//				//xxx
+//			}
+//	#else
 	
 #if JucePlugin_WantsMidiInput
-	x->midiEvents.clear();
+	x->midiEvents->clear();
 #endif	
 	
 	AudioSampleBuffer outputBuffer(x->outputChannels, x->juceAudioProcessor->getNumOutputChannels(), numSamples);
 	
 	// need to iterate through output channels
 	for(int i = 0; i < x->juceAudioProcessor->getNumOutputChannels(); i++) {
-		outputBuffer.copyFrom(i, 0, x->bufferSpace, i, 0, numSamples);
+		outputBuffer.copyFrom(i, 0, *x->bufferSpace, i, 0, numSamples);
 	}
 	
     return (w+3);
@@ -191,7 +213,7 @@ void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count)
 	dsp_add(jucemsp_perform, 2, x, sp[0]->s_n);
 		
 	// setup our intermediate buffers
-	x->bufferSpace.setSize(jmax(x->juceAudioProcessor->getNumInputChannels(), 
+	x->bufferSpace->setSize(jmax(x->juceAudioProcessor->getNumInputChannels(), 
 								x->juceAudioProcessor->getNumOutputChannels()),
 						   sp[0]->s_n);
 	
@@ -206,7 +228,8 @@ void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count)
 	for(int i = 0; i < x->juceAudioProcessor->getNumOutputChannels(); i++, signalIndex++) {
 		x->outputChannels[i] = sp[signalIndex]->s_vec;
 	}
-	
+		
+	x->midiEvents->clear();
 	x->juceAudioProcessor->prepareToPlay(sp[0]->s_sr, sp[0]->s_n);
 }
 	
@@ -218,8 +241,9 @@ void jucemsp_midievent(t_jucemsp *x, int byte1, int byte2, int byte3)
 	data[0] = byte1;
 	data[1] = byte2;
 	data[2] = byte3;
-
-	x->midiEvents.addEvent (data, 3, 0);
+	data[3] = 0;
+		
+	x->midiEvents->addEvent (data, 3, 0); 
 	
 #endif
 }
@@ -237,6 +261,13 @@ void jucemsp_list(t_jucemsp *x, t_symbol* s, short argc, t_atom* argv)
 	float value = jlimit(0.f, 1.f, argv[1].a_w.w_float);
 	
 	x->juceAudioProcessor->setParameterNotifyingHost(index, value);
+}
+
+void jucemsp_initparameterattrs(t_jucemsp *x)
+{
+	for(int i = 0; i < x->juceAudioProcessor->getNumParameters(); i++) {	
+		x->params[i] = x->juceAudioProcessor->getParameter(i);
+	}
 }
 
 t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *ac, t_atom **av)
@@ -337,6 +368,8 @@ void *jucemsp_new(t_symbol *s, long argc, t_atom *argv)
 	if(x) {
 		object_obex_store((void *)x, _sym_dumpout, (t_object *)outlet_new(x,NULL));
 		
+		x->bufferSpace = new AudioSampleBuffer(4, 64);
+		
 		x->juceAudioProcessor = createPluginFilter();
 		x->juceAudioProcessorListener = new JuceMSPListener(x);
 		x->juceAudioProcessor->addListener(x->juceAudioProcessorListener);
@@ -363,6 +396,11 @@ void *jucemsp_new(t_symbol *s, long argc, t_atom *argv)
 		}
 		
 		attr_args_process(x,argc,argv);		// Handle attribute args
+		
+		x->midiEvents = new MidiBuffer();
+		//x->midiEvents->clear();
+		
+		jucemsp_initparameterattrs(x);
 	}
 	
 	return(x);								// return pointer to the new instance 
@@ -374,6 +412,8 @@ void jucemsp_free(t_jucemsp *x)
 {
 	dsp_free((t_pxobject*)x);
 	x->juceAudioProcessor->removeListener(x->juceAudioProcessorListener);
+	delete x->bufferSpace;
+	delete x->midiEvents;
 	delete x->juceAudioProcessorListener;
 	delete x->juceAudioProcessor;
 }
