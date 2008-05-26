@@ -6,9 +6,10 @@
  */
 
 #include "../../../juce_code/juce/juce.h"
-#include "JucePluginCharacteristics.h"
 #include "ext.h"
 #include "MSPAudioProcessor.h"
+#include "MSPEditorComponent.h"
+
 
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
@@ -86,3 +87,9 @@ const String MSPAudioProcessor::getName() const
 {
 	return T(JucePlugin_Name); 
 }
+
+AudioProcessorEditor* MSPAudioProcessor::createEditor()
+{
+	return new MSPEditorComponent(this);
+}
+

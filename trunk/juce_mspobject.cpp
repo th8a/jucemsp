@@ -24,10 +24,11 @@ typedef struct _jucemsp
 	
 	t_symbol*	name;
 	t_wind*		window;
+	bool		windowIsVisible;
 	
 	AudioProcessor*					juceAudioProcessor;
-	class EditorComponentHolder*	juceWindowComp;
-	Component*						juceEditorComp;
+	Component*						juceWindowComp;
+	AudioProcessorEditor*			juceEditorComp;
 	class JuceMSPListener*			juceAudioProcessorListener;
 	
 	float* inputChannels[32]; // need to make this dynamic
@@ -54,9 +55,11 @@ t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *argc, t_atom **argv);
 t_max_err jucemsp_attr_set(t_jucemsp *x, void *attr, long argc, t_atom *argv); 
 void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count);
 void jucemsp_dblclick(t_jucemsp *x);
-void juce_update(t_jucemsp *x);
+void jucemsp_update(t_jucemsp *x);
+void jucemsp_invis(t_jucemsp *x); 
 void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s);
 void *jucemsp_new(t_symbol *s, long argc, t_atom *argv);
+void jucemsp_deleteui(t_jucemsp *x);
 void jucemsp_free(t_jucemsp *x);
 
 #pragma mark -
@@ -109,34 +112,12 @@ public:
     void paint (Graphics& g)
     {
     }
-};
-
-class EditorComponent : public Component
-{
-public:
-	EditorComponent()
-	{
-		addAndMakeVisible(slider = new Slider("Slider"));
-	}
-	
-	~EditorComponent()
-	{
-		deleteAllChildren();
-	}
-	
-	void resized()
-    {
-		slider->setBounds(20,20,200,24);
-	}
-	
-	void paint (Graphics& g)
-    {
-		g.fillAll (Colour::greyLevel (0.9f));
-    }
 	
 private:
-	Slider* slider;
+	t_jucemsp* juceMsp;
 };
+
+
 
 #pragma mark -
 #pragma mark t_jucemsp function definitions 
@@ -177,7 +158,8 @@ int main(void)
 	class_addmethod(c, (method)jucemsp_midievent,	 "midievent",	A_LONG, A_LONG, A_LONG, 0);
 	class_addmethod(c, (method)jucemsp_list,         "list",		A_GIMME, 0L);
 	class_addmethod(c, (method)jucemsp_dblclick,	 "dblclick",	A_CANT, 0); 
-	class_addmethod(c, (method)juce_update,			 "update",		A_CANT, 0);
+	class_addmethod(c, (method)jucemsp_update,		 "update",		A_CANT, 0);
+	class_addmethod(c, (method)jucemsp_invis,		 "invis",		A_CANT, 0); 
 	class_addmethod(c, (method)jucemsp_assist,       "assist",		A_CANT, 0L); 
 	class_addmethod(c, (method)object_obex_dumpout,  "dumpout",		A_CANT,0);  
 	class_addmethod(c, (method)object_obex_quickref, "quickref",	A_CANT, 0);
@@ -278,7 +260,7 @@ void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count)
 		
 	// setup our intermediate buffers
 	x->bufferSpace->setSize(jmax(x->juceAudioProcessor->getNumInputChannels(), 
-								x->juceAudioProcessor->getNumOutputChannels()),
+								 x->juceAudioProcessor->getNumOutputChannels()),
 						   sp[0]->s_n);
 	
 	int signalIndex = 0;
@@ -397,42 +379,60 @@ void jucemsp_updateattr(t_jucemsp *x, int parameterIndex, float newValue)
 	x->params[parameterIndex] = newValue;
 }
 
+#define WINDOWTITLEBARHEIGHT 22
+
 void jucemsp_dblclick(t_jucemsp *x) 
 { 
 	post("jucemsp_dblclick");
-	wind_vis(x->window); 
 	
-	//x->juceEditorComp = x->juceAudioProcessor->createEditorIfNeeded();
-	
-	x->juceEditorComp = new EditorComponent(); //new Slider (T("gain"));
-	x->juceEditorComp->setBounds(50, 50, 300, 100);
-	
-	const int w = x->juceEditorComp->getWidth();
-	const int h = x->juceEditorComp->getHeight();
-	
-	x->juceEditorComp->setOpaque (true);
-	x->juceEditorComp->setVisible (true);
-	
-	x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp);
-	x->juceWindowComp->setBounds(0, 22, w, h);
-	
-	// Mac only here...!
-	HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->window));
-	post("HIViewRef hiRoot=%p", hiRoot);
-	
-	x->juceWindowComp->addToDesktop(0, (void*)hiRoot);
+	if(!x->windowIsVisible) {
 		
-	syswindow_size(wind_syswind(x->window), w, h, true);
+		wind_vis(x->window);
+		syswindow_hide(wind_syswind(x->window));
+		
+		x->juceEditorComp = x->juceAudioProcessor->createEditorIfNeeded();
+		x->juceEditorComp->setBounds(50, 50, 300, 100);
+		
+		const int w = x->juceEditorComp->getWidth();
+		const int h = x->juceEditorComp->getHeight();
+		
+		x->juceEditorComp->setOpaque (true);
+		x->juceEditorComp->setVisible (true);
+		
+		x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp);
+		x->juceWindowComp->setBounds(0, WINDOWTITLEBARHEIGHT, w, h);
+		
+		syswindow_size(wind_syswind(x->window), w, h, true);	
+		
+		int mx, my;
+		Desktop::getMousePosition(mx,my);
+		
+		syswindow_move(wind_syswind(x->window), mx, my + WINDOWTITLEBARHEIGHT, false);
+		
+		// Mac only here...!
+		HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->window));
+		x->juceWindowComp->addToDesktop(0, (void*)hiRoot);
+		
+		x->windowIsVisible = true;
+		syswindow_show(wind_syswind(x->window));
+	}
 	
-	
-	
+	syswindow_move(wind_syswind(x->window), x->window->w_x1, x->window->w_y1, true);
+
 }
 
-void juce_update(t_jucemsp *x)
+void jucemsp_update(t_jucemsp *x)
 {
-	post("juce_update");
+	post("jucemsp_update");
 	
 	x->juceWindowComp->repaint();
+}
+
+void jucemsp_invis(t_jucemsp *x)
+{
+	post("jucemsp_invis");
+	
+	x->windowIsVisible = false;
 }
 
 void jucemsp_assist(t_jucemsp *x, void *b, long inletOrOutlet, long inletOutletIndex, char *s)
@@ -506,12 +506,29 @@ void *jucemsp_new(t_symbol *s, long argc, t_atom *argv)
 		x->juceEditorComp = 0L;
 		x->juceWindowComp = 0L;
 		x->window = wind_new (x, 50, 50, 150, 150, WCLOSE | WCOLOR); 
+		wind_settitle(x->window, x->name->s_name, 0);
+		
+		x->windowIsVisible = false;
 	}
 	
 	return(x);								// return pointer to the new instance 
 }
 	
 
+void jucemsp_deleteui(t_jucemsp *x)
+{
+	PopupMenu::dismissAllActiveMenus();
+	
+	// there's some kind of component currently modal, but the host
+	// is trying to delete our plugin..
+//	jassert (Component::getCurrentlyModalComponent() == 0);
+	
+	if (x->juceEditorComp != 0)
+		x->juceAudioProcessor->editorBeingDeleted (x->juceEditorComp);
+	
+	deleteAndZero (x->juceEditorComp);
+	deleteAndZero (x->juceWindowComp);
+}
 
 void jucemsp_free(t_jucemsp *x)
 {
@@ -520,11 +537,10 @@ void jucemsp_free(t_jucemsp *x)
 	delete x->bufferSpace;
 	delete x->midiEvents;
 	delete x->juceAudioProcessorListener;
+	
+	jucemsp_deleteui(x);
+		
 	delete x->juceAudioProcessor;
-
-	//must delete these
-//	x->juceEditorComp = 0L;
-//	x->juceWindowComp = 0L;
 }
 
 

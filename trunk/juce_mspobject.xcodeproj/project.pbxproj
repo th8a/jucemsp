@@ -21,6 +21,8 @@
 		A80FE1680DE8BE0C00AE5B01 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80FE1670DE8BE0C00AE5B01 /* OpenGL.framework */; };
 		A80FE2A00DE9395000AE5B01 /* JucePluginCharacteristics.h in Headers */ = {isa = PBXBuildFile; fileRef = A80FE29F0DE9395000AE5B01 /* JucePluginCharacteristics.h */; };
 		A80FE4B00DE9523F00AE5B01 /* commonsyms.c in Sources */ = {isa = PBXBuildFile; fileRef = A80FE4AF0DE9523F00AE5B01 /* commonsyms.c */; };
+		A894AE930DEB3B57009B3526 /* MSPEditorComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */; };
+		A894AE940DEB3B57009B3526 /* MSPEditorComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A894AE920DEB3B57009B3526 /* MSPEditorComponent.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		A80FE1670DE8BE0C00AE5B01 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		A80FE29F0DE9395000AE5B01 /* JucePluginCharacteristics.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = JucePluginCharacteristics.h; sourceTree = "<group>"; };
 		A80FE4AF0DE9523F00AE5B01 /* commonsyms.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = commonsyms.c; path = "../../c74support/max-includes/common/commonsyms.c"; sourceTree = SOURCE_ROOT; };
+		A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSPEditorComponent.h; sourceTree = "<group>"; };
+		A894AE920DEB3B57009B3526 /* MSPEditorComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MSPEditorComponent.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 				A80FE29F0DE9395000AE5B01 /* JucePluginCharacteristics.h */,
 				A80FE0300DE8B81700AE5B01 /* MSPAudioProcessor.h */,
 				A80FE0310DE8B81700AE5B01 /* MSPAudioProcessor.cpp */,
+				A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */,
+				A894AE920DEB3B57009B3526 /* MSPEditorComponent.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -150,6 +156,7 @@
 			files = (
 				A80FE0320DE8B81700AE5B01 /* MSPAudioProcessor.h in Headers */,
 				A80FE2A00DE9395000AE5B01 /* JucePluginCharacteristics.h in Headers */,
+				A894AE930DEB3B57009B3526 /* MSPEditorComponent.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +242,7 @@
 				8D01CCCC0486CAD60068D4B7 /* juce_mspobject.cpp in Sources */,
 				A80FE0330DE8B81700AE5B01 /* MSPAudioProcessor.cpp in Sources */,
 				A80FE4B00DE9523F00AE5B01 /* commonsyms.c in Sources */,
+				A894AE940DEB3B57009B3526 /* MSPEditorComponent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

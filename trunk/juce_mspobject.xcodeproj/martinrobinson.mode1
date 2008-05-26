@@ -259,6 +259,8 @@
 								<string>08FB77ADFE841716C02AAC07</string>
 								<string>089C167CFE841241C02AAC07</string>
 								<string>089C1671FE841209C02AAC07</string>
+								<string>0F5B62020919440900A62EB9</string>
+								<string>A894AC0E0DEAFFC7009B3526</string>
 								<string>19C28FB4FE9D528D11CA2CBB</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FAAC04509CD000000102</string>
@@ -322,19 +324,25 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>A894AE900DEB35DE009B3526</string>
+										<string>A894AF7B0DEB5EFB009B3526</string>
 										<key>history</key>
 										<array>
 											<string>A80FE5720DE974D500AE5B01</string>
 											<string>A80FE5AB0DEA96FF00AE5B01</string>
-											<string>A80FE6600DEAA71F00AE5B01</string>
-											<string>A80FE6610DEAA71F00AE5B01</string>
 											<string>A894AB310DEAC2CD009B3526</string>
 											<string>A894AC730DEB07D2009B3526</string>
-											<string>A894AC810DEB0823009B3526</string>
 											<string>A894AE470DEB3113009B3526</string>
 											<string>A894AE490DEB3113009B3526</string>
-											<string>A894AE850DEB3542009B3526</string>
+											<string>A894AEFC0DEB563A009B3526</string>
+											<string>A894AEFD0DEB563A009B3526</string>
+											<string>A894AF320DEB572D009B3526</string>
+											<string>A894AF330DEB572D009B3526</string>
+											<string>A894AF530DEB5C3B009B3526</string>
+											<string>A894AF540DEB5C3B009B3526</string>
+											<string>A894AF560DEB5C3B009B3526</string>
+											<string>A894AF580DEB5C3B009B3526</string>
+											<string>A894AF5A0DEB5C3B009B3526</string>
+											<string>A894AF5C0DEB5C3B009B3526</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -352,6 +360,59 @@
 											<string>A894AE4C0DEB3113009B3526</string>
 											<string>A894AE4D0DEB3113009B3526</string>
 											<string>A894AE4F0DEB3113009B3526</string>
+											<string>A894AF000DEB563A009B3526</string>
+											<string>A894AF010DEB563A009B3526</string>
+											<string>A894AF020DEB563A009B3526</string>
+											<string>A894AF030DEB563A009B3526</string>
+											<string>A894AF040DEB563A009B3526</string>
+											<string>A894AF050DEB563A009B3526</string>
+											<string>A894AF060DEB563A009B3526</string>
+											<string>A894AF070DEB563A009B3526</string>
+											<string>A894AF080DEB563A009B3526</string>
+											<string>A894AF090DEB563A009B3526</string>
+											<string>A894AF0A0DEB563A009B3526</string>
+											<string>A894AF0B0DEB563A009B3526</string>
+											<string>A894AF0C0DEB563A009B3526</string>
+											<string>A894AF0D0DEB563A009B3526</string>
+											<string>A894AF0E0DEB563A009B3526</string>
+											<string>A894AF0F0DEB563A009B3526</string>
+											<string>A894AF100DEB563A009B3526</string>
+											<string>A894AF110DEB563A009B3526</string>
+											<string>A894AF120DEB563A009B3526</string>
+											<string>A894AF130DEB563A009B3526</string>
+											<string>A894AF140DEB563A009B3526</string>
+											<string>A894AF150DEB563A009B3526</string>
+											<string>A894AF160DEB563A009B3526</string>
+											<string>A894AF170DEB563A009B3526</string>
+											<string>A894AF180DEB563A009B3526</string>
+											<string>A894AF190DEB563A009B3526</string>
+											<string>A894AF1A0DEB563A009B3526</string>
+											<string>A894AF1B0DEB563A009B3526</string>
+											<string>A894AF1C0DEB563A009B3526</string>
+											<string>A894AF1D0DEB563A009B3526</string>
+											<string>A894AF1E0DEB563A009B3526</string>
+											<string>A894AF1F0DEB563A009B3526</string>
+											<string>A894AF200DEB563A009B3526</string>
+											<string>A894AF210DEB563A009B3526</string>
+											<string>A894AF220DEB563A009B3526</string>
+											<string>A894AF230DEB563A009B3526</string>
+											<string>A894AF240DEB563A009B3526</string>
+											<string>A894AF250DEB563A009B3526</string>
+											<string>A894AF260DEB563A009B3526</string>
+											<string>A894AF270DEB563A009B3526</string>
+											<string>A894AF280DEB563A009B3526</string>
+											<string>A894AF290DEB563A009B3526</string>
+											<string>A894AF2A0DEB563A009B3526</string>
+											<string>A894AF2B0DEB563A009B3526</string>
+											<string>A894AF2C0DEB563A009B3526</string>
+											<string>A894AF340DEB572D009B3526</string>
+											<string>A894AF350DEB572D009B3526</string>
+											<string>A894AF5D0DEB5C3B009B3526</string>
+											<string>A894AF5E0DEB5C3B009B3526</string>
+											<string>A894AF5F0DEB5C3B009B3526</string>
+											<string>A894AF610DEB5C3B009B3526</string>
+											<string>A894AF630DEB5C3B009B3526</string>
+											<string>A894AF650DEB5C3B009B3526</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -546,10 +607,10 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>1C530D57069F1CE1000CFCEE</string>
+		<string>A857F64B0D2C103B004DDB2C</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>A894ABED0DEAC99C009B3526</string>
 		<string>1C0AD2B3069F1EA900FABCE6</string>
-		<string>A857F64B0D2C103B004DDB2C</string>
 		<string>/Users/martinrobinson/development/maxmsp/my projects/juce_mspobject~/juce_mspobject.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -569,12 +630,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>juce_mspobject.cpp</string>
+								<string>MSPAudioProcessor.cpp</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -591,8 +654,6 @@
 							<string>303pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -643,7 +704,7 @@
 			<key>WindowToolGUID</key>
 			<string>A857F64B0D2C103B004DDB2C</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -1005,7 +1066,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C0AD2B3069F1EA900FABCE6</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

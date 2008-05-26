@@ -11,6 +11,8 @@
 #ifndef _MSPAUDIOPROCESSOR_H_
 #define _MSPAUDIOPROCESSOR_H_
 
+#include "JucePluginCharacteristics.h"
+
 class MSPAudioProcessor  :	public AudioProcessor,
 							public ChangeBroadcaster
 {
@@ -27,7 +29,7 @@ public:
 	bool isOutputChannelStereoPair (int index) const { return false; }
 	bool acceptsMidi() const { return JucePlugin_WantsMidiInput; }
 	bool producesMidi() const { return JucePlugin_ProducesMidiOutput; }
-	AudioProcessorEditor* createEditor() { return NULL; }
+	AudioProcessorEditor* createEditor();
 	int getNumParameters(); 
 	const String getParameterName (int parameterIndex);
 	float getParameter (int parameterIndex);
@@ -40,7 +42,7 @@ public:
 	void changeProgramName (int index, const String& newName) { }
 	void getStateInformation (MemoryBlock& destData) { }
 	void setStateInformation (const void* data, int sizeInBytes) { }
-	
+		
 private:
 	float gain;
 };
