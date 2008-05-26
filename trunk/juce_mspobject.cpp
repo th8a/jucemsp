@@ -6,16 +6,23 @@
 #include "commonsyms.h"      // Common symbols used by the Max 4.5 API
 #include "ext_obex.h"        // Max Object Extensions
 
+#define VALIDCHARS "ABCDEFGHIJKLMNOPQRTSUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789"
+
 t_class *jucemsp_class;
 
 static const short channelConfigs[][2] = { JucePlugin_PreferredChannelConfigurations };
+static const int numChannelConfigs = numElementsInArray (channelConfigs);
 extern AudioProcessor* JUCE_CALLTYPE createPluginFilter();
 
+#pragma mark -
+#pragma mark t_jucemsp definition
 
 typedef struct _jucemsp
 {
     t_pxobject	x_obj;
 	void        *obex;       // Pointer to Obex object
+	
+	t_symbol*	name;
 	
 	AudioProcessor* juceAudioProcessor;
 	class JuceMSPListener* juceAudioProcessorListener;
@@ -31,6 +38,9 @@ typedef struct _jucemsp
 	//.. extra space will be alloacted for the number of params
 } t_jucemsp;
 
+#pragma mark -
+#pragma mark t_jucemsp function prototypes 
+
 void jucemsp_initattrs(t_class *c, AudioProcessor* juceAudioProcessor);
 t_int *jucemsp_perform(t_int *w);
 void jucemsp_list(t_jucemsp *x, t_symbol* s, short argc, t_atom* argv);
@@ -41,6 +51,9 @@ void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count);
 void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s);
 void *jucemsp_new(t_symbol *s, long argc, t_atom *argv);
 void jucemsp_free(t_jucemsp *x);
+
+#pragma mark -
+#pragma mark JuceMSPListener class 
 
 class JuceMSPListener : public AudioProcessorListener
 {
@@ -61,6 +74,9 @@ private:
 	t_jucemsp* juceMsp; 
 };
 
+#pragma mark -
+#pragma mark t_jucemsp function definitions 
+
 int main(void)
 {
 	long attrflags = 0;
@@ -73,7 +89,16 @@ int main(void)
 	common_symbols_init();
 	
 	// Define our class
-	c = class_new("juce_mspobject~",(method)jucemsp_new, (method)jucemsp_free, 
+	String className;
+	
+	className << String(JucePlugin_Name).replaceCharacter (' ', '_')
+										.replaceCharacter ('.', '_')
+										.retainCharacters (T(VALIDCHARS));
+	className << "~";
+	
+	post("Juce MSP Wrapper: '%s' plugin loaded as '%s'", JucePlugin_Name, (char*)(const char*)className);
+	
+	c = class_new((char*)(const char*)className,(method)jucemsp_new, (method)jucemsp_free, 
 				  // vaiable size float array for the last member of the struct
 				  (short)sizeof(t_jucemsp) + ((juceAudioProcessor->getNumParameters()-1) * sizeof(float)), 
 				  (method)0L, 
@@ -108,11 +133,17 @@ void jucemsp_initattrs(t_class *c, AudioProcessor* juceAudioProcessor)
 	long attrflags = 0;
 	t_object *attr;
 	
+	attr = attr_offset_new("name", 
+						   _sym_symbol, ATTR_SET_OPAQUE_USER,
+						   (method)0L, (method)0L, 
+						   calcoffset(t_jucemsp, name)); 
+	class_addattr(c, attr);
+	
 	for(int i = 0; i < juceAudioProcessor->getNumParameters(); i++) {		
 		attr = attr_offset_new((char*)(const char*)
 							   (juceAudioProcessor->getParameterName(i).replaceCharacter (' ', '_')
 																	   .replaceCharacter ('.', '_')
-																	   .retainCharacters (T("abcdefghijklmnopqrstuvwxyz_0123456789"))), 
+																	   .retainCharacters (T(VALIDCHARS))), 
 							   _sym_float32, attrflags,
 							   (method)jucemsp_attr_get, (method)jucemsp_attr_set, 
 							   calcoffset(t_jucemsp, params) + sizeof(float) * i); 
@@ -194,8 +225,7 @@ t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *ac, t_atom **av)
 		// memory passed in; use it 
 	} else { 
 		*ac = 1; // size of attr data 
-		*av = (t_atom *)getbytes(sizeof(t_atom) * 
-								 (*ac)); 
+		*av = (t_atom *)getbytes(sizeof(t_atom) * (*ac)); 
 		if (!(*av)) { 
 			*ac = 0; 
 			return MAX_ERR_OUT_OF_MEM; 
@@ -209,7 +239,7 @@ t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *ac, t_atom **av)
 		t_symbol *paramName = gensym((char*)(const char*)
 									 (x->juceAudioProcessor->getParameterName(i).replaceCharacter (' ', '_')
 																				.replaceCharacter ('.', '_')
-																				.retainCharacters (T("abcdefghijklmnopqrstuvwxyz_0123456789"))));
+																				.retainCharacters (T(VALIDCHARS))));
 		
 		if(attrName == paramName) {
 			atom_setfloat(*av, x->params[i]);
@@ -218,8 +248,7 @@ t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *ac, t_atom **av)
 		
 	}
 	
-	return MAX_ERR_NONE; 
-	
+	return MAX_ERR_GENERIC; 
 }
 
 t_max_err jucemsp_attr_set(t_jucemsp *x, void *attr, long ac, t_atom *av)
@@ -232,7 +261,7 @@ t_max_err jucemsp_attr_set(t_jucemsp *x, void *attr, long ac, t_atom *av)
 			t_symbol *paramName = gensym((char*)(const char*)
 										 (x->juceAudioProcessor->getParameterName(i).replaceCharacter (' ', '_')
 																					.replaceCharacter ('.', '_')
-																					.retainCharacters (T("abcdefghijklmnopqrstuvwxyz_0123456789"))));
+																					.retainCharacters (T(VALIDCHARS))));
 			
 			if(attrName == paramName) {
 				x->params[i] = jlimit(0.f, 1.f, atom_getfloat(av));
@@ -244,7 +273,7 @@ t_max_err jucemsp_attr_set(t_jucemsp *x, void *attr, long ac, t_atom *av)
 		}
 		
 	} 
-	return MAX_ERR_NONE; 
+	return MAX_ERR_GENERIC; 
 }
 
 
@@ -254,17 +283,29 @@ void jucemsp_updateattr(t_jucemsp *x, int parameterIndex, float newValue)
 }
 
 
-void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s)
+void jucemsp_assist(t_jucemsp *x, void *b, long inletOrOutlet, long inletOutletIndex, char *s)
 {
-//	if (m==ASSIST_INLET) {
-//		switch (a) {
-//			case 0: sprintf(s,"(signal/float) This + Right Inlet"); break;
-//			case 1: sprintf(s,"(signal/float) Left Inlet + This"); break;
-//		}
-//	}
-//	else {
-//		sprintf(s,"(signal) Addition Result");
-//	}
+	if (inletOrOutlet == ASSIST_INLET) {
+		
+		if(inletOutletIndex < x->juceAudioProcessor->getNumInputChannels()) {
+			if(inletOutletIndex == 0)
+				sprintf(s,"(signal) Input %s, and messages", 
+						(char*)(const char*)x->juceAudioProcessor->getInputChannelName(inletOutletIndex));
+			else
+				sprintf(s,"(signal) Input %s", 
+						(char*)(const char*)x->juceAudioProcessor->getInputChannelName(inletOutletIndex));
+		} else {
+			sprintf(s,"Message inlet %ld", inletOrOutlet+1);
+		}
+			
+	} else {
+		if(inletOutletIndex < x->juceAudioProcessor->getNumOutputChannels()) {
+			sprintf(s,"(signal) Output %s", 
+					(char*)(const char*)x->juceAudioProcessor->getOutputChannelName(inletOutletIndex));
+		} else {
+			sprintf(s,"Message outlet %ld", inletOrOutlet+1);
+		}
+	}
 }
 
 
@@ -274,17 +315,23 @@ void *jucemsp_new(t_symbol *s, long argc, t_atom *argv)
 	
 	x = (t_jucemsp *)object_alloc(jucemsp_class);
 	if(x) {
-		object_obex_store((void *)x, _sym_dumpout, 
-						  (t_object *)outlet_new(x,NULL));
+		object_obex_store((void *)x, _sym_dumpout, (t_object *)outlet_new(x,NULL));
 		
 		x->juceAudioProcessor = createPluginFilter();
 		x->juceAudioProcessorListener = new JuceMSPListener(x);
 		x->juceAudioProcessor->addListener(x->juceAudioProcessorListener);
 		
-		// using the first (zeroth) channel configs from "JucePluginCharacteristics.h"
-		// must think of an elegant way to select these in MaxMSP
-		x->juceAudioProcessor->setPlayConfigDetails(channelConfigs[0][0], // num inputs
-													channelConfigs[0][1], // num outputs
+		x->name = gensym((char*)(const char*)x->juceAudioProcessor->getName());
+		
+		int channelConfigIndex = 0;
+		int attrArgsOffset = attr_args_offset(argc, argv);
+		
+		if(argc > 0 && attrArgsOffset > 0) {
+			channelConfigIndex = jlimit(0, numChannelConfigs-1, (int)atom_getlong(argv));
+		}
+		
+		x->juceAudioProcessor->setPlayConfigDetails(channelConfigs[channelConfigIndex][0], // num inputs
+													channelConfigs[channelConfigIndex][1], // num outputs
 													sys_getsr(), sys_getblksize());
 		
 		// inputs

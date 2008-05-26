@@ -2,8 +2,6 @@
  *  MSPAudioProcessor.h
  *  juce_mspobject
  *
- *  Created by Martin Robinson on 24/05/2008.
- *  Copyright 2008 __MyCompanyName__. All rights reserved.
  *
  */
 
@@ -19,12 +17,12 @@ class MSPAudioProcessor  :	public AudioProcessor,
 public:
 	MSPAudioProcessor();
 	
-	const String getName() const { return T("MSPAudioProcessor"); }
+	const String getName() const;// { return T("JucePlugin_Name"); }
 	void prepareToPlay(double sampleRate, int estimatedSamplesPerBlock);
 	void releaseResources() { }
 	void processBlock(AudioSampleBuffer& buffer, MidiBuffer& midiMessages);
-	const String getInputChannelName (const int channelIndex) const { return String::empty; }
-	const String getOutputChannelName (const int channelIndex) const { return String::empty; }
+	const String getInputChannelName (const int channelIndex) const; //{ return String::empty; }
+	const String getOutputChannelName (const int channelIndex) const;// { return String::empty; }
 	bool isInputChannelStereoPair (int index) const { return false; }
 	bool isOutputChannelStereoPair (int index) const { return false; }
 	bool acceptsMidi() const { return false; }

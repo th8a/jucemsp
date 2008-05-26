@@ -204,7 +204,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>A80FE5A30DE9783C00AE5B01</string>
+						<string>A80FE63D0DEAA36900AE5B01</string>
 						<key>history</key>
 						<array>
 							<string>A80FE5300DE9698E00AE5B01</string>
@@ -244,7 +244,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>A80FE5A40DE9783C00AE5B01</string>
+						<string>A80FE63E0DEAA36900AE5B01</string>
 						<key>history</key>
 						<array>
 							<string>A80FE4CC0DE95C1E00AE5B01</string>
@@ -300,8 +300,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -350,7 +348,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>3</integer>
+									<integer>2</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -386,12 +384,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>commonsyms.c</string>
+								<string>juce_mspobject.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -399,19 +399,19 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>commonsyms.c</string>
+										<string>juce_mspobject.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>A80FE5A20DE9783C00AE5B01</string>
+										<string>A80FE63C0DEAA36900AE5B01</string>
 										<key>history</key>
 										<array>
-											<string>A80FE4980DE94ECF00AE5B01</string>
-											<string>A80FE5710DE974D500AE5B01</string>
 											<string>A80FE5720DE974D500AE5B01</string>
-											<string>A80FE5950DE9760300AE5B01</string>
-											<string>A80FE59F0DE9783C00AE5B01</string>
-											<string>A80FE5A00DE9783C00AE5B01</string>
+											<string>A80FE5AB0DEA96FF00AE5B01</string>
+											<string>A80FE6080DEAA02F00AE5B01</string>
+											<string>A80FE6090DEAA02F00AE5B01</string>
+											<string>A80FE62B0DEAA2D400AE5B01</string>
+											<string>A80FE62C0DEAA2D400AE5B01</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -554,6 +554,30 @@
 											<string>A80FE5880DE9757C00AE5B01</string>
 											<string>A80FE5970DE9760300AE5B01</string>
 											<string>A80FE5A10DE9783C00AE5B01</string>
+											<string>A80FE5AF0DEA96FF00AE5B01</string>
+											<string>A80FE5B00DEA96FF00AE5B01</string>
+											<string>A80FE5B10DEA96FF00AE5B01</string>
+											<string>A80FE5B20DEA96FF00AE5B01</string>
+											<string>A80FE5B30DEA96FF00AE5B01</string>
+											<string>A80FE5B40DEA96FF00AE5B01</string>
+											<string>A80FE5B50DEA96FF00AE5B01</string>
+											<string>A80FE5C70DEA99F600AE5B01</string>
+											<string>A80FE5C80DEA99F600AE5B01</string>
+											<string>A80FE5C90DEA99F600AE5B01</string>
+											<string>A80FE5CA0DEA99F600AE5B01</string>
+											<string>A80FE5CB0DEA99F600AE5B01</string>
+											<string>A80FE5CC0DEA99F600AE5B01</string>
+											<string>A80FE5CD0DEA99F600AE5B01</string>
+											<string>A80FE5D60DEA9A8A00AE5B01</string>
+											<string>A80FE5FB0DEA9F8200AE5B01</string>
+											<string>A80FE5FC0DEA9F8200AE5B01</string>
+											<string>A80FE60B0DEAA02F00AE5B01</string>
+											<string>A80FE60C0DEAA02F00AE5B01</string>
+											<string>A80FE60D0DEAA02F00AE5B01</string>
+											<string>A80FE62D0DEAA2D400AE5B01</string>
+											<string>A80FE62E0DEAA2D400AE5B01</string>
+											<string>A80FE62F0DEAA2D400AE5B01</string>
+											<string>A80FE6300DEAA2D400AE5B01</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -565,14 +589,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1095, 625}}</string>
+								<string>{{0, 0}, {1095, 624}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 83 1303 795 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>625pt</string>
+							<string>624pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -585,14 +609,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 630}, {1095, 124}}</string>
+								<string>{{0, 629}, {1095, 125}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 83 1303 795 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>124pt</string>
+							<string>125pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -747,9 +771,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>A857F64B0D2C103B004DDB2C</string>
 		<string>A80FE4E00DE95D6200AE5B01</string>
 		<string>A80FE52E0DE9698E00AE5B01</string>
+		<string>A857F64B0D2C103B004DDB2C</string>
 		<string>/Users/martinrobinson/development/maxmsp/my projects/juce_mspobject~/juce_mspobject.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -769,8 +793,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -793,6 +815,8 @@
 							<string>303pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -843,7 +867,7 @@
 			<key>WindowToolGUID</key>
 			<string>A857F64B0D2C103B004DDB2C</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

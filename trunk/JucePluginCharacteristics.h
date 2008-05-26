@@ -81,7 +81,7 @@
     number of channels that will be used with the AudioProcessor::getNumInputChannels()
     method.
 */
-#define JucePlugin_MaxNumInputChannels              1
+#define JucePlugin_MaxNumInputChannels              4
 
 /** The maximum number of channels of audio output that the plugin can handle.
 
@@ -95,7 +95,7 @@
     number of channels that will be used with the AudioProcessor::getNumOutputChannels()
     method.
 */
-#define JucePlugin_MaxNumOutputChannels             1
+#define JucePlugin_MaxNumOutputChannels             4
 
 /** This allows the plugin to specify the configurations of input/output channels that
     they can support.
@@ -117,7 +117,7 @@
     AudioProcessor::getNumOutputChannels() and AudioFilterBase::getNumInputChannels()
     methods.
 */
-#define JucePlugin_PreferredChannelConfigurations   { 2, 2 }
+#define JucePlugin_PreferredChannelConfigurations   { 1, 1 }, { 2, 2 }, { 4, 4 }
 
 //==============================================================================
 /** Set this value to 1 if your plugin is a synth, or 0 if it isn't.
