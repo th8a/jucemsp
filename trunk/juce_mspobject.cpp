@@ -23,9 +23,12 @@ typedef struct _jucemsp
 	void        *obex;       // Pointer to Obex object
 	
 	t_symbol*	name;
+	t_wind*		window;
 	
-	AudioProcessor* juceAudioProcessor;
-	class JuceMSPListener* juceAudioProcessorListener;
+	AudioProcessor*					juceAudioProcessor;
+	class EditorComponentHolder*	juceWindowComp;
+	Component*						juceEditorComp;
+	class JuceMSPListener*			juceAudioProcessorListener;
 	
 	float* inputChannels[32]; // need to make this dynamic
 	float* outputChannels[32]; // need to make this dynamic
@@ -50,12 +53,14 @@ void jucemsp_updateattr(t_jucemsp *x, int parameterIndex, float newValue);
 t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *argc, t_atom **argv); 
 t_max_err jucemsp_attr_set(t_jucemsp *x, void *attr, long argc, t_atom *argv); 
 void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count);
+void jucemsp_dblclick(t_jucemsp *x);
+void juce_update(t_jucemsp *x);
 void jucemsp_assist(t_jucemsp *x, void *b, long m, long a, char *s);
 void *jucemsp_new(t_symbol *s, long argc, t_atom *argv);
 void jucemsp_free(t_jucemsp *x);
 
 #pragma mark -
-#pragma mark JuceMSPListener class 
+#pragma mark Juce helper classes
 
 class JuceMSPListener : public AudioProcessorListener
 {
@@ -76,6 +81,63 @@ private:
 	t_jucemsp* juceMsp; 
 };
 
+class EditorComponentHolder  : public Component
+{
+public:
+    EditorComponentHolder (Component* const editorComp)
+    {
+        addAndMakeVisible (editorComp);
+        setOpaque (true);
+        setVisible (true);
+        setBroughtToFrontOnMouseClick (true);
+		
+//#if ! JucePlugin_EditorRequiresKeyboardFocus
+//        setWantsKeyboardFocus (false);
+//#endif
+    }
+	
+    ~EditorComponentHolder()
+    {
+    }
+	
+    void resized()
+    {
+        if (getNumChildComponents() > 0)
+            getChildComponent (0)->setBounds (0, 0, getWidth(), getHeight());
+    }
+	
+    void paint (Graphics& g)
+    {
+    }
+};
+
+class EditorComponent : public Component
+{
+public:
+	EditorComponent()
+	{
+		addAndMakeVisible(slider = new Slider("Slider"));
+	}
+	
+	~EditorComponent()
+	{
+		deleteAllChildren();
+	}
+	
+	void resized()
+    {
+		slider->setBounds(20,20,200,24);
+	}
+	
+	void paint (Graphics& g)
+    {
+		g.fillAll (Colour::greyLevel (0.9f));
+    }
+	
+private:
+	Slider* slider;
+};
+
 #pragma mark -
 #pragma mark t_jucemsp function definitions 
 
@@ -84,6 +146,8 @@ int main(void)
 	long attrflags = 0;
 	t_class *c;
 	t_object *attr;
+	
+	initialiseJuce_GUI();
 	
 	// a dummy so we can inspect it (it won't know the channel configs but we don't need that here)
 	AudioProcessor* juceAudioProcessor = createPluginFilter(); 
@@ -98,7 +162,7 @@ int main(void)
 										.retainCharacters (T(VALIDCHARS));
 	className << "~";
 	
-	post("Juce MSP Wrapper: '%s' plugin loaded as '%s'", JucePlugin_Name, (char*)(const char*)className);
+	post("Juce MSP Wrapper: '%s' plugin loaded as an object named'%s'", JucePlugin_Name, (char*)(const char*)className);
 	
 	c = class_new((char*)(const char*)className,(method)jucemsp_new, (method)jucemsp_free, 
 				  // vaiable size float array for the last member of the struct
@@ -111,7 +175,9 @@ int main(void)
 	// Make methods accessible for our class: 
 	class_addmethod(c, (method)jucemsp_dsp,          "dsp",			A_CANT, 0L);
 	class_addmethod(c, (method)jucemsp_midievent,	 "midievent",	A_LONG, A_LONG, A_LONG, 0);
-	class_addmethod(c, (method)jucemsp_list,         "list",		A_GIMME, 0L);        
+	class_addmethod(c, (method)jucemsp_list,         "list",		A_GIMME, 0L);
+	class_addmethod(c, (method)jucemsp_dblclick,	 "dblclick",	A_CANT, 0); 
+	class_addmethod(c, (method)juce_update,			 "update",		A_CANT, 0);
 	class_addmethod(c, (method)jucemsp_assist,       "assist",		A_CANT, 0L); 
 	class_addmethod(c, (method)object_obex_dumpout,  "dumpout",		A_CANT,0);  
 	class_addmethod(c, (method)object_obex_quickref, "quickref",	A_CANT, 0);
@@ -137,7 +203,7 @@ void jucemsp_setupattrs(t_class *c, AudioProcessor* juceAudioProcessor)
 	t_object *attr;
 	
 	// plugin name attribute
-	attr = attr_offset_new("name", 
+	attr = attr_offset_new("pluginname", 
 						   _sym_symbol, ATTR_SET_OPAQUE_USER,
 						   (method)0L, (method)0L, 
 						   calcoffset(t_jucemsp, name)); 
@@ -192,9 +258,7 @@ t_int *jucemsp_perform(t_int *w)
 //			}
 //	#else
 	
-#if JucePlugin_WantsMidiInput
 	x->midiEvents->clear();
-#endif	
 	
 	AudioSampleBuffer outputBuffer(x->outputChannels, x->juceAudioProcessor->getNumOutputChannels(), numSamples);
 	
@@ -333,6 +397,43 @@ void jucemsp_updateattr(t_jucemsp *x, int parameterIndex, float newValue)
 	x->params[parameterIndex] = newValue;
 }
 
+void jucemsp_dblclick(t_jucemsp *x) 
+{ 
+	post("jucemsp_dblclick");
+	wind_vis(x->window); 
+	
+	//x->juceEditorComp = x->juceAudioProcessor->createEditorIfNeeded();
+	
+	x->juceEditorComp = new EditorComponent(); //new Slider (T("gain"));
+	x->juceEditorComp->setBounds(50, 50, 300, 100);
+	
+	const int w = x->juceEditorComp->getWidth();
+	const int h = x->juceEditorComp->getHeight();
+	
+	x->juceEditorComp->setOpaque (true);
+	x->juceEditorComp->setVisible (true);
+	
+	x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp);
+	x->juceWindowComp->setBounds(0, 22, w, h);
+	
+	// Mac only here...!
+	HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->window));
+	post("HIViewRef hiRoot=%p", hiRoot);
+	
+	x->juceWindowComp->addToDesktop(0, (void*)hiRoot);
+		
+	syswindow_size(wind_syswind(x->window), w, h, true);
+	
+	
+	
+}
+
+void juce_update(t_jucemsp *x)
+{
+	post("juce_update");
+	
+	x->juceWindowComp->repaint();
+}
 
 void jucemsp_assist(t_jucemsp *x, void *b, long inletOrOutlet, long inletOutletIndex, char *s)
 {
@@ -401,6 +502,10 @@ void *jucemsp_new(t_symbol *s, long argc, t_atom *argv)
 		//x->midiEvents->clear();
 		
 		jucemsp_initparameterattrs(x);
+		
+		x->juceEditorComp = 0L;
+		x->juceWindowComp = 0L;
+		x->window = wind_new (x, 50, 50, 150, 150, WCLOSE | WCOLOR); 
 	}
 	
 	return(x);								// return pointer to the new instance 
@@ -416,6 +521,10 @@ void jucemsp_free(t_jucemsp *x)
 	delete x->midiEvents;
 	delete x->juceAudioProcessorListener;
 	delete x->juceAudioProcessor;
+
+	//must delete these
+//	x->juceEditorComp = 0L;
+//	x->juceWindowComp = 0L;
 }
 
 
