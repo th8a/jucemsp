@@ -19,17 +19,23 @@ public:
 		:	AudioProcessorEditor(ownerFilter)
 	{
 		addAndMakeVisible(slider = new Slider("Slider"));
+		addAndMakeVisible(resizer = new ResizableCornerComponent(this, 0));
 		setSize(200,24);
+		
+		//ownerFilter->addChangeListener (this);
 	}
 
 	~MSPEditorComponent()
 	{
+		//getFilter()->removeChangeListener (this);
+		
 		deleteAllChildren();
 	}
 
 	void resized()
 	{
 		slider->setBounds(20,20,200,24);
+		resizer->setBounds(getWidth()-12, getHeight()-12, 12, 12);
 	}
 
 	void paint (Graphics& g)
@@ -40,6 +46,7 @@ public:
 
 private:
 	Slider* slider;
+	ResizableCornerComponent* resizer;
 	
 	MSPAudioProcessor* getFilter() const throw()       { return (MSPAudioProcessor*)getAudioProcessor(); }
 };

@@ -29,7 +29,7 @@ typedef struct _jucemsp
 	AudioProcessor*					juceAudioProcessor;
 	Component*						juceWindowComp;
 	AudioProcessorEditor*			juceEditorComp;
-	class JuceMSPListener*			juceAudioProcessorListener;
+	class JuceMSPListener*			juceListener;
 	
 	float* inputChannels[32]; // need to make this dynamic
 	float* outputChannels[32]; // need to make this dynamic
@@ -65,12 +65,14 @@ void jucemsp_free(t_jucemsp *x);
 #pragma mark -
 #pragma mark Juce helper classes
 
-class JuceMSPListener : public AudioProcessorListener
+class JuceMSPListener :		public AudioProcessorListener,
+							public ComponentListener
 {
 public:
 	JuceMSPListener(t_jucemsp* x) 
 	:	AudioProcessorListener(),
-		juceMsp(x)
+		juceMsp(x),
+		recursive(false)
 	{
 	}
 	void audioProcessorParameterChanged (AudioProcessor *processor, int parameterIndex, float newValue)
@@ -80,8 +82,37 @@ public:
 	
 	void audioProcessorChanged (AudioProcessor *processor) { }
 	
+	void componentMovedOrResized (Component& component,
+                                  bool wasMoved,
+                                  bool wasResized)
+    {
+        if (! recursive)
+        {
+            recursive = true;
+			
+            if (juceMsp->juceEditorComp != 0 && wasResized)
+            {
+                const int w = jmax (32, juceMsp->juceEditorComp->getWidth());
+                const int h = jmax (32, juceMsp->juceEditorComp->getHeight());
+				
+				syswindow_size(wind_syswind(juceMsp->window), w, h, true);
+				
+                if (juceMsp->juceWindowComp->getWidth() != w
+					|| juceMsp->juceWindowComp->getHeight() != h)
+                {
+                    juceMsp->juceWindowComp->setSize (w, h);
+                }
+				
+                juceMsp->juceEditorComp->repaint();
+            }
+			
+            recursive = false;
+        }
+    }
+	
 private:
 	t_jucemsp* juceMsp; 
+	bool recursive;
 };
 
 class EditorComponentHolder  : public Component
@@ -415,6 +446,8 @@ void jucemsp_dblclick(t_jucemsp *x)
 		
 		x->windowIsVisible = true;
 		syswindow_show(wind_syswind(x->window));
+		
+		x->juceEditorComp->addComponentListener(x->juceListener);
 	}
 	
 	syswindow_move(wind_syswind(x->window), x->window->w_x1, x->window->w_y1, true);
@@ -472,8 +505,8 @@ void *jucemsp_new(t_symbol *s, long argc, t_atom *argv)
 		x->bufferSpace = new AudioSampleBuffer(4, 64);
 		
 		x->juceAudioProcessor = createPluginFilter();
-		x->juceAudioProcessorListener = new JuceMSPListener(x);
-		x->juceAudioProcessor->addListener(x->juceAudioProcessorListener);
+		x->juceListener	= new JuceMSPListener(x);
+		x->juceAudioProcessor->addListener(x->juceListener);
 		
 		x->name = gensym((char*)(const char*)x->juceAudioProcessor->getName());
 		
@@ -523,8 +556,10 @@ void jucemsp_deleteui(t_jucemsp *x)
 	// is trying to delete our plugin..
 //	jassert (Component::getCurrentlyModalComponent() == 0);
 	
-	if (x->juceEditorComp != 0)
+	if (x->juceEditorComp != 0) {
+		x->juceEditorComp->removeComponentListener(x->juceListener);
 		x->juceAudioProcessor->editorBeingDeleted (x->juceEditorComp);
+	}
 	
 	deleteAndZero (x->juceEditorComp);
 	deleteAndZero (x->juceWindowComp);
@@ -533,12 +568,18 @@ void jucemsp_deleteui(t_jucemsp *x)
 void jucemsp_free(t_jucemsp *x)
 {
 	dsp_free((t_pxobject*)x);
-	x->juceAudioProcessor->removeListener(x->juceAudioProcessorListener);
+	
+	wind_close(x->window);
+	
+	x->juceAudioProcessor->removeListener(x->juceListener);
+	
 	delete x->bufferSpace;
 	delete x->midiEvents;
-	delete x->juceAudioProcessorListener;
+	delete x->juceListener;
 	
 	jucemsp_deleteui(x);
+	
+	wind_free((t_object*)x->window);
 		
 	delete x->juceAudioProcessor;
 }
