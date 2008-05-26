@@ -414,7 +414,7 @@ void jucemsp_updateattr(t_jucemsp *x, int parameterIndex, float newValue)
 
 void jucemsp_dblclick(t_jucemsp *x) 
 { 
-	post("jucemsp_dblclick");
+	//post("jucemsp_dblclick");
 	
 	if(!x->windowIsVisible) {
 		
@@ -456,14 +456,14 @@ void jucemsp_dblclick(t_jucemsp *x)
 
 void jucemsp_update(t_jucemsp *x)
 {
-	post("jucemsp_update");
+	//post("jucemsp_update");
 	
 	x->juceWindowComp->repaint();
 }
 
 void jucemsp_invis(t_jucemsp *x)
 {
-	post("jucemsp_invis");
+	//post("jucemsp_invis");
 	
 	x->windowIsVisible = false;
 }

@@ -32,7 +32,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					856,
+					771,
 					20,
 					48,
 					43,
@@ -300,6 +300,34 @@
 			A894AFDC0DEB77DB009B3526 /* PBXTextBookmark */ = A894AFDC0DEB77DB009B3526 /* PBXTextBookmark */;
 			A894AFDD0DEB77DB009B3526 /* PBXTextBookmark */ = A894AFDD0DEB77DB009B3526 /* PBXTextBookmark */;
 			A894AFDE0DEB77DB009B3526 /* PBXTextBookmark */ = A894AFDE0DEB77DB009B3526 /* PBXTextBookmark */;
+			A894AFE10DEB7854009B3526 /* PBXTextBookmark */ = A894AFE10DEB7854009B3526 /* PBXTextBookmark */;
+			A894AFE20DEB7854009B3526 /* PBXTextBookmark */ = A894AFE20DEB7854009B3526 /* PBXTextBookmark */;
+			A894AFE30DEB7855009B3526 /* PBXTextBookmark */ = A894AFE30DEB7855009B3526 /* PBXTextBookmark */;
+			A894AFE40DEB7855009B3526 /* PBXTextBookmark */ = A894AFE40DEB7855009B3526 /* PBXTextBookmark */;
+			A894AFF40DEB7993009B3526 /* PBXTextBookmark */ = A894AFF40DEB7993009B3526 /* PBXTextBookmark */;
+			A894AFF50DEB7993009B3526 /* PBXTextBookmark */ = A894AFF50DEB7993009B3526 /* PBXTextBookmark */;
+			A894AFF60DEB7993009B3526 /* PBXTextBookmark */ = A894AFF60DEB7993009B3526 /* PBXTextBookmark */;
+			A894AFF70DEB7993009B3526 /* PBXTextBookmark */ = A894AFF70DEB7993009B3526 /* PBXTextBookmark */;
+			A894AFF80DEB7993009B3526 /* PBXTextBookmark */ = A894AFF80DEB7993009B3526 /* PBXTextBookmark */;
+			A894AFF90DEB7993009B3526 /* PBXTextBookmark */ = A894AFF90DEB7993009B3526 /* PBXTextBookmark */;
+			A894AFFA0DEB7993009B3526 /* PBXTextBookmark */ = A894AFFA0DEB7993009B3526 /* PBXTextBookmark */;
+			A894B0030DEB7A03009B3526 /* PBXTextBookmark */ = A894B0030DEB7A03009B3526 /* PBXTextBookmark */;
+			A894B0040DEB7A03009B3526 /* PBXTextBookmark */ = A894B0040DEB7A03009B3526 /* PBXTextBookmark */;
+			A894B0050DEB7A03009B3526 /* PBXTextBookmark */ = A894B0050DEB7A03009B3526 /* PBXTextBookmark */;
+			A894B0060DEB7A03009B3526 /* PBXTextBookmark */ = A894B0060DEB7A03009B3526 /* PBXTextBookmark */;
+			A894B0070DEB7A03009B3526 /* PBXTextBookmark */ = A894B0070DEB7A03009B3526 /* PBXTextBookmark */;
+			A894B0080DEB7A03009B3526 /* PBXTextBookmark */ = A894B0080DEB7A03009B3526 /* PBXTextBookmark */;
+			A894B0090DEB7A03009B3526 /* PBXTextBookmark */ = A894B0090DEB7A03009B3526 /* PBXTextBookmark */;
+			A894B00A0DEB7A0A009B3526 /* PBXTextBookmark */ = A894B00A0DEB7A0A009B3526 /* PBXTextBookmark */;
+			A894B00B0DEB7A0A009B3526 /* PBXTextBookmark */ = A894B00B0DEB7A0A009B3526 /* PBXTextBookmark */;
+			A894B00C0DEB7A0A009B3526 /* PBXTextBookmark */ = A894B00C0DEB7A0A009B3526 /* PBXTextBookmark */;
+			A894B00D0DEB7A0A009B3526 /* PBXTextBookmark */ = A894B00D0DEB7A0A009B3526 /* PBXTextBookmark */;
+			A894B00E0DEB7A0A009B3526 /* PBXTextBookmark */ = A894B00E0DEB7A0A009B3526 /* PBXTextBookmark */;
+			A894B0150DEB7AEA009B3526 /* PBXTextBookmark */ = A894B0150DEB7AEA009B3526 /* PBXTextBookmark */;
+			A894B0160DEB7AEA009B3526 /* PBXTextBookmark */ = A894B0160DEB7AEA009B3526 /* PBXTextBookmark */;
+			A894B0180DEB7B52009B3526 /* PBXTextBookmark */ = A894B0180DEB7B52009B3526 /* PBXTextBookmark */;
+			A894B0190DEB7B52009B3526 /* PBXTextBookmark */ = A894B0190DEB7B52009B3526 /* PBXTextBookmark */;
+			A894B01A0DEB7B52009B3526 /* PBXTextBookmark */ = A894B01A0DEB7B52009B3526 /* PBXTextBookmark */;
 		};
 		sourceControlManager = A857F6410D2C0FF4004DDB2C /* Source Control */;
 		userBuildSettings = {
@@ -307,9 +335,9 @@
 	};
 	08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1048, 8246}}";
-			sepNavSelRange = "{16186, 0}";
-			sepNavVisRect = "{{0, 7151}, {1048, 592}}";
+			sepNavIntBoundsRect = "{{0, 0}, {963, 8246}}";
+			sepNavSelRange = "{11776, 0}";
+			sepNavVisRect = "{{0, 4679}, {963, 592}}";
 			sepNavWindowFrame = "{{15, 2}, {943, 871}}";
 		};
 	};
@@ -326,9 +354,9 @@
 	};
 	A80FE0310DE8B81700AE5B01 /* MSPAudioProcessor.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1116, 1344}}";
-			sepNavSelRange = "{2132, 0}";
-			sepNavVisRect = "{{0, 1052}, {1116, 292}}";
+			sepNavIntBoundsRect = "{{0, 0}, {775, 1344}}";
+			sepNavSelRange = "{2093, 39}";
+			sepNavVisRect = "{{0, 1073}, {775, 271}}";
 			sepNavWindowFrame = "{{15, 2}, {943, 871}}";
 		};
 	};
@@ -529,7 +557,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 409";
 		rLen = 0;
-		rLoc = 16226;
+		rLoc = 16232;
 		rType = 0;
 		vrLen = 1297;
 		vrLoc = 10678;
@@ -685,7 +713,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 406";
 		rLen = 0;
-		rLoc = 15397;
+		rLoc = 15403;
 		rType = 0;
 		vrLen = 1285;
 		vrLoc = 10487;
@@ -705,7 +733,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 341";
 		rLen = 0;
-		rLoc = 11796;
+		rLoc = 11798;
 		rType = 0;
 		vrLen = 1090;
 		vrLoc = 9328;
@@ -715,7 +743,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 341";
 		rLen = 0;
-		rLoc = 11796;
+		rLoc = 11798;
 		rType = 0;
 		vrLen = 1090;
 		vrLoc = 9328;
@@ -745,7 +773,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 349";
 		rLen = 0;
-		rLoc = 12974;
+		rLoc = 12978;
 		rType = 0;
 		vrLen = 1067;
 		vrLoc = 9433;
@@ -755,7 +783,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 355";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1231;
 		vrLoc = 9874;
@@ -781,7 +809,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 355";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1231;
 		vrLoc = 9874;
@@ -873,7 +901,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 355";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1220;
 		vrLoc = 9874;
@@ -883,7 +911,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 356";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1080;
 		vrLoc = 9724;
@@ -893,7 +921,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 357";
 		rLen = 0;
-		rLoc = 12913;
+		rLoc = 12915;
 		rType = 0;
 		vrLen = 1098;
 		vrLoc = 9724;
@@ -903,7 +931,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 349";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 981;
 		vrLoc = 9724;
@@ -913,7 +941,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 349";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1002;
 		vrLoc = 9724;
@@ -933,7 +961,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 440";
 		rLen = 0;
-		rLoc = 15380;
+		rLoc = 15386;
 		rType = 0;
 		vrLen = 1146;
 		vrLoc = 12034;
@@ -943,7 +971,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 440";
 		rLen = 0;
-		rLoc = 15380;
+		rLoc = 15386;
 		rType = 0;
 		vrLen = 951;
 		vrLoc = 9751;
@@ -953,7 +981,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 351";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1250;
 		vrLoc = 9865;
@@ -963,7 +991,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 390";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1119;
 		vrLoc = 10423;
@@ -973,7 +1001,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 392";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1133;
 		vrLoc = 10435;
@@ -1001,7 +1029,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 394";
 		rLen = 0;
-		rLoc = 12913;
+		rLoc = 12915;
 		rType = 0;
 		vrLen = 1184;
 		vrLoc = 10436;
@@ -1011,7 +1039,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 394";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1154;
 		vrLoc = 10436;
@@ -1021,7 +1049,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 394";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1159;
 		vrLoc = 10436;
@@ -1031,7 +1059,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 394";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1171;
 		vrLoc = 10436;
@@ -1041,7 +1069,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 394";
 		rLen = 0;
-		rLoc = 12346;
+		rLoc = 12348;
 		rType = 0;
 		vrLen = 1183;
 		vrLoc = 10436;
@@ -1089,7 +1117,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 394";
 		rLen = 0;
-		rLoc = 12346;
+		rLoc = 12348;
 		rType = 0;
 		vrLen = 1183;
 		vrLoc = 10436;
@@ -1099,7 +1127,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 394";
 		rLen = 0;
-		rLoc = 12346;
+		rLoc = 12348;
 		rType = 0;
 		vrLen = 1183;
 		vrLoc = 10436;
@@ -1141,7 +1169,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 398";
 		rLen = 0;
-		rLoc = 12913;
+		rLoc = 12915;
 		rType = 0;
 		vrLen = 1142;
 		vrLoc = 10436;
@@ -1151,7 +1179,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 398";
 		rLen = 0;
-		rLoc = 12913;
+		rLoc = 12915;
 		rType = 0;
 		vrLen = 1142;
 		vrLoc = 10436;
@@ -1161,7 +1189,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 395";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 996;
 		vrLoc = 10436;
@@ -1171,7 +1199,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 390";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 994;
 		vrLoc = 10436;
@@ -1181,7 +1209,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 390";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 995;
 		vrLoc = 10436;
@@ -1191,7 +1219,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 390";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 995;
 		vrLoc = 10436;
@@ -1209,7 +1237,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 400";
 		rLen = 0;
-		rLoc = 12913;
+		rLoc = 12915;
 		rType = 0;
 		vrLen = 507;
 		vrLoc = 10864;
@@ -1303,7 +1331,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 400";
 		rLen = 0;
-		rLoc = 12913;
+		rLoc = 12915;
 		rType = 0;
 		vrLen = 507;
 		vrLoc = 10864;
@@ -1329,7 +1357,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 408";
 		rLen = 0;
-		rLoc = 12998;
+		rLoc = 13002;
 		rType = 0;
 		vrLen = 976;
 		vrLoc = 10361;
@@ -1339,7 +1367,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 414";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1039;
 		vrLoc = 10727;
@@ -1359,7 +1387,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 408";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1016;
 		vrLoc = 10758;
@@ -1369,23 +1397,23 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 408";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 1016;
 		vrLoc = 10758;
 	};
 	A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1116, 770}}";
-			sepNavSelRange = "{690, 0}";
-			sepNavVisRect = "{{0, 295}, {1116, 292}}";
+			sepNavIntBoundsRect = "{{0, 0}, {963, 1162}}";
+			sepNavSelRange = "{600, 0}";
+			sepNavVisRect = "{{0, 232}, {963, 592}}";
 		};
 	};
 	A894AE920DEB3B57009B3526 /* MSPEditorComponent.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1048, 592}}";
+			sepNavIntBoundsRect = "{{0, 0}, {963, 592}}";
 			sepNavSelRange = "{207, 32}";
-			sepNavVisRect = "{{0, 0}, {1048, 592}}";
+			sepNavVisRect = "{{0, 0}, {963, 592}}";
 		};
 	};
 	A894AE9E0DEB529D009B3526 /* PBXTextBookmark */ = {
@@ -1441,7 +1469,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 382";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 617;
 		vrLoc = 10510;
@@ -1451,7 +1479,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent(MSPAudioProcessor* const ownerFilter)";
 		rLen = 58;
-		rLoc = 323;
+		rLoc = 384;
 		rType = 0;
 		vrLen = 369;
 		vrLoc = 162;
@@ -1469,7 +1497,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 382";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 617;
 		vrLoc = 10510;
@@ -1479,7 +1507,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent(MSPAudioProcessor* const ownerFilter)";
 		rLen = 58;
-		rLoc = 323;
+		rLoc = 384;
 		rType = 0;
 		vrLen = 369;
 		vrLoc = 162;
@@ -1557,7 +1585,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "x->juceEditorComp = new EditorComponent(); //new Slider (T(\"gain\"));";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 998;
 		vrLoc = 10383;
@@ -1597,7 +1625,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 22";
 		rLen = 0;
-		rLoc = 546;
+		rLoc = 673;
 		rType = 0;
 		vrLen = 766;
 		vrLoc = 47;
@@ -1647,7 +1675,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: slider";
 		rLen = 0;
-		rLoc = 921;
+		rLoc = 1582;
 		rType = 0;
 		vrLen = 501;
 		vrLoc = 0;
@@ -1657,7 +1685,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "x->juceEditorComp = new EditorComponent(); //new Slider (T(\"gain\"));";
 		rLen = 0;
-		rLoc = 11830;
+		rLoc = 11832;
 		rType = 0;
 		vrLen = 998;
 		vrLoc = 10383;
@@ -1687,7 +1715,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 10";
 		rLen = 0;
-		rLoc = 312;
+		rLoc = 373;
 		rType = 0;
 		vrLen = 515;
 		vrLoc = 0;
@@ -1707,7 +1735,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 41";
 		rLen = 0;
-		rLoc = 1089;
+		rLoc = 1750;
 		rType = 0;
 		vrLen = 614;
 		vrLoc = 0;
@@ -1737,7 +1765,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 41";
 		rLen = 0;
-		rLoc = 1089;
+		rLoc = 1750;
 		rType = 0;
 		vrLen = 614;
 		vrLoc = 0;
@@ -1767,7 +1795,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: MSPEditorComponent";
 		rLen = 0;
-		rLoc = 379;
+		rLoc = 440;
 		rType = 0;
 		vrLen = 655;
 		vrLoc = 0;
@@ -1787,7 +1815,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 18";
 		rLen = 0;
-		rLoc = 417;
+		rLoc = 478;
 		rType = 0;
 		vrLen = 694;
 		vrLoc = 0;
@@ -1807,7 +1835,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: getFilter";
 		rLen = 0;
-		rLoc = 1056;
+		rLoc = 1717;
 		rType = 0;
 		vrLen = 767;
 		vrLoc = 0;
@@ -1897,7 +1925,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 38";
 		rLen = 0;
-		rLoc = 909;
+		rLoc = 1570;
 		rType = 0;
 		vrLen = 783;
 		vrLoc = 50;
@@ -1947,7 +1975,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = MSPEditorComponent;
 		rLen = 18;
-		rLoc = 324;
+		rLoc = 385;
 		rType = 0;
 		vrLen = 786;
 		vrLoc = 47;
@@ -2007,7 +2035,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = MSPEditorComponent;
 		rLen = 18;
-		rLoc = 324;
+		rLoc = 385;
 		rType = 0;
 		vrLen = 786;
 		vrLoc = 47;
@@ -2037,7 +2065,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 22";
 		rLen = 0;
-		rLoc = 546;
+		rLoc = 673;
 		rType = 0;
 		vrLen = 766;
 		vrLoc = 47;
@@ -2057,7 +2085,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 22";
 		rLen = 0;
-		rLoc = 560;
+		rLoc = 687;
 		rType = 0;
 		vrLen = 791;
 		vrLoc = 28;
@@ -2067,7 +2095,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 22";
 		rLen = 0;
-		rLoc = 560;
+		rLoc = 687;
 		rType = 0;
 		vrLen = 791;
 		vrLoc = 28;
@@ -2087,7 +2115,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 22";
 		rLen = 0;
-		rLoc = 560;
+		rLoc = 687;
 		rType = 0;
 		vrLen = 791;
 		vrLoc = 28;
@@ -2117,7 +2145,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 403";
 		rLen = 0;
-		rLoc = 12913;
+		rLoc = 12915;
 		rType = 0;
 		vrLen = 1221;
 		vrLoc = 10945;
@@ -2137,7 +2165,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = syswindow_size;
 		rLen = 14;
-		rLoc = 12346;
+		rLoc = 12348;
 		rType = 0;
 		vrLen = 1012;
 		vrLoc = 10603;
@@ -2147,7 +2175,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 411";
 		rLen = 0;
-		rLoc = 12534;
+		rLoc = 12536;
 		rType = 0;
 		vrLen = 1063;
 		vrLoc = 10603;
@@ -2335,7 +2363,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 401";
 		rLen = 0;
-		rLoc = 12343;
+		rLoc = 12345;
 		rType = 0;
 		vrLen = 1050;
 		vrLoc = 10752;
@@ -2345,7 +2373,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 411";
 		rLen = 0;
-		rLoc = 12542;
+		rLoc = 12544;
 		rType = 0;
 		vrLen = 1050;
 		vrLoc = 10752;
@@ -2355,7 +2383,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 431";
 		rLen = 0;
-		rLoc = 13103;
+		rLoc = 13109;
 		rType = 0;
 		vrLen = 1121;
 		vrLoc = 11192;
@@ -2365,7 +2393,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 422";
 		rLen = 0;
-		rLoc = 12910;
+		rLoc = 12912;
 		rType = 0;
 		vrLen = 1153;
 		vrLoc = 10854;
@@ -2375,7 +2403,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 509";
 		rLen = 0;
-		rLoc = 15446;
+		rLoc = 15452;
 		rType = 0;
 		vrLen = 1226;
 		vrLoc = 13686;
@@ -2385,7 +2413,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 509";
 		rLen = 0;
-		rLoc = 15446;
+		rLoc = 15452;
 		rType = 0;
 		vrLen = 1238;
 		vrLoc = 13605;
@@ -2395,7 +2423,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 22";
 		rLen = 0;
-		rLoc = 560;
+		rLoc = 687;
 		rType = 0;
 		vrLen = 790;
 		vrLoc = 28;
@@ -2405,7 +2433,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 509";
 		rLen = 0;
-		rLoc = 15446;
+		rLoc = 15452;
 		rType = 0;
 		vrLen = 1238;
 		vrLoc = 13605;
@@ -2415,7 +2443,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 34";
 		rLen = 0;
-		rLoc = 829;
+		rLoc = 1014;
 		rType = 0;
 		vrLen = 831;
 		vrLoc = 47;
@@ -2455,7 +2483,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 34";
 		rLen = 0;
-		rLoc = 829;
+		rLoc = 1014;
 		rType = 0;
 		vrLen = 831;
 		vrLoc = 47;
@@ -2475,7 +2503,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "x->juceEditorComp";
 		rLen = 17;
-		rLoc = 12168;
+		rLoc = 12170;
 		rType = 0;
 		vrLen = 1193;
 		vrLoc = 11658;
@@ -2485,7 +2513,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 34";
 		rLen = 0;
-		rLoc = 829;
+		rLoc = 1014;
 		rType = 0;
 		vrLen = 831;
 		vrLoc = 47;
@@ -2525,7 +2553,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 34";
 		rLen = 0;
-		rLoc = 829;
+		rLoc = 1014;
 		rType = 0;
 		vrLen = 831;
 		vrLoc = 47;
@@ -2545,7 +2573,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 560";
 		rLen = 0;
-		rLoc = 15958;
+		rLoc = 15964;
 		rType = 0;
 		vrLen = 1196;
 		vrLoc = 2446;
@@ -2555,7 +2583,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 570";
 		rLen = 0;
-		rLoc = 16125;
+		rLoc = 16131;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 15285;
@@ -2565,7 +2593,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 570";
 		rLen = 0;
-		rLoc = 16125;
+		rLoc = 16131;
 		rType = 0;
 		vrLen = 975;
 		vrLoc = 15285;
@@ -2575,7 +2603,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 570";
 		rLen = 0;
-		rLoc = 16125;
+		rLoc = 16131;
 		rType = 0;
 		vrLen = 976;
 		vrLoc = 15285;
@@ -2585,7 +2613,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 570";
 		rLen = 0;
-		rLoc = 16123;
+		rLoc = 16129;
 		rType = 0;
 		vrLen = 998;
 		vrLoc = 15285;
@@ -2623,7 +2651,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 570";
 		rLen = 0;
-		rLoc = 16125;
+		rLoc = 16131;
 		rType = 0;
 		vrLen = 360;
 		vrLoc = 15892;
@@ -2643,7 +2671,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 25";
 		rLen = 0;
-		rLoc = 570;
+		rLoc = 757;
 		rType = 0;
 		vrLen = 905;
 		vrLoc = 3;
@@ -2663,7 +2691,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 570";
 		rLen = 0;
-		rLoc = 16123;
+		rLoc = 16129;
 		rType = 0;
 		vrLen = 1282;
 		vrLoc = 13897;
@@ -2673,7 +2701,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 570";
 		rLen = 0;
-		rLoc = 16123;
+		rLoc = 16129;
 		rType = 0;
 		vrLen = 1282;
 		vrLoc = 13897;
@@ -2683,7 +2711,7 @@
 		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
 		name = "MSPEditorComponent.h: 25";
 		rLen = 0;
-		rLoc = 570;
+		rLoc = 757;
 		rType = 0;
 		vrLen = 905;
 		vrLoc = 3;
@@ -2703,7 +2731,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 559";
 		rLen = 164;
-		rLoc = 15796;
+		rLoc = 15802;
 		rType = 0;
 		vrLen = 840;
 		vrLoc = 15452;
@@ -2725,6 +2753,7 @@
 			sepNavIntBoundsRect = "{{0, 0}, {898, 8064}}";
 			sepNavSelRange = "{24157, 75}";
 			sepNavVisRect = "{{0, 6874}, {898, 742}}";
+			sepNavWindowFrame = "{{15, 2}, {943, 871}}";
 		};
 	};
 	A894AFC40DEB7676009B3526 /* PBXTextBookmark */ = {
@@ -2760,6 +2789,7 @@
 			sepNavIntBoundsRect = "{{0, 0}, {898, 2422}}";
 			sepNavSelRange = "{8421, 86}";
 			sepNavVisRect = "{{0, 1680}, {898, 742}}";
+			sepNavWindowFrame = "{{15, 2}, {943, 871}}";
 		};
 	};
 	A894AFCA0DEB7676009B3526 /* PBXTextBookmark */ = {
@@ -2783,7 +2813,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 557";
 		rLen = 0;
-		rLoc = 15736;
+		rLoc = 15742;
 		rType = 0;
 		vrLen = 840;
 		vrLoc = 15452;
@@ -2793,7 +2823,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 560";
 		rLen = 0;
-		rLoc = 15854;
+		rLoc = 15860;
 		rType = 0;
 		vrLen = 1014;
 		vrLoc = 15112;
@@ -2823,7 +2853,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: 575";
 		rLen = 0;
-		rLoc = 16186;
+		rLoc = 16192;
 		rType = 0;
 		vrLen = 1243;
 		vrLoc = 14386;
@@ -2847,5 +2877,283 @@
 		rType = 0;
 		vrLen = 1991;
 		vrLoc = 6562;
+	};
+	A894AFE10DEB7854009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		name = "juce_mspobject.cpp: 572";
+		rLen = 0;
+		rLoc = 16131;
+		rType = 0;
+		vrLen = 392;
+		vrLoc = 15891;
+	};
+	A894AFE20DEB7854009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE730DEB33AE009B3526 /* HIObject.h */;
+		name = "HIObject.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1757;
+		vrLoc = 7155;
+	};
+	A894AFE30DEB7855009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		name = "juce_mspobject.cpp: 572";
+		rLen = 0;
+		rLoc = 16131;
+		rType = 0;
+		vrLen = 392;
+		vrLoc = 15891;
+	};
+	A894AFE40DEB7855009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE730DEB33AE009B3526 /* HIObject.h */;
+		name = "HIObject.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1757;
+		vrLoc = 7155;
+	};
+	A894AFF40DEB7993009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		name = "juce_mspobject.cpp: jucemsp_dblclick";
+		rLen = 0;
+		rLoc = 12917;
+		rType = 0;
+		vrLen = 975;
+		vrLoc = 10825;
+	};
+	A894AFF50DEB7993009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE920DEB3B57009B3526 /* MSPEditorComponent.cpp */;
+		name = "#include \"MSPEditorComponent.h\"";
+		rLen = 32;
+		rLoc = 207;
+		rType = 0;
+		vrLen = 240;
+		vrLoc = 0;
+	};
+	A894AFF60DEB7993009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
+		name = "MSPEditorComponent.h: 55";
+		rLen = 0;
+		rLoc = 1281;
+		rType = 0;
+		vrLen = 836;
+		vrLoc = 697;
+	};
+	A894AFF70DEB7993009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		name = "juce_mspobject.cpp: jucemsp_dblclick";
+		rLen = 0;
+		rLoc = 12917;
+		rType = 0;
+		vrLen = 975;
+		vrLoc = 10825;
+	};
+	A894AFF80DEB7993009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
+		name = "MSPEditorComponent.h: slider";
+		rLen = 0;
+		rLoc = 1361;
+		rType = 0;
+		vrLen = 1187;
+		vrLoc = 674;
+	};
+	A894AFF90DEB7993009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE920DEB3B57009B3526 /* MSPEditorComponent.cpp */;
+		name = "#include \"MSPEditorComponent.h\"";
+		rLen = 32;
+		rLoc = 207;
+		rType = 0;
+		vrLen = 240;
+		vrLoc = 0;
+	};
+	A894AFFA0DEB7993009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
+		name = "MSPEditorComponent.h: 40";
+		rLen = 0;
+		rLoc = 955;
+		rType = 0;
+		vrLen = 973;
+		vrLoc = 442;
+	};
+	A894B0030DEB7A03009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		name = "juce_mspobject.cpp: 572";
+		rLen = 0;
+		rLoc = 16131;
+		rType = 0;
+		vrLen = 392;
+		vrLoc = 15891;
+	};
+	A894B0040DEB7A03009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A80FE0310DE8B81700AE5B01 /* MSPAudioProcessor.cpp */;
+		name = "return new MSPEditorComponent(this);";
+		rLen = 39;
+		rLoc = 2093;
+		rType = 0;
+		vrLen = 353;
+		vrLoc = 1782;
+	};
+	A894B0050DEB7A03009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: 'DemoEditorComponent' has not been declared";
+		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
+		rLen = 1;
+		rLoc = 56;
+		rType = 1;
+	};
+	A894B0060DEB7A03009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		name = "juce_mspobject.cpp: 572";
+		rLen = 0;
+		rLoc = 16131;
+		rType = 0;
+		vrLen = 392;
+		vrLoc = 15891;
+	};
+	A894B0070DEB7A03009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A80FE0310DE8B81700AE5B01 /* MSPAudioProcessor.cpp */;
+		name = "return new MSPEditorComponent(this);";
+		rLen = 39;
+		rLoc = 2093;
+		rType = 0;
+		vrLen = 353;
+		vrLoc = 1782;
+	};
+	A894B0080DEB7A03009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
+		name = "MSPEditorComponent.h: sliderValueChanged";
+		rLen = 0;
+		rLoc = 1188;
+		rType = 0;
+		vrLen = 464;
+		vrLoc = 992;
+	};
+	A894B0090DEB7A03009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE730DEB33AE009B3526 /* HIObject.h */;
+		name = "HIObject.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1757;
+		vrLoc = 7155;
+	};
+	A894B00A0DEB7A0A009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE920DEB3B57009B3526 /* MSPEditorComponent.cpp */;
+		name = "#include \"MSPEditorComponent.h\"";
+		rLen = 32;
+		rLoc = 207;
+		rType = 0;
+		vrLen = 240;
+		vrLoc = 0;
+	};
+	A894B00B0DEB7A0A009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
+		name = "MSPEditorComponent.h: 28";
+		rLen = 0;
+		rLoc = 701;
+		rType = 0;
+		vrLen = 921;
+		vrLoc = 535;
+	};
+	A894B00C0DEB7A0A009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
+		name = "MSPEditorComponent.h: 28";
+		rLen = 0;
+		rLoc = 701;
+		rType = 0;
+		vrLen = 921;
+		vrLoc = 535;
+	};
+	A894B00D0DEB7A0A009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE920DEB3B57009B3526 /* MSPEditorComponent.cpp */;
+		name = "#include \"MSPEditorComponent.h\"";
+		rLen = 32;
+		rLoc = 207;
+		rType = 0;
+		vrLen = 240;
+		vrLoc = 0;
+	};
+	A894B00E0DEB7A0A009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
+		name = "MSPEditorComponent.h: 28";
+		rLen = 0;
+		rLoc = 701;
+		rType = 0;
+		vrLen = 921;
+		vrLoc = 535;
+	};
+	A894B0150DEB7AEA009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
+		name = "MSPEditorComponent.h: 25";
+		rLen = 0;
+		rLoc = 600;
+		rType = 0;
+		vrLen = 952;
+		vrLoc = 345;
+	};
+	A894B0160DEB7AEA009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
+		name = "MSPEditorComponent.h: 25";
+		rLen = 0;
+		rLoc = 600;
+		rType = 0;
+		vrLen = 952;
+		vrLoc = 345;
+	};
+	A894B0180DEB7B52009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
+		name = "MSPEditorComponent.h: 25";
+		rLen = 0;
+		rLoc = 600;
+		rType = 0;
+		vrLen = 952;
+		vrLoc = 345;
+	};
+	A894B0190DEB7B52009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */;
+		name = "MSPEditorComponent.h: 25";
+		rLen = 0;
+		rLoc = 600;
+		rType = 0;
+		vrLen = 952;
+		vrLoc = 345;
+	};
+	A894B01A0DEB7B52009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		name = "juce_mspobject.cpp: 417";
+		rLen = 0;
+		rLoc = 11776;
+		rType = 0;
+		vrLen = 1160;
+		vrLoc = 9675;
 	};
 }

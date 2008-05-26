@@ -12,22 +12,28 @@
 
 #include "MSPAudioProcessor.h"
 
-class MSPEditorComponent : public AudioProcessorEditor
+class MSPEditorComponent :	public AudioProcessorEditor,
+							public ChangeListener,
+							public SliderListener
 {
 public:
 	MSPEditorComponent(MSPAudioProcessor* const ownerFilter)
 		:	AudioProcessorEditor(ownerFilter)
 	{
 		addAndMakeVisible(slider = new Slider("Slider"));
+		slider->setRange(0.0, 1.0, 0.001);
+		slider->addListener(this);
 		addAndMakeVisible(resizer = new ResizableCornerComponent(this, 0));
 		setSize(200,24);
 		
-		//ownerFilter->addChangeListener (this);
+		slider->setValue (ownerFilter->getParameter (0), false);
+		
+		ownerFilter->addChangeListener (this);
 	}
 
 	~MSPEditorComponent()
 	{
-		//getFilter()->removeChangeListener (this);
+		getFilter()->removeChangeListener (this);
 		
 		deleteAllChildren();
 	}
@@ -42,6 +48,28 @@ public:
 	{
 		g.fillAll (Colour::greyLevel (0.9f));
 	}
+	
+	void changeListenerCallback (void* source)
+	{
+		updateParametersFromFilter();
+	}
+	
+	void sliderValueChanged (Slider*)
+	{
+		getFilter()->setParameterNotifyingHost (0, (float) slider->getValue());
+	}
+	
+	void updateParametersFromFilter()
+	{
+		MSPAudioProcessor* const filter = getFilter();
+		
+		filter->getCallbackLock().enter();
+		const float newGain = filter->getParameter (0);
+		filter->getCallbackLock().exit();
+		
+		slider->setValue (newGain, false);
+	}
+
 	
 
 private:
