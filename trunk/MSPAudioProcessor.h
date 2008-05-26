@@ -25,8 +25,8 @@ public:
 	const String getOutputChannelName (const int channelIndex) const;// { return String::empty; }
 	bool isInputChannelStereoPair (int index) const { return false; }
 	bool isOutputChannelStereoPair (int index) const { return false; }
-	bool acceptsMidi() const { return false; }
-	bool producesMidi() const { return false; }
+	bool acceptsMidi() const { return JucePlugin_WantsMidiInput; }
+	bool producesMidi() const { return JucePlugin_ProducesMidiOutput; }
 	AudioProcessorEditor* createEditor() { return NULL; }
 	int getNumParameters(); 
 	const String getParameterName (int parameterIndex);

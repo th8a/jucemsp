@@ -132,7 +132,7 @@
 /** Set this to 1 if your plugin wants to output midi messages, or 0 if
     it doesn't.
 */
-#define JucePlugin_ProducesMidiOutput               1
+#define JucePlugin_ProducesMidiOutput               0
 
 /** If this is 1, it means that when the plugins input buffers are
     silent, it's output will be too.

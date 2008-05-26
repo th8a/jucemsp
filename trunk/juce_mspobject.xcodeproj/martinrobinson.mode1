@@ -190,46 +190,6 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
-				<string>A80FE52E0DE9698E00AE5B01</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>ext_obex.h</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>A80FE52F0DE9698E00AE5B01</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>ext_obex.h</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>A80FE63D0DEAA36900AE5B01</string>
-						<key>history</key>
-						<array>
-							<string>A80FE5300DE9698E00AE5B01</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {943, 774}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>15 58 943 815 0 0 1440 878 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
 				<string>A80FE4E00DE95D6200AE5B01</string>
 				<key>PBXProjectModuleLabel</key>
 				<string>MSPAudioProcessor.cpp</string>
@@ -244,7 +204,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>A80FE63E0DEAA36900AE5B01</string>
+						<string>A80FE66A0DEAA72000AE5B01</string>
 						<key>history</key>
 						<array>
 							<string>A80FE4CC0DE95C1E00AE5B01</string>
@@ -300,6 +260,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -348,8 +310,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>2</integer>
-									<integer>1</integer>
+									<integer>5</integer>
+									<integer>4</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -384,14 +346,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>juce_mspobject.cpp</string>
+								<string>JucePluginCharacteristics.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -399,19 +359,19 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>juce_mspobject.cpp</string>
+										<string>JucePluginCharacteristics.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>A80FE63C0DEAA36900AE5B01</string>
+										<string>A80FE6690DEAA71F00AE5B01</string>
 										<key>history</key>
 										<array>
 											<string>A80FE5720DE974D500AE5B01</string>
 											<string>A80FE5AB0DEA96FF00AE5B01</string>
-											<string>A80FE6080DEAA02F00AE5B01</string>
-											<string>A80FE6090DEAA02F00AE5B01</string>
-											<string>A80FE62B0DEAA2D400AE5B01</string>
-											<string>A80FE62C0DEAA2D400AE5B01</string>
+											<string>A80FE65F0DEAA71F00AE5B01</string>
+											<string>A80FE6600DEAA71F00AE5B01</string>
+											<string>A80FE6610DEAA71F00AE5B01</string>
+											<string>A80FE6620DEAA71F00AE5B01</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -578,6 +538,14 @@
 											<string>A80FE62E0DEAA2D400AE5B01</string>
 											<string>A80FE62F0DEAA2D400AE5B01</string>
 											<string>A80FE6300DEAA2D400AE5B01</string>
+											<string>A80FE6470DEAA42300AE5B01</string>
+											<string>A80FE64E0DEAA54D00AE5B01</string>
+											<string>A80FE6630DEAA71F00AE5B01</string>
+											<string>A80FE6640DEAA71F00AE5B01</string>
+											<string>A80FE6650DEAA71F00AE5B01</string>
+											<string>A80FE6660DEAA71F00AE5B01</string>
+											<string>A80FE6670DEAA71F00AE5B01</string>
+											<string>A80FE6680DEAA71F00AE5B01</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -771,9 +739,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>A80FE4E00DE95D6200AE5B01</string>
-		<string>A80FE52E0DE9698E00AE5B01</string>
 		<string>A857F64B0D2C103B004DDB2C</string>
+		<string>A80FE4E00DE95D6200AE5B01</string>
 		<string>/Users/martinrobinson/development/maxmsp/my projects/juce_mspobject~/juce_mspobject.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -867,7 +834,7 @@
 			<key>WindowToolGUID</key>
 			<string>A857F64B0D2C103B004DDB2C</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

@@ -43,6 +43,7 @@ typedef struct _jucemsp
 
 void jucemsp_initattrs(t_class *c, AudioProcessor* juceAudioProcessor);
 t_int *jucemsp_perform(t_int *w);
+void jucemsp_midievent(t_jucemsp *x, int byte1, int byte2, int byte3);
 void jucemsp_list(t_jucemsp *x, t_symbol* s, short argc, t_atom* argv);
 void jucemsp_updateattr(t_jucemsp *x, int parameterIndex, float newValue);
 t_max_err jucemsp_attr_get(t_jucemsp *x, void *attr, long *argc, t_atom **argv); 
@@ -108,6 +109,7 @@ int main(void)
 	
 	// Make methods accessible for our class: 
 	class_addmethod(c, (method)jucemsp_dsp,          "dsp",			A_CANT, 0L);
+	class_addmethod(c, (method)jucemsp_midievent,	 "midievent",	A_LONG, A_LONG, A_LONG, 0);
 	class_addmethod(c, (method)jucemsp_list,         "list",		A_GIMME, 0L);        
 	class_addmethod(c, (method)jucemsp_assist,       "assist",		A_CANT, 0L); 
 	class_addmethod(c, (method)object_obex_dumpout,  "dumpout",		A_CANT,0);  
@@ -168,6 +170,10 @@ t_int *jucemsp_perform(t_int *w)
 	
 	x->juceAudioProcessor->processBlock(x->bufferSpace, x->midiEvents);
 	
+#if JucePlugin_WantsMidiInput
+	x->midiEvents.clear();
+#endif	
+	
 	AudioSampleBuffer outputBuffer(x->outputChannels, x->juceAudioProcessor->getNumOutputChannels(), numSamples);
 	
 	// need to iterate through output channels
@@ -204,6 +210,20 @@ void jucemsp_dsp(t_jucemsp *x, t_signal **sp, short *count)
 	x->juceAudioProcessor->prepareToPlay(sp[0]->s_sr, sp[0]->s_n);
 }
 	
+void jucemsp_midievent(t_jucemsp *x, int byte1, int byte2, int byte3)
+{
+#if JucePlugin_WantsMidiInput
+
+	JUCE_NAMESPACE::uint8 data [4];
+	data[0] = byte1;
+	data[1] = byte2;
+	data[2] = byte3;
+
+	x->midiEvents.addEvent (data, 3, 0);
+	
+#endif
+}
+
 void jucemsp_list(t_jucemsp *x, t_symbol* s, short argc, t_atom* argv)
 {
 	if(argc != 2) return;
