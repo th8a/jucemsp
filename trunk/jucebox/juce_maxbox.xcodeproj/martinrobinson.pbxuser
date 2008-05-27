@@ -271,6 +271,11 @@
 			A894B2850DEBF6A0009B3526 /* PBXTextBookmark */ = A894B2850DEBF6A0009B3526 /* PBXTextBookmark */;
 			A894B2890DEBF759009B3526 /* PBXTextBookmark */ = A894B2890DEBF759009B3526 /* PBXTextBookmark */;
 			A894B28A0DEBF759009B3526 /* PBXTextBookmark */ = A894B28A0DEBF759009B3526 /* PBXTextBookmark */;
+			A894B28F0DEBF9EF009B3526 /* PBXTextBookmark */ = A894B28F0DEBF9EF009B3526 /* PBXTextBookmark */;
+			A894B2900DEBF9EF009B3526 /* PBXTextBookmark */ = A894B2900DEBF9EF009B3526 /* PBXTextBookmark */;
+			A894B2910DEBF9EF009B3526 /* PBXTextBookmark */ = A894B2910DEBF9EF009B3526 /* PBXTextBookmark */;
+			A894B2920DEBF9EF009B3526 /* PBXTextBookmark */ = A894B2920DEBF9EF009B3526 /* PBXTextBookmark */;
+			A894B2930DEBF9EF009B3526 /* PBXTextBookmark */ = A894B2930DEBF9EF009B3526 /* PBXTextBookmark */;
 		};
 		sourceControlManager = A857F6060D2C0DAC004DDB2C /* Source Control */;
 		userBuildSettings = {
@@ -278,9 +283,9 @@
 	};
 	08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {830, 3248}}";
-			sepNavSelRange = "{1538, 0}";
-			sepNavVisRect = "{{0, 0}, {792, 540}}";
+			sepNavIntBoundsRect = "{{0, 0}, {830, 3262}}";
+			sepNavSelRange = "{4387, 0}";
+			sepNavVisRect = "{{0, 2181}, {792, 540}}";
 			sepNavWindowFrame = "{{276, -5}, {1244, 814}}";
 		};
 	};
@@ -701,7 +706,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: jucebox_new";
 		rLen = 0;
-		rLoc = 4513;
+		rLoc = 4574;
 		rType = 0;
 		vrLen = 1190;
 		vrLoc = 0;
@@ -739,7 +744,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "//    meter_draw(x);";
 		rLen = 151;
-		rLoc = 5671;
+		rLoc = 5732;
 		rType = 0;
 		vrLen = 527;
 		vrLoc = 3044;
@@ -769,7 +774,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: jucebox_new";
 		rLen = 0;
-		rLoc = 4513;
+		rLoc = 4574;
 		rType = 0;
 		vrLen = 1212;
 		vrLoc = 0;
@@ -819,7 +824,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 85";
 		rLen = 0;
-		rLoc = 4513;
+		rLoc = 4574;
 		rType = 0;
 		vrLen = 1199;
 		vrLoc = 0;
@@ -869,7 +874,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: jucebox_new";
 		rLen = 0;
-		rLoc = 4513;
+		rLoc = 4574;
 		rType = 0;
 		vrLen = 1240;
 		vrLoc = 0;
@@ -919,7 +924,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: jucebox_new";
 		rLen = 0;
-		rLoc = 4513;
+		rLoc = 4574;
 		rType = 0;
 		vrLen = 1240;
 		vrLoc = 0;
@@ -969,7 +974,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: jucebox_new";
 		rLen = 0;
-		rLoc = 4513;
+		rLoc = 4574;
 		rType = 0;
 		vrLen = 1240;
 		vrLoc = 0;
@@ -1051,7 +1056,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: jucebox_new";
 		rLen = 0;
-		rLoc = 4513;
+		rLoc = 4574;
 		rType = 0;
 		vrLen = 1240;
 		vrLoc = 0;
@@ -1200,7 +1205,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: jucebox_new";
 		rLen = 0;
-		rLoc = 4513;
+		rLoc = 4574;
 		rType = 0;
 		vrLen = 1225;
 		vrLoc = 0;
@@ -1280,7 +1285,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: jucebox_new";
 		rLen = 0;
-		rLoc = 4513;
+		rLoc = 4574;
 		rType = 0;
 		vrLen = 1225;
 		vrLoc = 0;
@@ -1537,7 +1542,7 @@
 		comments = "warning: 'SetPort' is deprecated (declared at /Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/ApplicationServices.framework/Frameworks/QD.framework/Headers/Quickdraw.h:1847)";
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		rLen = 1;
-		rLoc = 220;
+		rLoc = 221;
 		rType = 1;
 	};
 	A894B1510DEB8EA2009B3526 /* PBXTextBookmark */ = {
@@ -1545,7 +1550,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = patcher_setport;
 		rLen = 15;
-		rLoc = 5637;
+		rLoc = 5698;
 		rType = 0;
 		vrLen = 452;
 		vrLoc = 4907;
@@ -1639,7 +1644,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "x->juceWindowComp->addToDesktop(0, (void*)hiRoot);";
 		rLen = 61;
-		rLoc = 4327;
+		rLoc = 4388;
 		rType = 0;
 		vrLen = 1689;
 		vrLoc = 2277;
@@ -1659,7 +1664,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 205";
 		rLen = 0;
-		rLoc = 5819;
+		rLoc = 5880;
 		rType = 0;
 		vrLen = 1177;
 		vrLoc = 4210;
@@ -1679,7 +1684,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = patcher_setport;
 		rLen = 15;
-		rLoc = 5637;
+		rLoc = 5698;
 		rType = 0;
 		vrLen = 482;
 		vrLoc = 4907;
@@ -1689,7 +1694,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 205";
 		rLen = 0;
-		rLoc = 5819;
+		rLoc = 5880;
 		rType = 0;
 		vrLen = 1177;
 		vrLoc = 4210;
@@ -1699,7 +1704,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 204";
 		rLen = 0;
-		rLoc = 5785;
+		rLoc = 5846;
 		rType = 0;
 		vrLen = 1104;
 		vrLoc = 4383;
@@ -1709,7 +1714,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 189";
 		rLen = 0;
-		rLoc = 5072;
+		rLoc = 5133;
 		rType = 0;
 		vrLen = 1129;
 		vrLoc = 4383;
@@ -1763,7 +1768,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 156";
 		rLen = 0;
-		rLoc = 4383;
+		rLoc = 4444;
 		rType = 0;
 		vrLen = 1193;
 		vrLoc = 3362;
@@ -1804,7 +1809,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 156";
 		rLen = 0;
-		rLoc = 4383;
+		rLoc = 4444;
 		rType = 0;
 		vrLen = 1310;
 		vrLoc = 3031;
@@ -1814,7 +1819,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 156";
 		rLen = 0;
-		rLoc = 4383;
+		rLoc = 4444;
 		rType = 0;
 		vrLen = 1310;
 		vrLoc = 3031;
@@ -1824,7 +1829,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 156";
 		rLen = 0;
-		rLoc = 4383;
+		rLoc = 4444;
 		rType = 0;
 		vrLen = 1522;
 		vrLoc = 3031;
@@ -1834,7 +1839,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 170";
 		rLen = 0;
-		rLoc = 4383;
+		rLoc = 4444;
 		rType = 0;
 		vrLen = 1489;
 		vrLoc = 2865;
@@ -1926,7 +1931,7 @@
 		comments = "error: 'gblkrgb' was not declared in this scope";
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		rLen = 0;
-		rLoc = 226;
+		rLoc = 227;
 		rType = 1;
 	};
 	A894B1CF0DEBDBAE009B3526 /* PBXTextBookmark */ = {
@@ -1934,7 +1939,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 260";
 		rLen = 0;
-		rLoc = 5853;
+		rLoc = 5914;
 		rType = 0;
 		vrLen = 477;
 		vrLoc = 6310;
@@ -1944,7 +1949,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 239";
 		rLen = 0;
-		rLoc = 5826;
+		rLoc = 5887;
 		rType = 0;
 		vrLen = 1206;
 		vrLoc = 5100;
@@ -2172,7 +2177,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 167";
 		rLen = 0;
-		rLoc = 4370;
+		rLoc = 4431;
 		rType = 0;
 		vrLen = 1360;
 		vrLoc = 3043;
@@ -2192,7 +2197,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 217";
 		rLen = 0;
-		rLoc = 5675;
+		rLoc = 5736;
 		rType = 0;
 		vrLen = 1409;
 		vrLoc = 3004;
@@ -2272,7 +2277,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 169";
 		rLen = 0;
-		rLoc = 4370;
+		rLoc = 4431;
 		rType = 0;
 		vrLen = 1300;
 		vrLoc = 3277;
@@ -2310,7 +2315,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 223";
 		rLen = 0;
-		rLoc = 5826;
+		rLoc = 5887;
 		rType = 0;
 		vrLen = 1587;
 		vrLoc = 2473;
@@ -2350,7 +2355,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 225";
 		rLen = 0;
-		rLoc = 5826;
+		rLoc = 5887;
 		rType = 0;
 		vrLen = 988;
 		vrLoc = 4844;
@@ -2466,6 +2471,56 @@
 		vrLoc = 116;
 	};
 	A894B28A0DEBF759009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894B1B40DEBD8A2009B3526 /* max.c */;
+		name = "patcher_setport(x->box.b_patcher)";
+		rLen = 33;
+		rLoc = 24206;
+		rType = 0;
+		vrLen = 926;
+		vrLoc = 23727;
+	};
+	A894B28F0DEBF9EF009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894B1020DEB8850009B3526 /* juce_maxbox.r */;
+		name = "juce_maxbox.r: 41";
+		rLen = 0;
+		rLoc = 2456;
+		rType = 0;
+		vrLen = 2343;
+		vrLoc = 116;
+	};
+	A894B2900DEBF9EF009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
+		name = "juce_maxbox.cpp: 79";
+		rLen = 0;
+		rLoc = 1538;
+		rType = 0;
+		vrLen = 949;
+		vrLoc = 0;
+	};
+	A894B2910DEBF9EF009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = A894B1020DEB8850009B3526 /* juce_maxbox.r */;
+		name = "juce_maxbox.r: 41";
+		rLen = 0;
+		rLoc = 2456;
+		rType = 0;
+		vrLen = 2343;
+		vrLoc = 116;
+	};
+	A894B2920DEBF9EF009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
+		name = "juce_maxbox.cpp: 172";
+		rLen = 0;
+		rLoc = 4387;
+		rType = 0;
+		vrLen = 1237;
+		vrLoc = 3711;
+	};
+	A894B2930DEBF9EF009B3526 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = A894B1B40DEBD8A2009B3526 /* max.c */;
 		name = "patcher_setport(x->box.b_patcher)";

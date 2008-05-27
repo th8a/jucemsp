@@ -167,6 +167,7 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
         HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
         post("HIViewRef hiRoot=%p", hiRoot);
         
+		x->juceWindowComp->setInterceptsMouseClicks(false, false);
         x->juceWindowComp->addToDesktop(0, (void*)hiRoot);
 			
 		
