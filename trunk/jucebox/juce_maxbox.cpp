@@ -45,6 +45,11 @@ public:
 //		ClipRect(&ref->b_rect);
 	}
 	
+	void mouseDown(const MouseEvent& e)
+	{
+		post("EditorComponentHolder::mousedown %d, %d", e.x, e.y);
+	}
+	
 private:	
 	t_box* ref;
 };
@@ -71,7 +76,30 @@ public:
     {
 		post("EditorComponent::paint");
 		g.fillAll (Colour::greyLevel (0.9f));
+		
+//		getParentComponent()->getPeer()->grabFocus();
+//		getParentComponent()->getPeer()->handleFocusLoss();
+		
     }
+	
+	void mouseEnter(const MouseEvent& e)
+	{
+		post("EditorComponent::mouseEnter %d, %d", e.x, e.y);
+	}
+	
+	void mouseExit(const MouseEvent& e)
+	{
+		post("EditorComponent::mouseExit %d, %d", e.x, e.y);
+		
+//		getParentComponent()->getPeer()->grabFocus();
+//		getParentComponent()->getPeer()->handleFocusLoss();
+		
+	}
+	
+	void mouseDown(const MouseEvent& e)
+	{
+		post("EditorComponent::mouseDown %d, %d", e.x, e.y);
+	}
 	
 private:
 	Slider* slider;
@@ -159,16 +187,23 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
         x->juceEditorComp->setOpaque (true);
         x->juceEditorComp->setVisible (true);
         
+		
+		
         x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, (t_box*)x);
-        x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h);
+        //x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h);
+		
+		x->juceWindowComp->setBounds(x_coord + x->ob.b_patcher->p_wind->w_x1, 
+									 y_coord + x->ob.b_patcher->p_wind->w_y1, 
+									 w, h);
+		
 		//x->juceWindowComp->setBounds(0, 0, w, h);
         
         // Mac only here...!
-        HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
-        post("HIViewRef hiRoot=%p", hiRoot);
+//        HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
+//        post("HIViewRef hiRoot=%p", hiRoot);
         
-		x->juceWindowComp->setInterceptsMouseClicks(false, false);
-        x->juceWindowComp->addToDesktop(0, (void*)hiRoot);
+		x->juceWindowComp->setInterceptsMouseClicks(true, true);
+        x->juceWindowComp->addToDesktop(0, 0);//(void*)hiRoot);
 			
 		
 		// Finish it up...
@@ -217,8 +252,14 @@ void jucebox_update(t_jucebox* x)
 	
 	GrafPtr	gp = patcher_setport(x->ob.b_patcher);
 	
-	x->juceWindowComp->setBounds(x->ob.b_rect.left, x->ob.b_rect.top + WINDOWTITLEBARHEIGHT, width_new, height_new);
+	//x->juceWindowComp->setBounds(x->ob.b_rect.left, x->ob.b_rect.top + WINDOWTITLEBARHEIGHT, width_new, height_new);
+	
+	x->juceWindowComp->setBounds(x->ob.b_rect.left + x->ob.b_patcher->p_wind->w_x1, 
+								 x->ob.b_rect.top + x->ob.b_patcher->p_wind->w_y1, 
+								 width_new, height_new);
+	
 	x->juceWindowComp->repaint();
+	x->juceWindowComp->toFront(false);
 	
     patcher_restoreport(gp); 
 }
