@@ -190,13 +190,13 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 		
 		
         x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, (t_box*)x);
-        x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h);
+        x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h); // for the rootview
 		
 //		x->juceWindowComp->setBounds(x_coord + x->ob.b_patcher->p_wind->w_x1, 
 //									 y_coord + x->ob.b_patcher->p_wind->w_y1, 
-//									 w, h);
+//									 w, h); // for the floater
 		
-		//x->juceWindowComp->setBounds(0, 0, w, h);
+//		x->juceWindowComp->setBounds(x_coord, y_coord, w, h); // for the subview
         
         // Mac only here...!
         HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
@@ -209,9 +209,68 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 			post("parentView=0");
 			parentView = hiRoot;
 		}        
+		
+		/*
+		ControlRef NewControl (
+							   WindowRef owningWindow,
+							   const Rect *boundsRect,
+							   ConstStr255Param controlTitle,
+							   Boolean initiallyVisible,
+							   SInt16 initialValue,
+							   SInt16 minimumValue,
+							   SInt16 maximumValue,
+							   SInt16 procID,
+							   SRefCon controlReference
+							   );
         
+		 */
+		
+//		ControlRef subView = NewControl((WindowRef)wind_syswind(x->ob.b_patcher->p_wind), 
+//										&x->ob.b_rect, 0, true, 
+//										0, 0, 0, 
+//										0, x->juceWindowComp->getComponentUID());
+		
+		/*
+		 OSStatus CreateUserPaneControl (
+										 WindowRef window,
+										 const Rect *boundsRect,
+										 UInt32 features,
+										 ControlRef *outControl
+										 );
+		 kControlSupportsGhosting
+		 kControlSupportsEmbedding
+		 kControlSupportsFocus
+		 kControlWantsIdle
+		 kControlWantsActivate
+		 kControlHandlesTracking
+		 kControlSupportsDataAccess
+		 kControlHasSpecialBackground 
+		 kControlGetsFocusOnClick
+		 kControlSupportsCalcBestRect
+		 kControlSupportsLiveFeedback
+		 kControlHasRadioBehavior
+		 kControlSupportsDragAndDrop
+		 kControlAutoToggles
+		 kControlSupportsGetRegion
+		 kControlSupportsFlattening
+		 kControlSupportsSetCursor
+		 kControlSupportsContextualMenus
+		 kControlSupportsClickActivation
+		 kControlIdlesWithTimer
+		 */
+		
+//		ControlRef subView;
+//		CreateUserPaneControl((WindowRef)wind_syswind(x->ob.b_patcher->p_wind),
+//							  &x->ob.b_rect,
+//							  kControlSupportsEmbedding | kControlIdlesWithTimer,
+//							  &subView);
+		
+		
 		x->juceWindowComp->setInterceptsMouseClicks(true, true);
         x->juceWindowComp->addToDesktop(0, (void*)parentView);
+		
+		//x->juceWindowComp->addToDesktop(0, (void*)subView);
+		
 		//x->juceWindowComp->addToDesktop(0, 0);	
 		
 		// Finish it up...
@@ -259,6 +318,8 @@ void jucebox_update(t_jucebox* x)
 	}
 	
 	GrafPtr	gp = patcher_setport(x->ob.b_patcher);
+	
+//	x->juceWindowComp->setBounds(x->ob.b_rect.left, x->ob.b_rect.top, width_new, height_new);
 	
 	x->juceWindowComp->setBounds(x->ob.b_rect.left, x->ob.b_rect.top + WINDOWTITLEBARHEIGHT, width_new, height_new);
 	
