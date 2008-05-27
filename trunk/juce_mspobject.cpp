@@ -142,6 +142,7 @@ public:
 	
     void paint (Graphics& g)
     {
+		post("EditorComponentHolder::paint");
     }
 	
 private:

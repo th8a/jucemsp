@@ -24,7 +24,7 @@ public:
 		slider->setRange(0.0, 1.0, 0.001);
 		slider->addListener(this);
 		addAndMakeVisible(resizer = new ResizableCornerComponent(this, 0));
-		setSize(200,24);
+		setSize(300,100);
 		
 		slider->setValue (ownerFilter->getParameter (0), false);
 		
