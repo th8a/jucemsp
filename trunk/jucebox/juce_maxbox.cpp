@@ -190,21 +190,29 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 		
 		
         x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, (t_box*)x);
-        //x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h);
+        x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h);
 		
-		x->juceWindowComp->setBounds(x_coord + x->ob.b_patcher->p_wind->w_x1, 
-									 y_coord + x->ob.b_patcher->p_wind->w_y1, 
-									 w, h);
+//		x->juceWindowComp->setBounds(x_coord + x->ob.b_patcher->p_wind->w_x1, 
+//									 y_coord + x->ob.b_patcher->p_wind->w_y1, 
+//									 w, h);
 		
 		//x->juceWindowComp->setBounds(0, 0, w, h);
         
         // Mac only here...!
-//        HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
-//        post("HIViewRef hiRoot=%p", hiRoot);
+        HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
+		post("HIViewRef hiRoot=%p", hiRoot);
+		
+		HIViewRef parentView = 0;
+		//HIViewFindByID (hiRoot, kHIViewWindowContentID, &parentView);
+		
+		if (parentView == 0) {
+			post("parentView=0");
+			parentView = hiRoot;
+		}        
         
 		x->juceWindowComp->setInterceptsMouseClicks(true, true);
-        x->juceWindowComp->addToDesktop(0, 0);//(void*)hiRoot);
-			
+        x->juceWindowComp->addToDesktop(0, (void*)parentView);
+		//x->juceWindowComp->addToDesktop(0, 0);	
 		
 		// Finish it up...
 		box_ready((t_box *)x);
@@ -252,16 +260,19 @@ void jucebox_update(t_jucebox* x)
 	
 	GrafPtr	gp = patcher_setport(x->ob.b_patcher);
 	
-	//x->juceWindowComp->setBounds(x->ob.b_rect.left, x->ob.b_rect.top + WINDOWTITLEBARHEIGHT, width_new, height_new);
+	x->juceWindowComp->setBounds(x->ob.b_rect.left, x->ob.b_rect.top + WINDOWTITLEBARHEIGHT, width_new, height_new);
 	
-	x->juceWindowComp->setBounds(x->ob.b_rect.left + x->ob.b_patcher->p_wind->w_x1, 
-								 x->ob.b_rect.top + x->ob.b_patcher->p_wind->w_y1, 
-								 width_new, height_new);
+//	x->juceWindowComp->setBounds(x->ob.b_rect.left + x->ob.b_patcher->p_wind->w_x1, 
+//								 x->ob.b_rect.top + x->ob.b_patcher->p_wind->w_y1, 
+//								 width_new, height_new);
 	
 	x->juceWindowComp->repaint();
-	x->juceWindowComp->toFront(false);
+//	x->juceWindowComp->toFront(false);
 	
     patcher_restoreport(gp); 
+	
+	
+	
 }
 
 void jucebox_qfn(t_jucebox* x)
