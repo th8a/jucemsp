@@ -22,9 +22,9 @@ public:
         setVisible (true);
         setBroughtToFrontOnMouseClick (true);
 		
-		//#if ! JucePlugin_EditorRequiresKeyboardFocus
-		//        setWantsKeyboardFocus (false);
-		//#endif
+//#if ! JucePlugin_EditorRequiresKeyboardFocus
+        setWantsKeyboardFocus (false);
+//#endif
 	}
 
 	~EditorComponentHolder()
@@ -40,9 +40,6 @@ public:
 	void paint (Graphics& g)
 	{
 		post("EditorComponentHolder::paint");
-//		
-//		patcher_setport(ref->b_patcher);
-//		ClipRect(&ref->b_rect);
 	}
 	
 	void mouseDown(const MouseEvent& e)
@@ -76,10 +73,6 @@ public:
     {
 		post("EditorComponent::paint");
 		g.fillAll (Colour::greyLevel (0.9f));
-		
-//		getParentComponent()->getPeer()->grabFocus();
-//		getParentComponent()->getPeer()->handleFocusLoss();
-		
     }
 	
 	void mouseEnter(const MouseEvent& e)
@@ -91,9 +84,7 @@ public:
 	{
 		post("EditorComponent::mouseExit %d, %d", e.x, e.y);
 		
-//		getParentComponent()->getPeer()->grabFocus();
-//		getParentComponent()->getPeer()->handleFocusLoss();
-		
+		//DisableControl((ControlRef)getPeer()->getNativeHandle());
 	}
 	
 	void mouseDown(const MouseEvent& e)
@@ -187,92 +178,15 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
         x->juceEditorComp->setOpaque (true);
         x->juceEditorComp->setVisible (true);
         
-		
-		
         x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, (t_box*)x);
         x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h); // for the rootview
-		
-//		x->juceWindowComp->setBounds(x_coord + x->ob.b_patcher->p_wind->w_x1, 
-//									 y_coord + x->ob.b_patcher->p_wind->w_y1, 
-//									 w, h); // for the floater
-		
-//		x->juceWindowComp->setBounds(x_coord, y_coord, w, h); // for the subview
         
         // Mac only here...!
         HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
-		post("HIViewRef hiRoot=%p", hiRoot);
-		
-		HIViewRef parentView = 0;
-		//HIViewFindByID (hiRoot, kHIViewWindowContentID, &parentView);
-		
-		if (parentView == 0) {
-			post("parentView=0");
-			parentView = hiRoot;
-		}        
-		
-		/*
-		ControlRef NewControl (
-							   WindowRef owningWindow,
-							   const Rect *boundsRect,
-							   ConstStr255Param controlTitle,
-							   Boolean initiallyVisible,
-							   SInt16 initialValue,
-							   SInt16 minimumValue,
-							   SInt16 maximumValue,
-							   SInt16 procID,
-							   SRefCon controlReference
-							   );
-        
-		 */
-		
-//		ControlRef subView = NewControl((WindowRef)wind_syswind(x->ob.b_patcher->p_wind), 
-//										&x->ob.b_rect, 0, true, 
-//										0, 0, 0, 
-//										0, x->juceWindowComp->getComponentUID());
-		
-		/*
-		 OSStatus CreateUserPaneControl (
-										 WindowRef window,
-										 const Rect *boundsRect,
-										 UInt32 features,
-										 ControlRef *outControl
-										 );
-		 kControlSupportsGhosting
-		 kControlSupportsEmbedding
-		 kControlSupportsFocus
-		 kControlWantsIdle
-		 kControlWantsActivate
-		 kControlHandlesTracking
-		 kControlSupportsDataAccess
-		 kControlHasSpecialBackground 
-		 kControlGetsFocusOnClick
-		 kControlSupportsCalcBestRect
-		 kControlSupportsLiveFeedback
-		 kControlHasRadioBehavior
-		 kControlSupportsDragAndDrop
-		 kControlAutoToggles
-		 kControlSupportsGetRegion
-		 kControlSupportsFlattening
-		 kControlSupportsSetCursor
-		 kControlSupportsContextualMenus
-		 kControlSupportsClickActivation
-		 kControlIdlesWithTimer
-		 */
-		
-//		ControlRef subView;
-//		CreateUserPaneControl((WindowRef)wind_syswind(x->ob.b_patcher->p_wind),
-//							  &x->ob.b_rect,
-//							  kControlSupportsEmbedding | kControlIdlesWithTimer,
-//							  &subView);
-		
-		
+				
 		x->juceWindowComp->setInterceptsMouseClicks(true, true);
-        x->juceWindowComp->addToDesktop(0, (void*)parentView);
-		
-		//x->juceWindowComp->addToDesktop(0, (void*)subView);
-		
-		//x->juceWindowComp->addToDesktop(0, 0);	
-		
+        x->juceWindowComp->addToDesktop(ComponentPeer::windowIgnoresMouseClicks, (void*)hiRoot);
+				
 		// Finish it up...
 		box_ready((t_box *)x);
 	}
@@ -284,7 +198,7 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 
 void *jucebox_menu(void *p, long x, long y, long font)
 {
-	t_atom argv[5];		// reduced to 5 on 24 nov 2004
+	t_atom argv[5];
 	
 	SETOBJ(argv, (t_object *)p);				// patcher
 	SETLONG(argv+1, x);							// x coord
@@ -318,21 +232,11 @@ void jucebox_update(t_jucebox* x)
 	}
 	
 	GrafPtr	gp = patcher_setport(x->ob.b_patcher);
-	
-//	x->juceWindowComp->setBounds(x->ob.b_rect.left, x->ob.b_rect.top, width_new, height_new);
-	
+		
 	x->juceWindowComp->setBounds(x->ob.b_rect.left, x->ob.b_rect.top + WINDOWTITLEBARHEIGHT, width_new, height_new);
-	
-//	x->juceWindowComp->setBounds(x->ob.b_rect.left + x->ob.b_patcher->p_wind->w_x1, 
-//								 x->ob.b_rect.top + x->ob.b_patcher->p_wind->w_y1, 
-//								 width_new, height_new);
-	
 	x->juceWindowComp->repaint();
-//	x->juceWindowComp->toFront(false);
 	
     patcher_restoreport(gp); 
-	
-	
 	
 }
 
