@@ -11,6 +11,28 @@
 #define DEFWIDTH 		300			// default width and height
 #define DEFHEIGHT		150			//		...
 
+/*
+ juce_mac_Windowing.cpp lines 2008-23 have to be:
+ 
+ EventTypeSpec viewEvents[] =
+ {
+ { kEventClassHIObject, kEventHIObjectConstruct },
+ { kEventClassHIObject, kEventHIObjectInitialize },
+ { kEventClassHIObject, kEventHIObjectDestruct },
+ { kEventClassControl, kEventControlInitialize },
+ { kEventClassControl, kEventControlDraw },
+	 //                { kEventClassControl, kEventControlBoundsChanged },
+	 //                { kEventClassControl, kEventControlSetFocusPart },
+ { kEventClassControl, kEventControlHitTest },
+	 //                { kEventClassControl, kEventControlDragEnter },
+	 //                { kEventClassControl, kEventControlDragLeave },
+	 //                { kEventClassControl, kEventControlDragWithin },
+	 //                { kEventClassControl, kEventControlDragReceive },
+	 //                { kEventClassControl, kEventControlOwningWindowChanged }
+ };
+ 
+ */
+
 class EditorComponentHolder  : public Component
 {
 public:
@@ -23,7 +45,7 @@ public:
         setBroughtToFrontOnMouseClick (true);
 		
 //#if ! JucePlugin_EditorRequiresKeyboardFocus
-//        setWantsKeyboardFocus (false);
+        setWantsKeyboardFocus (false);
 //#endif
 	}
 
@@ -188,7 +210,7 @@ void jucebox_addjucecomponents(t_jucebox* x)
 			width   = x->ob.b_rect.right -  x->ob.b_rect.left, 
 			height  = x->ob.b_rect.bottom - x->ob.b_rect.top;
 	
-	x->juceEditorComp = new EditorComponent(); //new Slider (T("gain"));
+	x->juceEditorComp = new EditorComponent();
 	x->juceEditorComp->setBounds(0, 0, width, height);
 	
 	const int w = x->juceEditorComp->getWidth();
@@ -198,54 +220,14 @@ void jucebox_addjucecomponents(t_jucebox* x)
 	x->juceEditorComp->setVisible (true);
 	
 	x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, (t_box*)x);
-	x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h); // for the rootview
+	x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h);
 	
-	// Mac only here...!
-	
+	// Mac only here...
 	HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
-	
-	WindowAttributes attributes;
-	GetWindowAttributes ((WindowRef)wind_syswind(x->ob.b_patcher->p_wind), &attributes);
 		
-	post("(attributes & kWindowCompositingAttribute) = %d", attributes & kWindowCompositingAttribute);
-	
-	
-	HIRect hiRootRect;
-	HIViewGetBounds(hiRoot, &hiRootRect);
-	
-	post("hiRootRect L=%d T=%d W=%d H=%d",		
-		 (int)hiRootRect.origin.x,
-		 (int)hiRootRect.origin.y,
-		 (int)hiRootRect.size.width,
-		 (int)hiRootRect.size.height);
-	
-	// Get a reference to the content view
-	HIViewRef hiContent = NULL;
-	long err = HIViewFindByID(hiRoot, kHIViewWindowContentID, &hiContent);
-	
-	post("hiRoot=%p hiContent=%p err=%ld", hiRoot, hiContent, err);
-	
-	HIRect hiContentRect;
-	HIViewGetBounds(hiContent, &hiContentRect);
-	
-	post("hiContentRect L=%d T=%d W=%d H=%d",   
-		 (int)hiContentRect.origin.x,
-		 (int)hiContentRect.origin.y,
-		 (int)hiContentRect.size.width,
-		 (int)hiContentRect.size.height);
-	
-	Rect qdBoundsRect;
-	GetControlBounds(hiContent, &qdBoundsRect);
-	
-	post("qdBoundsRect L=%d T=%d W=%d H=%d",   
-		 (int)qdBoundsRect.left,
-		 (int)qdBoundsRect.top,
-		 (int)qdBoundsRect.right-qdBoundsRect.left,
-		 (int)qdBoundsRect.bottom-qdBoundsRect.top);
-	
-	x->juceWindowComp->setInterceptsMouseClicks(true, true);
-	x->juceWindowComp->addToDesktop(0, (void*)hiRoot);	
+	x->juceWindowComp->addToDesktop(ComponentPeer::windowRepaintedExplictly, (void*)hiRoot);	
 }
+
 
 void *jucebox_menu(void *p, long x, long y, long font)
 {
@@ -283,12 +265,16 @@ void jucebox_psave(t_jucebox *x, void *w)
 
 void jucebox_free(t_jucebox* x)
 {
+	// must delete the juce ui...!
+	
 	qelem_free(x->qelem);				// delete our qelem
 	box_free((t_box *)x);				// free the ui box
 }
 
 void jucebox_update(t_jucebox* x)
 {
+	box_invalnow(&x->ob);
+	
 	post("jucebox_update");
 	
 	short width_old = x->rect.right - x->rect.left;
@@ -307,8 +293,13 @@ void jucebox_update(t_jucebox* x)
 	
 	if(!x->juceWindowComp) jucebox_addjucecomponents(x);
 	
+	x->juceWindowComp->setBounds(0xffff, 0xffff, width_new, height_new);
 	x->juceWindowComp->setBounds(x->ob.b_rect.left, x->ob.b_rect.top + WINDOWTITLEBARHEIGHT, width_new, height_new);
+//	x->juceWindowComp->resized();
+//	x->juceWindowComp->repaint();
 	x->juceWindowComp->repaint();
+	x->juceWindowComp->getPeer()->repaint(0, 0, 0xffff, 0xffff);
+	x->juceWindowComp->getPeer()->performAnyPendingRepaintsNow();
 	
     patcher_restoreport(gp); 
 	

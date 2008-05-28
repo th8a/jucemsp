@@ -18,7 +18,7 @@
 		A80FD9280DE2E09600AE5B01 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80FD9270DE2E09600AE5B01 /* QuickTime.framework */; };
 		A80FD94D0DE2E09E00AE5B01 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80FD94C0DE2E09E00AE5B01 /* IOKit.framework */; };
 		A80FD9EE0DE2E0A300AE5B01 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80FD9ED0DE2E0A300AE5B01 /* OpenGL.framework */; };
-		A80FDA1C0DE2E4D500AE5B01 /* libjuce.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A80FD7690DE2E05700AE5B01 /* libjuce.a */; };
+		A80FDA1C0DE2E4D500AE5B01 /* libjucedebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A80FD7690DE2E05700AE5B01 /* libjucedebug.a */; };
 		A894B1040DEB8850009B3526 /* juce_maxbox.r in Rez */ = {isa = PBXBuildFile; fileRef = A894B1020DEB8850009B3526 /* juce_maxbox.r */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A80FDA1C0DE2E4D500AE5B01 /* libjuce.a in Frameworks */,
+				A80FDA1C0DE2E4D500AE5B01 /* libjucedebug.a in Frameworks */,
 				8D01CCCE0486CAD60068D4B7 /* Carbon.framework in Frameworks */,
 				0F5B62030919440900A62EB9 /* MaxAPI.framework in Frameworks */,
 				A80FD79E0DE2E06800AE5B01 /* CoreMIDI.framework in Frameworks */,
@@ -127,7 +127,7 @@
 		A80FD7650DE2E05700AE5B01 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A80FD7690DE2E05700AE5B01 /* libjuce.a */,
+				A80FD7690DE2E05700AE5B01 /* libjucedebug.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -187,10 +187,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A80FD7690DE2E05700AE5B01 /* libjuce.a */ = {
+		A80FD7690DE2E05700AE5B01 /* libjucedebug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libjuce.a;
+			path = libjucedebug.a;
 			remoteRef = A80FD7680DE2E05700AE5B01 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
