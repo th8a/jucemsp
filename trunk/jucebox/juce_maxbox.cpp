@@ -109,7 +109,9 @@ typedef struct _jucebox
 
 static t_class *jucebox_class;
 void *jucebox_new(t_symbol *s, short ac, t_atom *av);
+void jucebox_addjucecomponents(t_jucebox* x);
 void *jucebox_menu(void *p, long x, long y, long font);
+void jucebox_psave(t_jucebox *x, void *w);
 void jucebox_free(t_jucebox* x);
 void jucebox_update(t_jucebox* x);
 void jucebox_qfn(t_jucebox* x);
@@ -125,7 +127,8 @@ int main()
 	c = class_new("juce_maxbox",(method)jucebox_new, (method)jucebox_free, (short)sizeof(t_jucebox), (method)jucebox_menu, A_GIMME, 0);
 	class_obexoffset_set(c, calcoffset(t_jucebox, obex));
 	
-	class_addmethod(c, (method)jucebox_update, 	"update", A_CANT, 0L);
+	class_addmethod(c, (method)jucebox_psave,		"psave",		A_CANT, 0L);
+	class_addmethod(c, (method)jucebox_update,		"update",		A_CANT, 0L);
 		
 	class_register(CLASS_BOX, c);
 	jucebox_class = c;	
@@ -166,25 +169,9 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 
 		// Create our queue element for defering calls to the draw function
 		x->qelem = qelem_new(x, (method)jucebox_qfn);
-
-		x->juceEditorComp = new EditorComponent(); //new Slider (T("gain"));
-		x->juceEditorComp->setBounds(0, 0, width, height);
-
-		const int w = x->juceEditorComp->getWidth();
-		const int h = x->juceEditorComp->getHeight();
-
-		x->juceEditorComp->setOpaque (true);
-		x->juceEditorComp->setVisible (true);
-
-		x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, (t_box*)x);
-		x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h); // for the rootview
-
-		// Mac only here...!
-		HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
-				
-		x->juceWindowComp->setInterceptsMouseClicks(true, true);
-		x->juceWindowComp->addToDesktop(ComponentPeer::windowIgnoresMouseClicks, (void*)hiRoot);
-				
+		
+		x->juceWindowComp = 0L;
+		
 		// Finish it up...
 		box_ready((t_box *)x);
 	}
@@ -192,6 +179,72 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 		error("juce_maxbox - could not create instance");
 	
 	return(x);
+}
+
+void jucebox_addjucecomponents(t_jucebox* x)
+{
+	long	x_coord = x->ob.b_rect.left, 
+			y_coord = x->ob.b_rect.top, 
+			width   = x->ob.b_rect.right -  x->ob.b_rect.left, 
+			height  = x->ob.b_rect.bottom - x->ob.b_rect.top;
+	
+	x->juceEditorComp = new EditorComponent(); //new Slider (T("gain"));
+	x->juceEditorComp->setBounds(0, 0, width, height);
+	
+	const int w = x->juceEditorComp->getWidth();
+	const int h = x->juceEditorComp->getHeight();
+	
+	x->juceEditorComp->setOpaque (true);
+	x->juceEditorComp->setVisible (true);
+	
+	x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, (t_box*)x);
+	x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h); // for the rootview
+	
+	// Mac only here...!
+	
+	HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
+	
+	WindowAttributes attributes;
+	GetWindowAttributes ((WindowRef)wind_syswind(x->ob.b_patcher->p_wind), &attributes);
+		
+	post("(attributes & kWindowCompositingAttribute) = %d", attributes & kWindowCompositingAttribute);
+	
+	
+	HIRect hiRootRect;
+	HIViewGetBounds(hiRoot, &hiRootRect);
+	
+	post("hiRootRect L=%d T=%d W=%d H=%d",		
+		 (int)hiRootRect.origin.x,
+		 (int)hiRootRect.origin.y,
+		 (int)hiRootRect.size.width,
+		 (int)hiRootRect.size.height);
+	
+	// Get a reference to the content view
+	HIViewRef hiContent = NULL;
+	long err = HIViewFindByID(hiRoot, kHIViewWindowContentID, &hiContent);
+	
+	post("hiRoot=%p hiContent=%p err=%ld", hiRoot, hiContent, err);
+	
+	HIRect hiContentRect;
+	HIViewGetBounds(hiContent, &hiContentRect);
+	
+	post("hiContentRect L=%d T=%d W=%d H=%d",   
+		 (int)hiContentRect.origin.x,
+		 (int)hiContentRect.origin.y,
+		 (int)hiContentRect.size.width,
+		 (int)hiContentRect.size.height);
+	
+	Rect qdBoundsRect;
+	GetControlBounds(hiContent, &qdBoundsRect);
+	
+	post("qdBoundsRect L=%d T=%d W=%d H=%d",   
+		 (int)qdBoundsRect.left,
+		 (int)qdBoundsRect.top,
+		 (int)qdBoundsRect.right-qdBoundsRect.left,
+		 (int)qdBoundsRect.bottom-qdBoundsRect.top);
+	
+	x->juceWindowComp->setInterceptsMouseClicks(true, true);
+	x->juceWindowComp->addToDesktop(0, (void*)hiRoot);	
 }
 
 void *jucebox_menu(void *p, long x, long y, long font)
@@ -205,6 +258,27 @@ void *jucebox_menu(void *p, long x, long y, long font)
 	SETLONG(argv+4, DEFHEIGHT);					// height
 	
 	return jucebox_new(gensym("juce_maxbox"), 5, argv);
+}
+
+void jucebox_psave(t_jucebox *x, void *w)
+{
+	Rect r = x->ob.b_rect;
+	t_atom argv[16];
+	short inc = 0;
+	
+	SETSYM(argv,gensym("#P"));
+	if (x->ob.b_hidden) {	// i.e. if it's hidden when the patcher is locked
+		SETSYM(argv+1,gensym("hidden"));
+		inc = 1;
+	}
+	SETSYM(argv+1+inc, gensym("user"));
+	SETSYM(argv+2+inc, ob_sym(x));
+	SETLONG(argv+3+inc, r.left);			// x
+	SETLONG(argv+4+inc, r.top);				// y
+	SETLONG(argv+5+inc, r.right - r.left);	// width
+	SETLONG(argv+6+inc, r.bottom - r.top);	// height
+	
+	binbuf_insert(w, 0L, 7+inc, argv);
 }
 
 void jucebox_free(t_jucebox* x)
@@ -230,7 +304,9 @@ void jucebox_update(t_jucebox* x)
 	}
 	
 	GrafPtr	gp = patcher_setport(x->ob.b_patcher);
-		
+	
+	if(!x->juceWindowComp) jucebox_addjucecomponents(x);
+	
 	x->juceWindowComp->setBounds(x->ob.b_rect.left, x->ob.b_rect.top + WINDOWTITLEBARHEIGHT, width_new, height_new);
 	x->juceWindowComp->repaint();
 	
