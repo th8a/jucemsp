@@ -23,7 +23,7 @@ public:
         setBroughtToFrontOnMouseClick (true);
 		
 //#if ! JucePlugin_EditorRequiresKeyboardFocus
-        setWantsKeyboardFocus (false);
+//        setWantsKeyboardFocus (false);
 //#endif
 	}
 
@@ -83,8 +83,6 @@ public:
 	void mouseExit(const MouseEvent& e)
 	{
 		post("EditorComponent::mouseExit %d, %d", e.x, e.y);
-		
-		//DisableControl((ControlRef)getPeer()->getNativeHandle());
 	}
 	
 	void mouseDown(const MouseEvent& e)
@@ -151,41 +149,41 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 		y_coord = argv[2].a_w.w_long;					// y coord
 		width = argv[3].a_w.w_long;						// width
 		height = argv[4].a_w.w_long;					// height
-		
+
 		width = CLIP(width, MINWIDTH, MAXWIDTH); 		// constrain to min and max size
 		height = CLIP(height, MINHEIGHT, MAXHEIGHT);	// constrain to min and max size
-		
+
 		flags = F_DRAWFIRSTIN | F_NODRAWBOX | F_GROWBOTH | F_DRAWINLAST | F_SAVVY;
-		
+
 		// now actually initialize the t_box structure
 		box_new((t_box *)x, (t_patcher *)patcher, flags, x_coord, y_coord, x_coord + width, y_coord + height);
-		
+
 		// Reassign the box's firstin field to point to our new object
 		x->ob.b_firstin = (void *)x;
-		
+
 		// Cache rect for comparisons when the user decides to re-size the object
 		x->rect = x->ob.b_rect;
-		
+
 		// Create our queue element for defering calls to the draw function
 		x->qelem = qelem_new(x, (method)jucebox_qfn);
-		
+
 		x->juceEditorComp = new EditorComponent(); //new Slider (T("gain"));
-        x->juceEditorComp->setBounds(0, 0, width, height);
-        
-        const int w = x->juceEditorComp->getWidth();
-        const int h = x->juceEditorComp->getHeight();
-        
-        x->juceEditorComp->setOpaque (true);
-        x->juceEditorComp->setVisible (true);
-        
-        x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, (t_box*)x);
-        x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h); // for the rootview
-        
-        // Mac only here...!
-        HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
+		x->juceEditorComp->setBounds(0, 0, width, height);
+
+		const int w = x->juceEditorComp->getWidth();
+		const int h = x->juceEditorComp->getHeight();
+
+		x->juceEditorComp->setOpaque (true);
+		x->juceEditorComp->setVisible (true);
+
+		x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, (t_box*)x);
+		x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h); // for the rootview
+
+		// Mac only here...!
+		HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
 				
 		x->juceWindowComp->setInterceptsMouseClicks(true, true);
-        x->juceWindowComp->addToDesktop(ComponentPeer::windowIgnoresMouseClicks, (void*)hiRoot);
+		x->juceWindowComp->addToDesktop(ComponentPeer::windowIgnoresMouseClicks, (void*)hiRoot);
 				
 		// Finish it up...
 		box_ready((t_box *)x);

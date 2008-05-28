@@ -185,88 +185,7 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>A894B36F0DEC6A8F009B3526</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>HIView.h</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>A894B3700DEC6A8F009B3526</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>HIView.h</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>A894B3F50DEC7B7C009B3526</string>
-						<key>history</key>
-						<array>
-							<string>A894B3470DEC668E009B3526</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {943, 774}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>15 58 943 815 0 0 1440 878 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>A894B3D50DEC75C8009B3526</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>Controls.h</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>A894B3D60DEC75C8009B3526</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>Controls.h</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>A894B3F60DEC7B7C009B3526</string>
-						<key>history</key>
-						<array>
-							<string>A894B3C90DEC74B4009B3526</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {943, 774}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>15 58 943 815 0 0 1440 878 </string>
-			</dict>
-		</dict>
-	</array>
+	<array/>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -407,7 +326,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>A894B3F40DEC7B7C009B3526</string>
+										<string>A894B4060DED3381009B3526</string>
 										<key>history</key>
 										<array>
 											<string>A80F10970D53C63C00A3FA79</string>
@@ -645,9 +564,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>A894B3D50DEC75C8009B3526</string>
 		<string>1C0AD2B3069F1EA900FABCE6</string>
-		<string>A894B36F0DEC6A8F009B3526</string>
 		<string>A857F62F0D2C0FBC004DDB2C</string>
 		<string>/Users/martinrobinson/development/maxmsp/my projects/juce_maxbox/juce_maxbox.xcodeproj</string>
 	</array>

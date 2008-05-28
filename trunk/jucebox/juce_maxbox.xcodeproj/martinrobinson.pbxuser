@@ -178,6 +178,8 @@
 			A894B3F40DEC7B7C009B3526 /* PBXTextBookmark */ = A894B3F40DEC7B7C009B3526 /* PBXTextBookmark */;
 			A894B3F50DEC7B7C009B3526 /* PBXTextBookmark */ = A894B3F50DEC7B7C009B3526 /* PBXTextBookmark */;
 			A894B3F60DEC7B7C009B3526 /* PBXTextBookmark */ = A894B3F60DEC7B7C009B3526 /* PBXTextBookmark */;
+			A894B4030DED3345009B3526 /* PBXTextBookmark */ = A894B4030DED3345009B3526 /* PBXTextBookmark */;
+			A894B4060DED3381009B3526 /* PBXTextBookmark */ = A894B4060DED3381009B3526 /* PBXTextBookmark */;
 		};
 		sourceControlManager = A857F6060D2C0DAC004DDB2C /* Source Control */;
 		userBuildSettings = {
@@ -185,9 +187,9 @@
 	};
 	08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {830, 3500}}";
-			sepNavSelRange = "{4759, 0}";
-			sepNavVisRect = "{{0, 2355}, {792, 540}}";
+			sepNavIntBoundsRect = "{{0, 0}, {830, 3472}}";
+			sepNavSelRange = "{730, 0}";
+			sepNavVisRect = "{{0, 2932}, {792, 540}}";
 			sepNavWindowFrame = "{{276, -5}, {1244, 814}}";
 		};
 	};
@@ -216,7 +218,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "maxobject.c: 22";
 		rLen = 0;
-		rLoc = 1939;
+		rLoc = 1876;
 		rType = 0;
 		vrLen = 0;
 		vrLoc = 545;
@@ -591,7 +593,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 196";
 		rLen = 0;
-		rLoc = 4510;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1313;
 		vrLoc = 4078;
@@ -601,7 +603,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 196";
 		rLen = 0;
-		rLoc = 4510;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1313;
 		vrLoc = 4078;
@@ -621,7 +623,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 206";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1148;
 		vrLoc = 4502;
@@ -631,7 +633,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 206";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1143;
 		vrLoc = 4502;
@@ -726,7 +728,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 206";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1143;
 		vrLoc = 4502;
@@ -736,7 +738,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 206";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1143;
 		vrLoc = 4502;
@@ -772,7 +774,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 206";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1143;
 		vrLoc = 4502;
@@ -798,7 +800,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 206";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1143;
 		vrLoc = 4502;
@@ -872,7 +874,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 232";
 		rLen = 0;
-		rLoc = 4644;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1109;
 		vrLoc = 4887;
@@ -898,7 +900,7 @@
 		comments = "error: cannot convert 'OpaqueControlRef*' to 'OpaqueWindowPtr*' for argument '1' to 'OpaqueControlRef* NewControl(OpaqueWindowPtr*, const Rect*, const unsigned char*, Boolean, SInt16, SInt16, SInt16, SInt16, SInt32)'";
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		rLen = 0;
-		rLoc = 185;
+		rLoc = 146;
 		rType = 1;
 	};
 	A894B3790DEC6B18009B3526 /* PBXTextBookmark */ = {
@@ -906,7 +908,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 228";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 953;
 		vrLoc = 5199;
@@ -926,7 +928,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 221";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 512;
 		vrLoc = 5296;
@@ -936,7 +938,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 235";
 		rLen = 0;
-		rLoc = 4712;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 953;
 		vrLoc = 5199;
@@ -956,7 +958,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 229";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 999;
 		vrLoc = 5133;
@@ -976,7 +978,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 238";
 		rLen = 0;
-		rLoc = 4803;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 990;
 		vrLoc = 5202;
@@ -996,7 +998,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 246";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1076;
 		vrLoc = 5390;
@@ -1016,7 +1018,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 193";
 		rLen = 0;
-		rLoc = 4509;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1302;
 		vrLoc = 4341;
@@ -1036,7 +1038,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 245";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1065;
 		vrLoc = 5489;
@@ -1056,7 +1058,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 302";
 		rLen = 0;
-		rLoc = 6053;
+		rLoc = 5884;
 		rType = 0;
 		vrLen = 1255;
 		vrLoc = 7001;
@@ -1076,7 +1078,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 193";
 		rLen = 0;
-		rLoc = 4405;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1311;
 		vrLoc = 4332;
@@ -1096,7 +1098,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 302";
 		rLen = 0;
-		rLoc = 6053;
+		rLoc = 5884;
 		rType = 0;
 		vrLen = 1256;
 		vrLoc = 7048;
@@ -1116,7 +1118,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 302";
 		rLen = 0;
-		rLoc = 6053;
+		rLoc = 5884;
 		rType = 0;
 		vrLen = 1256;
 		vrLoc = 7048;
@@ -1126,7 +1128,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 265";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1075;
 		vrLoc = 5845;
@@ -1146,7 +1148,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 265";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1086;
 		vrLoc = 5845;
@@ -1166,7 +1168,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 265";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1085;
 		vrLoc = 5845;
@@ -1186,7 +1188,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 265";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1164;
 		vrLoc = 5965;
@@ -1206,7 +1208,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 265";
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1189;
 		vrLoc = 5965;
@@ -1226,7 +1228,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 272";
 		rLen = 0;
-		rLoc = 4803;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1112;
 		vrLoc = 6091;
@@ -1273,7 +1275,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 270";
 		rLen = 0;
-		rLoc = 4712;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1112;
 		vrLoc = 6091;
@@ -1283,7 +1285,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 270";
 		rLen = 0;
-		rLoc = 4712;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1112;
 		vrLoc = 6091;
@@ -1309,7 +1311,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = CreateUserPaneControl;
 		rLen = 0;
-		rLoc = 4642;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1102;
 		vrLoc = 6133;
@@ -1345,7 +1347,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 324";
 		rLen = 0;
-		rLoc = 6055;
+		rLoc = 5886;
 		rType = 0;
 		vrLen = 1241;
 		vrLoc = 7712;
@@ -1375,7 +1377,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 199";
 		rLen = 0;
-		rLoc = 4510;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1366;
 		vrLoc = 4202;
@@ -1405,7 +1407,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 26";
 		rLen = 0;
-		rLoc = 728;
+		rLoc = 730;
 		rType = 0;
 		vrLen = 815;
 		vrLoc = 315;
@@ -1435,7 +1437,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 87";
 		rLen = 0;
-		rLoc = 1734;
+		rLoc = 1703;
 		rType = 0;
 		vrLen = 663;
 		vrLoc = 1146;
@@ -1465,7 +1467,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
 		name = "juce_maxbox.cpp: 188";
 		rLen = 0;
-		rLoc = 4759;
+		rLoc = 2947;
 		rType = 0;
 		vrLen = 1366;
 		vrLoc = 3844;
@@ -1489,5 +1491,25 @@
 		rType = 0;
 		vrLen = 2669;
 		vrLoc = 21224;
+	};
+	A894B4030DED3345009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
+		name = "juce_maxbox.cpp: 149";
+		rLen = 1734;
+		rLoc = 2949;
+		rType = 0;
+		vrLen = 1304;
+		vrLoc = 2772;
+	};
+	A894B4060DED3381009B3526 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */;
+		name = "juce_maxbox.cpp: 26";
+		rLen = 0;
+		rLoc = 730;
+		rType = 0;
+		vrLen = 1009;
+		vrLoc = 5099;
 	};
 }
