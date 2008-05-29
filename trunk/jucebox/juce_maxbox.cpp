@@ -22,6 +22,7 @@ typedef MaxMSPPoint *		MaxMSPPointPtr;
 
 #define VALIDCHARS "ABCDEFGHIJKLMNOPQRTSUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789"
 
+extern Component* createMaxBoxComponent();
 
 typedef struct _jucebox
 {
@@ -30,7 +31,7 @@ typedef struct _jucebox
 	void		*qelem;	
 	Rect 		rect;
 	
-	class EditorComponent* juceEditorComp;
+	Component* juceEditorComp;
 	class EditorComponentHolder* juceWindowComp;
 	HIViewRef hiRoot;
 	
@@ -147,41 +148,6 @@ private:
 	Component* editorComp;
 };
 
-class EditorComponent : public Component
-{
-public:
-	EditorComponent()
-	{
-		addAndMakeVisible(slider = new Slider("Slider"));
-		slider->setRange(0.0, 1.0, 0.001);
-		addAndMakeVisible(dial = new Slider("Dial"));
-		dial->setSliderStyle(Slider::RotaryVerticalDrag);
-		dial->setRange(-50.0, 50.0, 0.1);
-	}
-	
-	~EditorComponent()
-	{
-		deleteAllChildren();
-	}
-	
-	void resized()
-    {
-		slider->setBounds(20, 20, 200, 24);
-		dial->setBounds(20, 54, 200, 80);
-	}
-	
-	void paint (Graphics& g)
-    {
-		g.fillAll (Colour::greyLevel (0.9f));
-    }
-	
-private:
-	Slider* slider;
-	Slider* dial;
-};
-
-
-
 
 
 
@@ -205,7 +171,7 @@ int main()
 	class_addmethod(c, (method)object_obex_dumpout,  "dumpout",		A_CANT,	0);  
 	class_addmethod(c, (method)object_obex_quickref, "quickref",	A_CANT, 0);
 		
-	Component* tempComp = new EditorComponent();
+	Component* tempComp = createMaxBoxComponent(); //new EditorComponent();
 	jucebox_setupattrs(c, gensym(""), tempComp);
 	delete tempComp;
 	
@@ -404,7 +370,7 @@ void jucebox_addjucecomponents(t_jucebox* x)
 			width   = x->ob.b_rect.right -  x->ob.b_rect.left, 
 			height  = x->ob.b_rect.bottom - x->ob.b_rect.top;
 	
-	x->juceEditorComp = new EditorComponent();
+	x->juceEditorComp = createMaxBoxComponent(); // new EditorComponent();
 	x->juceEditorComp->setBounds(0, 0, width, height);
 	
 	const int w = x->juceEditorComp->getWidth();
