@@ -59,7 +59,8 @@ void jucebox_qfn(t_jucebox* x);
 
 class EditorComponentHolder  :	public Component,
 								public Timer,
-								public SliderListener
+								public SliderListener,
+								public ComponentListener
 {
 public:
     EditorComponentHolder (Component* const editorComp_, t_jucebox* x)
@@ -75,13 +76,24 @@ public:
 //#endif
 		
 		editorComp = editorComp_;
+		
+		editorComp->addComponentListener(this);
+		
 		startTimer(20);
+		
 	}
 
 	~EditorComponentHolder()
 	{
+		editorComp->removeComponentListener(this);
 		stopTimer();
-		
+	}
+	
+	void componentMovedOrResized (Component &component, bool wasMoved, bool wasResized)
+	{
+		//post("EditorComponentHolder::componentMovedOrResized");
+		box_size(ref, editorComp->getWidth(), editorComp->getHeight());
+		//setSize(editorComp->getWidth(), editorComp->getHeight());
 	}
 	
 	void timerCallback()
