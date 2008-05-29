@@ -20,6 +20,8 @@ typedef MaxMSPPoint *		MaxMSPPointPtr;
 #define DEFWIDTH 		300			// default width and height
 #define DEFHEIGHT		150			//		...
 
+#define VALIDCHARS "ABCDEFGHIJKLMNOPQRTSUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789"
+
 
 typedef struct _jucebox
 {
@@ -32,14 +34,19 @@ typedef struct _jucebox
 	class EditorComponentHolder* juceWindowComp;
 	HIViewRef hiRoot;
 	
+	t_object*	dumpOut;
+	
+	float		params[256]; // must be able to do a deep count of child components to set this dynamically
+	
 } t_jucebox;
 
 static t_class *jucebox_class;
+void jucebox_setupattrs(t_class *c, t_symbol* prefixSym, Component* comp);
 void *jucebox_new(t_symbol *s, short ac, t_atom *av);
+t_max_err jucebox_attr_get(t_jucebox *x, void *attr, long *argc, t_atom **argv); 
+t_max_err jucebox_attr_set(t_jucebox *x, void *attr, long argc, t_atom *argv); 
+void jucebox_sliderchanged(t_jucebox* x, Slider *slider);
 void jucebox_addjucecomponents(t_jucebox* x);
-void jucebox_updatezorder(t_jucebox* x);
-void jucebox_back(t_jucebox* x);
-void jucebox_forward(t_jucebox* x);
 void *jucebox_menu(void *p, long x, long y, long font);
 void jucebox_psave(t_jucebox *x, void *w);
 void jucebox_free(t_jucebox* x);
@@ -50,7 +57,8 @@ void jucebox_qfn(t_jucebox* x);
 
 
 class EditorComponentHolder  :	public Component,
-								public Timer
+								public Timer,
+								public SliderListener
 {
 public:
     EditorComponentHolder (Component* const editorComp_, t_jucebox* x)
@@ -79,23 +87,22 @@ public:
     {
 		if(box_ownerlocked((t_box*)ref)) {
 			setVisible(true);
-			
-//			setBounds(ref->ob.b_rect.left + ref->ob.b_patcher->p_wind->w_x1, 
-//					  ref->ob.b_rect.top + ref->ob.b_patcher->p_wind->w_y1, 
-//					  getWidth(), getHeight());
-			
-			
-			
+						
 			calcAndSetBounds();
-			
-			//jucebox_updatezorder(ref);
-			
+						
 			getPeer()->toFront(false);
 		
 		}
 		else {
 			setVisible(false);
 		}
+	}
+	
+	void sliderValueChanged(Slider *slider)
+	{
+		//post("EditorComponentHolder::sliderValueChanged");
+		
+		jucebox_sliderchanged(ref, slider);
 	}
 	
 	void calcAndSetBounds()
@@ -113,9 +120,6 @@ public:
 		Rectangle windowRect(windowX, windowY, windowR-windowX, windowB-windowY);
 		Rectangle boxRect(boxX, boxY, boxR-boxX, boxB-boxY);
 				
-//		post("window XYRB %d %d %d %d", windowX, windowY, windowR, windowB);
-//		post("box XYRB %d %d %d %d", boxX, boxY, boxR, boxB);
-
 		int offsetX = boxX >= windowX ? 0 : boxX-windowX;
 		int offsetY = boxY >= windowY ? 0 : boxY-windowY;
 				
@@ -136,18 +140,8 @@ public:
 		
 		
 	}
-
-	void paint (Graphics& g)
-	{
-		//post("EditorComponentHolder::paint");
-	}
 	
-	
-//	void mouseDown(const MouseEvent& e)
-//	{
-//		post("EditorComponentHolder::mousedown %d, %d", e.x, e.y);
-//	}
-	
+		
 private:	
 	t_jucebox* ref;
 	Component* editorComp;
@@ -159,6 +153,10 @@ public:
 	EditorComponent()
 	{
 		addAndMakeVisible(slider = new Slider("Slider"));
+		slider->setRange(0.0, 1.0, 0.001);
+		addAndMakeVisible(dial = new Slider("Dial"));
+		dial->setSliderStyle(Slider::RotaryVerticalDrag);
+		dial->setRange(-50.0, 50.0, 0.1);
 	}
 	
 	~EditorComponent()
@@ -168,43 +166,18 @@ public:
 	
 	void resized()
     {
-		slider->setBounds(20,20,200,24);
+		slider->setBounds(20, 20, 200, 24);
+		dial->setBounds(20, 54, 200, 80);
 	}
 	
 	void paint (Graphics& g)
     {
-		post("EditorComponent::paint");
 		g.fillAll (Colour::greyLevel (0.9f));
     }
 	
-//	void mouseEnter(const MouseEvent& e)
-//	{
-//		post("EditorComponent::mouseEnter %d, %d", e.x, e.y);
-//	}
-//	
-//	void mouseExit(const MouseEvent& e)
-//	{
-//		post("EditorComponent::mouseExit %d, %d", e.x, e.y);
-//	}
-//	
-//	void mouseDown(const MouseEvent& e)
-//	{
-//		post("EditorComponent::mouseDown %d, %d", e.x, e.y);
-//	}
-//	
-//	void mouseUp(const MouseEvent& e)
-//	{
-//		post("EditorComponent::mouseUp %d, %d", e.x, e.y);
-//	}
-//	
-//	void mouseMove(const MouseEvent& e)
-//	{
-//		post("EditorComponent::mouseMove %d, %d", e.x, e.y);
-//	}
-	
 private:
 	Slider* slider;
-	ResizableCornerComponent* resizer;
+	Slider* dial;
 };
 
 
@@ -228,12 +201,44 @@ int main()
 	class_addmethod(c, (method)jucebox_psave,		"psave",		A_CANT, 0L);
 	class_addmethod(c, (method)jucebox_click,		"click",		A_CANT, 0L);
 	class_addmethod(c, (method)jucebox_update,		"update",		A_CANT, 0L);
-	class_addmethod(c, (method)jucebox_back,		"back",			0L);
-	class_addmethod(c, (method)jucebox_forward,		"forward",		0L);
+	
+	class_addmethod(c, (method)object_obex_dumpout,  "dumpout",		A_CANT,	0);  
+	class_addmethod(c, (method)object_obex_quickref, "quickref",	A_CANT, 0);
 		
+	Component* tempComp = new EditorComponent();
+	jucebox_setupattrs(c, gensym(""), tempComp);
+	delete tempComp;
+	
 	class_register(CLASS_BOX, c);
 	jucebox_class = c;	
 	return 0;
+}
+
+void jucebox_setupattrs(t_class *c, t_symbol* prefixSym, Component* comp)
+{
+	long attrflags = 0;
+	t_object *attr;
+	
+	String prefix(prefixSym->s_name);
+	if(prefix.isNotEmpty())
+		prefix << "_";
+	
+	// plugin parameter attributes
+	for(int i = 0; i < comp->getNumChildComponents(); i++) {
+		Component* child = comp->getChildComponent(i);
+				
+		String childAttrName(prefix + child->getName().replaceCharacter (' ', '_')
+													  .replaceCharacter ('.', '_')
+													  .retainCharacters (T(VALIDCHARS)));
+		
+		//post("procssing attr: %s", (char*)(const char*)childAttrName);
+		
+		attr = attr_offset_new((char*)(const char*)childAttrName, 
+							   _sym_float32, attrflags,
+							   (method)jucebox_attr_get, (method)jucebox_attr_set, 
+							   calcoffset(t_jucebox, params) + sizeof(float) * i); 
+		class_addattr(c, attr);
+	}
 }
 
 #define WINDOWTITLEBARHEIGHT 22
@@ -265,7 +270,10 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 		// Reassign the box's firstin field to point to our new object
 		x->ob.b_firstin = (void *)x;
 		
-		object_obex_store((void *)x, _sym_dumpout, (t_object *)outlet_new(x,NULL));
+		// create attr dumpout
+		object_obex_store((void *)x, 
+						  _sym_dumpout, 
+						  x->dumpOut = (t_object *)outlet_new(x,NULL));
 		
 		// Cache rect for comparisons when the user decides to re-size the object
 		x->rect = x->ob.b_rect;
@@ -276,6 +284,8 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 		x->juceWindowComp = 0L;
 		x->juceEditorComp = 0L;
 		
+		jucebox_addjucecomponents(x);
+		
 		// Finish it up...
 		box_ready((t_box *)x);
 	}
@@ -283,6 +293,108 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 		error("juce_maxbox - could not create instance");
 	
 	return(x);
+}
+
+t_max_err jucebox_attr_get(t_jucebox *x, void *attr, long *ac, t_atom **av)
+{
+	if (*ac && *av) {
+		// memory passed in; use it 
+	} else { 
+		*ac = 1; // size of attr data 
+		*av = (t_atom *)getbytes(sizeof(t_atom) * (*ac)); 
+		if (!(*av)) { 
+			*ac = 0; 
+			return MAX_ERR_OUT_OF_MEM; 
+		} 
+	} 
+	
+	t_symbol *attrName = (t_symbol*)object_method(attr, _sym_getname); 
+	
+	String prefix(String::empty);
+	
+	for(int i = 0; i < x->juceEditorComp->getNumChildComponents(); i++) {
+		Component* child = x->juceEditorComp->getChildComponent(i);
+		
+		String childAttrName(prefix + child->getName().replaceCharacter (' ', '_')
+							 .replaceCharacter ('.', '_')
+							 .retainCharacters (T(VALIDCHARS)));
+		
+		t_symbol *paramName = gensym((char*)(const char*)childAttrName);
+		
+		if(attrName == paramName) {
+			atom_setfloat(*av, x->params[i]);
+			return MAX_ERR_NONE;
+		}
+		
+	}
+	
+	return MAX_ERR_GENERIC; 
+}
+
+
+t_max_err jucebox_attr_set(t_jucebox *x, void *attr, long ac, t_atom *av)
+{
+	if (ac && av) { 
+		t_symbol *attrName = (t_symbol*)object_method(attr, _sym_getname); 
+		
+		String prefix(String::empty);
+		
+		for(int i = 0; i < x->juceEditorComp->getNumChildComponents(); i++) {
+			Slider* child = dynamic_cast <Slider*> (x->juceEditorComp->getChildComponent(i));
+			
+			if(child != 0) {
+				String childAttrName(prefix + child->getName().replaceCharacter (' ', '_')
+									 .replaceCharacter ('.', '_')
+									 .retainCharacters (T(VALIDCHARS)));
+				
+				t_symbol *paramName = gensym((char*)(const char*)childAttrName);
+				
+				if(attrName == paramName) {
+					x->params[i] = atom_getfloat(av);			
+					
+					child->setValue(x->params[i], false);
+					
+					if(child->getValue() != x->params[i])
+						x->params[i] = child->getValue();
+					
+					return MAX_ERR_NONE;
+				}
+			}
+			
+		}
+		
+	} 
+	return MAX_ERR_GENERIC; 
+}
+
+void jucebox_sliderchanged(t_jucebox* x, Slider *slider)
+{
+	String prefix(String::empty);
+	
+	for(int i = 0; i < x->juceEditorComp->getNumChildComponents(); i++) {
+		Slider* child = dynamic_cast <Slider*> (x->juceEditorComp->getChildComponent(i));
+		
+		if(child == slider) {
+			String childAttrName(prefix + child->getName().replaceCharacter (' ', '_')
+														  .replaceCharacter ('.', '_')
+														  .retainCharacters (T(VALIDCHARS)));
+			
+			t_symbol *paramName = gensym((char*)(const char*)childAttrName);
+			
+			//post("jucebox_sliderchanged %s", paramName->s_name);
+			
+			x->params[i] = child->getValue();
+			
+			//object_attr_getdump(x, paramName, 0, 0L); weird I get "der" from the outlet!
+			
+			t_atom atom;
+			atom_setfloat(&atom, x->params[i]);
+			outlet_anything(x->dumpOut, paramName, 1, &atom);
+			
+			break;
+		}
+		
+	}
 }
 
 void jucebox_addjucecomponents(t_jucebox* x)
@@ -301,11 +413,7 @@ void jucebox_addjucecomponents(t_jucebox* x)
 	x->juceEditorComp->setOpaque (true);
 	x->juceEditorComp->setVisible (true);
 	
-	x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, x);	
-//	x->juceWindowComp->setBounds(x_coord + x->ob.b_patcher->p_wind->w_x1, 
-//								 y_coord + x->ob.b_patcher->p_wind->w_y1, 
-//								 w, h);
-		
+	x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, x);			
 	x->juceWindowComp->calcAndSetBounds();
 	
 	// Mac only here...
@@ -314,40 +422,15 @@ void jucebox_addjucecomponents(t_jucebox* x)
 	x->juceWindowComp->addToDesktop(0);//, (void*)hiRoot);
 
 	x->hiRoot = hiRoot;
+		
+	for(int i = 0; i < x->juceEditorComp->getNumChildComponents(); i++) {
+		Slider* child = dynamic_cast <Slider*> (x->juceEditorComp->getChildComponent(i));
+		
+		if(child != 0)
+			child->addListener(x->juceWindowComp);
+	}
 }
 
-void jucebox_updatezorder(t_jucebox* x)
-{
-	post("jucebox_updatezorder");
-	
-//	HIViewSetZOrder((HIViewRef)x->juceWindowComp->getPeer()->getNativeHandle(), 
-//					kHIViewZOrderAbove, 
-//					(HIViewRef)wind_syswind(x->ob.b_patcher->p_wind));
-	
-	SendBehind((WindowRef)wind_syswind(x->ob.b_patcher->p_wind),
-			   (WindowRef)x->juceWindowComp->getPeer()->getNativeHandle());
-	
-	//SetUserFocusWindow((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
-}
-
-void jucebox_back(t_jucebox* x)
-{
-	post("jucebox_back");
-	
-	HIViewRef nextView = HIViewGetNextView(x->hiRoot);
-	HIViewSetZOrder((HIViewRef)x->juceWindowComp->getPeer()->getNativeHandle(), kHIViewZOrderBelow, nextView);
-	
-}
-
-
-void jucebox_forward(t_jucebox* x)
-{
-	post("jucebox_forward");
-	
-	HIViewRef prevView = HIViewGetPreviousView(x->hiRoot);
-	HIViewSetZOrder((HIViewRef)x->juceWindowComp->getPeer()->getNativeHandle(), kHIViewZOrderAbove, prevView);
-	
-}
 
 void *jucebox_menu(void *p, long x, long y, long font)
 {
@@ -405,14 +488,14 @@ void jucebox_deleteui(t_jucebox *x)
 
 void jucebox_click(t_jucebox *x, MaxMSPPoint pt, short modifiers)
 {
-	post("jucebox_click x=%d y=%d", pt.h, pt.v);
+	//post("jucebox_click x=%d y=%d", pt.h, pt.v);
 }
 
 void jucebox_update(t_jucebox* x)
 {
 	box_invalnow(&x->ob);
 	
-	post("jucebox_update");
+	//post("jucebox_update");
 	
 	short width_old = x->rect.right - x->rect.left;
 	short height_old = x->rect.bottom - x->rect.top;
