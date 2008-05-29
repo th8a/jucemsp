@@ -20,40 +20,43 @@ typedef MaxMSPPoint *		MaxMSPPointPtr;
 #define DEFWIDTH 		300			// default width and height
 #define DEFHEIGHT		150			//		...
 
-/*
- juce_mac_Windowing.cpp lines 2008-23 have to be:
- 
- EventTypeSpec viewEvents[] =
- {
- { kEventClassHIObject, kEventHIObjectConstruct },
- { kEventClassHIObject, kEventHIObjectInitialize },
- { kEventClassHIObject, kEventHIObjectDestruct },
- { kEventClassControl, kEventControlInitialize },
- { kEventClassControl, kEventControlDraw },
-	 //                { kEventClassControl, kEventControlBoundsChanged },
-	 //                { kEventClassControl, kEventControlSetFocusPart },
- { kEventClassControl, kEventControlHitTest },
-	 //                { kEventClassControl, kEventControlDragEnter },
-	 //                { kEventClassControl, kEventControlDragLeave },
-	 //                { kEventClassControl, kEventControlDragWithin },
-	 //                { kEventClassControl, kEventControlDragReceive },
-	 //                { kEventClassControl, kEventControlOwningWindowChanged }
- };
- 
- */
+
+typedef struct _jucebox
+{
+	t_box		ob;
+	void		*obex;
+	void		*qelem;	
+	Rect 		rect;
+	
+	class EditorComponent* juceEditorComp;
+	class EditorComponentHolder* juceWindowComp;
+	HIViewRef hiRoot;
+	
+} t_jucebox;
+
+static t_class *jucebox_class;
+void *jucebox_new(t_symbol *s, short ac, t_atom *av);
+void jucebox_addjucecomponents(t_jucebox* x);
+void jucebox_updatezorder(t_jucebox* x);
+void jucebox_back(t_jucebox* x);
+void jucebox_forward(t_jucebox* x);
+void *jucebox_menu(void *p, long x, long y, long font);
+void jucebox_psave(t_jucebox *x, void *w);
+void jucebox_free(t_jucebox* x);
+void jucebox_deleteui(t_jucebox *x);
+void jucebox_click(t_jucebox *x, MaxMSPPoint pt, short modifiers);
+void jucebox_update(t_jucebox* x);
+void jucebox_qfn(t_jucebox* x);
+
 
 class EditorComponentHolder  :	public Component,
 								public Timer
 {
 public:
-    EditorComponentHolder (Component* const editorComp_, t_box* x)
-		:	ref(x),
-			mouseIsInEditor(false),
-			lastBoxX(0xffff),
-			lastBoxY(0xffff),
-			lastMouseIsDown(false)
+    EditorComponentHolder (Component* const editorComp_, t_jucebox* x)
+		:	ref(x)
 	{
-        addAndMakeVisible (editorComp_);
+		addAndMakeVisible (editorComp_);
         setOpaque (true);
         setVisible (true);
         setBroughtToFrontOnMouseClick (true);
@@ -63,100 +66,71 @@ public:
 //#endif
 		
 		editorComp = editorComp_;
-		startTimer(250);
+		startTimer(20);
 	}
 
 	~EditorComponentHolder()
 	{
 		stopTimer();
+		
 	}
 	
 	void timerCallback()
     {
-		//post("EditorComponentHolder::timerCallback %p", this);
+		if(box_ownerlocked((t_box*)ref)) {
+			setVisible(true);
+			
+//			setBounds(ref->ob.b_rect.left + ref->ob.b_patcher->p_wind->w_x1, 
+//					  ref->ob.b_rect.top + ref->ob.b_patcher->p_wind->w_y1, 
+//					  getWidth(), getHeight());
+			
+			
+			
+			calcAndSetBounds();
+			
+			//jucebox_updatezorder(ref);
+			
+			getPeer()->toFront(false);
 		
-		if (editorComp != 0)
-        {
-            int screenX, screenY;
-            Desktop::getInstance().getMousePosition (screenX, screenY);
-			
-			//post("EditorComponentHolder::timerCallback screenmouse x=%d y=%d", screenX, screenY);
-			
-			int windowX = screenX - ref->b_patcher->p_wind->w_x1, 
-				windowY = screenY - ref->b_patcher->p_wind->w_y1;
-			
-			//post("EditorComponentHolder::timerCallback windowmouse x=%d y=%d", windowX, windowY);
-			
-			int boxX = windowX - ref->b_rect.left,
-				boxY = windowY - ref->b_rect.top;
-			
-			//post("EditorComponentHolder::timerCallback boxmouse x=%d y=%d", boxX, boxY);
-			
-			int boxW = ref->b_rect.right - ref->b_rect.left,
-				boxH = ref->b_rect.bottom - ref->b_rect.top;
-			
-			const ModifierKeys mod = ModifierKeys::getCurrentModifiersRealtime();
-			bool mouseIsDown = mod.isAnyMouseButtonDown();
-			
-			post("mouseIsDown = %d", mouseIsDown);
-			
-			if(mouseIsDown == false) {
-				mouseDownX = boxX;
-				mouseDownY = boxY;
-				mouseDownTime = Time::getCurrentTime();
-			}
-			
-			if(boxX >= 0 && boxX < boxW && boxY >= 0 && boxY < boxH) {
-				//post("EditorComponentHolder MOUSE IN BOX");
-				
-				MouseEvent e(boxX, boxY,							// position
-							 mod,									// mods
-							 this,									// originator comp
-							 Time::getCurrentTime(),				// event time
-							 mouseDownX, mouseDownY,				// mouse down pos
-							 mouseDownTime,							// mouse down time
-							 mouseIsDown ? 1 : 0,					// numclicks
-							 mouseIsDown && lastMouseIsDown);	    // mousewasdragged
-				
-				if(mouseIsInEditor == false) {
-					mouseIsInEditor = true;
-					editorComp->mouseEnter(e);
-				}
-				else if(boxX != lastBoxX || boxY != lastBoxY)
-					editorComp->mouseMove(e);
-				
-				if(mouseIsDown == true && lastMouseIsDown == false)
-					editorComp->mouseDown(e);
-				else if(mouseIsDown == false && lastMouseIsDown == true)
-					editorComp->mouseUp(e);
-				
-				
-			}
-			else if(mouseIsInEditor == true) {
-				MouseEvent e(boxX, boxY,							// position
-							 mod,									// mods
-							 this,									// originator comp
-							 Time::getCurrentTime(),				// event time
-							 mouseDownX, mouseDownY,				// mouse down pos
-							 mouseDownTime,							// mouse down time
-							 mouseIsDown ? 1 : 0,					// numclicks, mousewasdragged
-							 mouseIsDown && lastMouseIsDown);
-				
-				editorComp->mouseExit(e);
-				mouseIsInEditor = false;
-			}
-			
-			lastBoxX = boxX;
-			lastBoxY = boxY;
-			lastMouseIsDown = mouseIsDown;
 		}
+		else {
+			setVisible(false);
+		}
+	}
+	
+	void calcAndSetBounds()
+	{
+		int windowX = ref->ob.b_patcher->p_wind->w_x1,
+		windowY = ref->ob.b_patcher->p_wind->w_y1,
+		windowR = ref->ob.b_patcher->p_wind->w_x2 - SBARWIDTH,
+		windowB = ref->ob.b_patcher->p_wind->w_y2 - SBARWIDTH;
+		
+		int boxX = ref->ob.b_rect.left + windowX,
+			boxY = ref->ob.b_rect.top + windowY,
+			boxR = ref->ob.b_rect.right + windowX,
+			boxB = ref->ob.b_rect.bottom + windowY;
+		
+		post("window XYRB %d %d %d %d", windowX, windowY, windowR, windowB);
+		post("box XYRB %d %d %d %d", boxX, boxY, boxR, boxB);
+		
+		int clipW = jmin(boxR, windowR) - boxX;
+		int clipH = jmin(boxB, windowB) - boxY;
+		
+		// need to control the peer and just the X Y pos of the editorComp
+		
+		editorComp->setBounds (0, 0, getWidth(), getHeight());
+		setBounds(boxX, boxY, clipW, clipH);
 		
 	}
-
+	
 	void resized()
 	{
-		if (getNumChildComponents() > 0)
-			getChildComponent (0)->setBounds (0, 0, getWidth(), getHeight());
+		//if (getNumChildComponents() > 0)
+		//	getChildComponent (0)->setBounds (0, 0, getWidth(), getHeight());
+		
+		// do the clipping by manipulating these two rects...
+		
+		
 	}
 
 	void paint (Graphics& g)
@@ -164,19 +138,15 @@ public:
 		post("EditorComponentHolder::paint");
 	}
 	
-	void mouseDown(const MouseEvent& e)
-	{
-		post("EditorComponentHolder::mousedown %d, %d", e.x, e.y);
-	}
+	
+//	void mouseDown(const MouseEvent& e)
+//	{
+//		post("EditorComponentHolder::mousedown %d, %d", e.x, e.y);
+//	}
 	
 private:	
-	t_box* ref;
+	t_jucebox* ref;
 	Component* editorComp;
-	bool mouseIsInEditor;
-	int lastBoxX, lastBoxY;
-	bool lastMouseIsDown;
-	int mouseDownX, mouseDownY;
-	Time mouseDownTime;
 };
 
 class EditorComponent : public Component
@@ -203,61 +173,39 @@ public:
 		g.fillAll (Colour::greyLevel (0.9f));
     }
 	
-	void mouseEnter(const MouseEvent& e)
-	{
-		post("EditorComponent::mouseEnter %d, %d", e.x, e.y);
-	}
-	
-	void mouseExit(const MouseEvent& e)
-	{
-		post("EditorComponent::mouseExit %d, %d", e.x, e.y);
-	}
-	
-	void mouseDown(const MouseEvent& e)
-	{
-		post("EditorComponent::mouseDown %d, %d", e.x, e.y);
-	}
-	
-	void mouseUp(const MouseEvent& e)
-	{
-		post("EditorComponent::mouseUp %d, %d", e.x, e.y);
-	}
-	
-	void mouseMove(const MouseEvent& e)
-	{
-		post("EditorComponent::mouseMove %d, %d", e.x, e.y);
-	}
+//	void mouseEnter(const MouseEvent& e)
+//	{
+//		post("EditorComponent::mouseEnter %d, %d", e.x, e.y);
+//	}
+//	
+//	void mouseExit(const MouseEvent& e)
+//	{
+//		post("EditorComponent::mouseExit %d, %d", e.x, e.y);
+//	}
+//	
+//	void mouseDown(const MouseEvent& e)
+//	{
+//		post("EditorComponent::mouseDown %d, %d", e.x, e.y);
+//	}
+//	
+//	void mouseUp(const MouseEvent& e)
+//	{
+//		post("EditorComponent::mouseUp %d, %d", e.x, e.y);
+//	}
+//	
+//	void mouseMove(const MouseEvent& e)
+//	{
+//		post("EditorComponent::mouseMove %d, %d", e.x, e.y);
+//	}
 	
 private:
 	Slider* slider;
 	ResizableCornerComponent* resizer;
 };
 
-typedef struct _jucebox
-{
-	t_box		ob;
-	void		*obex;
-	void		*qelem;	
-	Rect 		rect;
-	
-	EditorComponent* juceEditorComp;
-	EditorComponentHolder* juceWindowComp;
-	HIViewRef hiRoot;
-	
-} t_jucebox;
 
-static t_class *jucebox_class;
-void *jucebox_new(t_symbol *s, short ac, t_atom *av);
-void jucebox_addjucecomponents(t_jucebox* x);
-void jucebox_back(t_jucebox* x);
-void jucebox_forward(t_jucebox* x);
-void *jucebox_menu(void *p, long x, long y, long font);
-void jucebox_psave(t_jucebox *x, void *w);
-void jucebox_free(t_jucebox* x);
-void jucebox_deleteui(t_jucebox *x);
-void jucebox_click(t_jucebox *x, MaxMSPPoint pt, short modifiers);
-void jucebox_update(t_jucebox* x);
-void jucebox_qfn(t_jucebox* x);
+
+
 
 
 int main()
@@ -305,7 +253,7 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 		width = CLIP(width, MINWIDTH, MAXWIDTH); 		// constrain to min and max size
 		height = CLIP(height, MINHEIGHT, MAXHEIGHT);	// constrain to min and max size
 
-		flags = F_DRAWFIRSTIN | F_NODRAWBOX | F_GROWBOTH | F_DRAWINLAST | F_TRANSPARENT;// |	F_SAVVY ;
+		flags = F_DRAWFIRSTIN | F_NODRAWBOX | F_GROWBOTH | F_DRAWINLAST | F_SAVVY ;
 
 		// now actually initialize the t_box structure
 		box_new((t_box *)x, (t_patcher *)patcher, flags, x_coord, y_coord, x_coord + width, y_coord + height);
@@ -349,20 +297,33 @@ void jucebox_addjucecomponents(t_jucebox* x)
 	x->juceEditorComp->setOpaque (true);
 	x->juceEditorComp->setVisible (true);
 	
-	x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, (t_box*)x);
-	x->juceWindowComp->setBounds(x_coord, y_coord + WINDOWTITLEBARHEIGHT, w, h);
+	x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, x);	
+//	x->juceWindowComp->setBounds(x_coord + x->ob.b_patcher->p_wind->w_x1, 
+//								 y_coord + x->ob.b_patcher->p_wind->w_y1, 
+//								 w, h);
+		
+	x->juceWindowComp->calcAndSetBounds();
 	
 	// Mac only here...
 	HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
-		
-	x->juceWindowComp->addToDesktop(ComponentPeer::windowRepaintedExplictly, (void*)hiRoot);	
-	
-	//HIViewRef bottomView = HIViewGetLastSubview(hiRoot);
-	//HIViewRef topView = HIViewGetFirstSubview(hiRoot);
+			
+	x->juceWindowComp->addToDesktop(0);//, (void*)hiRoot);
 
-	//HIViewSetZOrder((HIViewRef)x->juceWindowComp->getPeer()->getNativeView(), kHIViewZOrderBelow, topView);
-	
 	x->hiRoot = hiRoot;
+}
+
+void jucebox_updatezorder(t_jucebox* x)
+{
+	post("jucebox_updatezorder");
+	
+//	HIViewSetZOrder((HIViewRef)x->juceWindowComp->getPeer()->getNativeHandle(), 
+//					kHIViewZOrderAbove, 
+//					(HIViewRef)wind_syswind(x->ob.b_patcher->p_wind));
+	
+	SendBehind((WindowRef)wind_syswind(x->ob.b_patcher->p_wind),
+			   (WindowRef)x->juceWindowComp->getPeer()->getNativeHandle());
+	
+	//SetUserFocusWindow((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
 }
 
 void jucebox_back(t_jucebox* x)
@@ -370,7 +331,7 @@ void jucebox_back(t_jucebox* x)
 	post("jucebox_back");
 	
 	HIViewRef nextView = HIViewGetNextView(x->hiRoot);
-	HIViewSetZOrder((HIViewRef)x->juceWindowComp->getPeer()->getNativeView(), kHIViewZOrderBelow, nextView);
+	HIViewSetZOrder((HIViewRef)x->juceWindowComp->getPeer()->getNativeHandle(), kHIViewZOrderBelow, nextView);
 	
 }
 
@@ -380,7 +341,7 @@ void jucebox_forward(t_jucebox* x)
 	post("jucebox_forward");
 	
 	HIViewRef prevView = HIViewGetPreviousView(x->hiRoot);
-	HIViewSetZOrder((HIViewRef)x->juceWindowComp->getPeer()->getNativeView(), kHIViewZOrderAbove, prevView);
+	HIViewSetZOrder((HIViewRef)x->juceWindowComp->getPeer()->getNativeHandle(), kHIViewZOrderAbove, prevView);
 	
 }
 
@@ -460,20 +421,21 @@ void jucebox_update(t_jucebox* x)
 		box_size(&x->ob, width_new, height_new);	// this function actually resizes out t_box structure
 		x->rect = x->ob.b_rect;
 	}
-	
-	GrafPtr	gp = patcher_setport(x->ob.b_patcher);
-	
-	if(!x->juceWindowComp) jucebox_addjucecomponents(x);
-	
-	x->juceWindowComp->setBounds(0xffff, 0xffff, width_new, height_new);
-	x->juceWindowComp->setBounds(x->ob.b_rect.left, x->ob.b_rect.top + WINDOWTITLEBARHEIGHT, width_new, height_new);
-//	x->juceWindowComp->resized();
-//	x->juceWindowComp->repaint();
-	x->juceWindowComp->repaint();
-	x->juceWindowComp->getPeer()->repaint(0, 0, 0xffff, 0xffff);
-	x->juceWindowComp->getPeer()->performAnyPendingRepaintsNow();
-	
-    patcher_restoreport(gp); 
+		
+	if(box_ownerlocked((t_box*)x)) {
+		if(!x->juceWindowComp) jucebox_addjucecomponents(x);
+		
+//		x->juceWindowComp->setBounds(x->ob.b_rect.left + x->ob.b_patcher->p_wind->w_x1, 
+//									 x->ob.b_rect.top + x->ob.b_patcher->p_wind->w_y1, 
+//									 width_new, height_new);
+		
+		x->juceWindowComp->calcAndSetBounds();
+	}
+	else {
+		GrafPtr	gp = patcher_setport(x->ob.b_patcher);
+		// could display some dummy text in unlocked mode
+		patcher_restoreport(gp); 
+	}
 	
 }
 
