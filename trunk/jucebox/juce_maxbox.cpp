@@ -1,7 +1,16 @@
 #include "../../../juce_code/juce/juce.h"
 #include "ext.h"
 #include "ext_common.h"
+#include "commonsyms.h"      // Common symbols used by the Max 4.5 API
 #include "ext_obex.h"
+
+// Point conflicts with the Juce::Point, perhaps use a namespace for this
+struct MaxMSPPoint {
+	short               v;
+	short               h;
+};
+typedef struct MaxMSPPoint	MaxMSPPoint;
+typedef MaxMSPPoint *		MaxMSPPointPtr;
 
 #define RES_ID			10120
 #define MAXWIDTH 		1024L	
@@ -33,13 +42,18 @@
  
  */
 
-class EditorComponentHolder  : public Component
+class EditorComponentHolder  :	public Component,
+								public Timer
 {
 public:
-    EditorComponentHolder (Component* const editorComp, t_box* x)
-	: ref(x)
+    EditorComponentHolder (Component* const editorComp_, t_box* x)
+		:	ref(x),
+			mouseIsInEditor(false),
+			lastBoxX(0xffff),
+			lastBoxY(0xffff),
+			lastMouseIsDown(false)
 	{
-        addAndMakeVisible (editorComp);
+        addAndMakeVisible (editorComp_);
         setOpaque (true);
         setVisible (true);
         setBroughtToFrontOnMouseClick (true);
@@ -47,10 +61,96 @@ public:
 //#if ! JucePlugin_EditorRequiresKeyboardFocus
         setWantsKeyboardFocus (false);
 //#endif
+		
+		editorComp = editorComp_;
+		startTimer(250);
 	}
 
 	~EditorComponentHolder()
 	{
+		stopTimer();
+	}
+	
+	void timerCallback()
+    {
+		//post("EditorComponentHolder::timerCallback %p", this);
+		
+		if (editorComp != 0)
+        {
+            int screenX, screenY;
+            Desktop::getInstance().getMousePosition (screenX, screenY);
+			
+			//post("EditorComponentHolder::timerCallback screenmouse x=%d y=%d", screenX, screenY);
+			
+			int windowX = screenX - ref->b_patcher->p_wind->w_x1, 
+				windowY = screenY - ref->b_patcher->p_wind->w_y1;
+			
+			//post("EditorComponentHolder::timerCallback windowmouse x=%d y=%d", windowX, windowY);
+			
+			int boxX = windowX - ref->b_rect.left,
+				boxY = windowY - ref->b_rect.top;
+			
+			//post("EditorComponentHolder::timerCallback boxmouse x=%d y=%d", boxX, boxY);
+			
+			int boxW = ref->b_rect.right - ref->b_rect.left,
+				boxH = ref->b_rect.bottom - ref->b_rect.top;
+			
+			const ModifierKeys mod = ModifierKeys::getCurrentModifiersRealtime();
+			bool mouseIsDown = mod.isAnyMouseButtonDown();
+			
+			post("mouseIsDown = %d", mouseIsDown);
+			
+			if(mouseIsDown == false) {
+				mouseDownX = boxX;
+				mouseDownY = boxY;
+				mouseDownTime = Time::getCurrentTime();
+			}
+			
+			if(boxX >= 0 && boxX < boxW && boxY >= 0 && boxY < boxH) {
+				//post("EditorComponentHolder MOUSE IN BOX");
+				
+				MouseEvent e(boxX, boxY,							// position
+							 mod,									// mods
+							 this,									// originator comp
+							 Time::getCurrentTime(),				// event time
+							 mouseDownX, mouseDownY,				// mouse down pos
+							 mouseDownTime,							// mouse down time
+							 mouseIsDown ? 1 : 0,					// numclicks
+							 mouseIsDown && lastMouseIsDown);	    // mousewasdragged
+				
+				if(mouseIsInEditor == false) {
+					mouseIsInEditor = true;
+					editorComp->mouseEnter(e);
+				}
+				else if(boxX != lastBoxX || boxY != lastBoxY)
+					editorComp->mouseMove(e);
+				
+				if(mouseIsDown == true && lastMouseIsDown == false)
+					editorComp->mouseDown(e);
+				else if(mouseIsDown == false && lastMouseIsDown == true)
+					editorComp->mouseUp(e);
+				
+				
+			}
+			else if(mouseIsInEditor == true) {
+				MouseEvent e(boxX, boxY,							// position
+							 mod,									// mods
+							 this,									// originator comp
+							 Time::getCurrentTime(),				// event time
+							 mouseDownX, mouseDownY,				// mouse down pos
+							 mouseDownTime,							// mouse down time
+							 mouseIsDown ? 1 : 0,					// numclicks, mousewasdragged
+							 mouseIsDown && lastMouseIsDown);
+				
+				editorComp->mouseExit(e);
+				mouseIsInEditor = false;
+			}
+			
+			lastBoxX = boxX;
+			lastBoxY = boxY;
+			lastMouseIsDown = mouseIsDown;
+		}
+		
 	}
 
 	void resized()
@@ -71,6 +171,12 @@ public:
 	
 private:	
 	t_box* ref;
+	Component* editorComp;
+	bool mouseIsInEditor;
+	int lastBoxX, lastBoxY;
+	bool lastMouseIsDown;
+	int mouseDownX, mouseDownY;
+	Time mouseDownTime;
 };
 
 class EditorComponent : public Component
@@ -112,6 +218,16 @@ public:
 		post("EditorComponent::mouseDown %d, %d", e.x, e.y);
 	}
 	
+	void mouseUp(const MouseEvent& e)
+	{
+		post("EditorComponent::mouseUp %d, %d", e.x, e.y);
+	}
+	
+	void mouseMove(const MouseEvent& e)
+	{
+		post("EditorComponent::mouseMove %d, %d", e.x, e.y);
+	}
+	
 private:
 	Slider* slider;
 	ResizableCornerComponent* resizer;
@@ -126,31 +242,42 @@ typedef struct _jucebox
 	
 	EditorComponent* juceEditorComp;
 	EditorComponentHolder* juceWindowComp;
+	HIViewRef hiRoot;
 	
 } t_jucebox;
 
 static t_class *jucebox_class;
 void *jucebox_new(t_symbol *s, short ac, t_atom *av);
 void jucebox_addjucecomponents(t_jucebox* x);
+void jucebox_back(t_jucebox* x);
+void jucebox_forward(t_jucebox* x);
 void *jucebox_menu(void *p, long x, long y, long font);
 void jucebox_psave(t_jucebox *x, void *w);
 void jucebox_free(t_jucebox* x);
+void jucebox_deleteui(t_jucebox *x);
+void jucebox_click(t_jucebox *x, MaxMSPPoint pt, short modifiers);
 void jucebox_update(t_jucebox* x);
 void jucebox_qfn(t_jucebox* x);
+
 
 int main()
 {	
 	initialiseJuce_GUI();
-	
+
 	long attrflags = 0;
 	t_class *c;
 	t_object *attr;
+	
+	common_symbols_init();
 		
 	c = class_new("juce_maxbox",(method)jucebox_new, (method)jucebox_free, (short)sizeof(t_jucebox), (method)jucebox_menu, A_GIMME, 0);
 	class_obexoffset_set(c, calcoffset(t_jucebox, obex));
 	
 	class_addmethod(c, (method)jucebox_psave,		"psave",		A_CANT, 0L);
+	class_addmethod(c, (method)jucebox_click,		"click",		A_CANT, 0L);
 	class_addmethod(c, (method)jucebox_update,		"update",		A_CANT, 0L);
+	class_addmethod(c, (method)jucebox_back,		"back",			0L);
+	class_addmethod(c, (method)jucebox_forward,		"forward",		0L);
 		
 	class_register(CLASS_BOX, c);
 	jucebox_class = c;	
@@ -178,14 +305,16 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 		width = CLIP(width, MINWIDTH, MAXWIDTH); 		// constrain to min and max size
 		height = CLIP(height, MINHEIGHT, MAXHEIGHT);	// constrain to min and max size
 
-		flags = F_DRAWFIRSTIN | F_NODRAWBOX | F_GROWBOTH | F_DRAWINLAST | F_SAVVY;
+		flags = F_DRAWFIRSTIN | F_NODRAWBOX | F_GROWBOTH | F_DRAWINLAST | F_TRANSPARENT;// |	F_SAVVY ;
 
 		// now actually initialize the t_box structure
 		box_new((t_box *)x, (t_patcher *)patcher, flags, x_coord, y_coord, x_coord + width, y_coord + height);
 
 		// Reassign the box's firstin field to point to our new object
 		x->ob.b_firstin = (void *)x;
-
+		
+		object_obex_store((void *)x, _sym_dumpout, (t_object *)outlet_new(x,NULL));
+		
 		// Cache rect for comparisons when the user decides to re-size the object
 		x->rect = x->ob.b_rect;
 
@@ -193,6 +322,7 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 		x->qelem = qelem_new(x, (method)jucebox_qfn);
 		
 		x->juceWindowComp = 0L;
+		x->juceEditorComp = 0L;
 		
 		// Finish it up...
 		box_ready((t_box *)x);
@@ -226,8 +356,33 @@ void jucebox_addjucecomponents(t_jucebox* x)
 	HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->ob.b_patcher->p_wind));
 		
 	x->juceWindowComp->addToDesktop(ComponentPeer::windowRepaintedExplictly, (void*)hiRoot);	
+	
+	//HIViewRef bottomView = HIViewGetLastSubview(hiRoot);
+	//HIViewRef topView = HIViewGetFirstSubview(hiRoot);
+
+	//HIViewSetZOrder((HIViewRef)x->juceWindowComp->getPeer()->getNativeView(), kHIViewZOrderBelow, topView);
+	
+	x->hiRoot = hiRoot;
 }
 
+void jucebox_back(t_jucebox* x)
+{
+	post("jucebox_back");
+	
+	HIViewRef nextView = HIViewGetNextView(x->hiRoot);
+	HIViewSetZOrder((HIViewRef)x->juceWindowComp->getPeer()->getNativeView(), kHIViewZOrderBelow, nextView);
+	
+}
+
+
+void jucebox_forward(t_jucebox* x)
+{
+	post("jucebox_forward");
+	
+	HIViewRef prevView = HIViewGetPreviousView(x->hiRoot);
+	HIViewSetZOrder((HIViewRef)x->juceWindowComp->getPeer()->getNativeView(), kHIViewZOrderAbove, prevView);
+	
+}
 
 void *jucebox_menu(void *p, long x, long y, long font)
 {
@@ -265,10 +420,27 @@ void jucebox_psave(t_jucebox *x, void *w)
 
 void jucebox_free(t_jucebox* x)
 {
-	// must delete the juce ui...!
+	jucebox_deleteui(x);
 	
 	qelem_free(x->qelem);				// delete our qelem
 	box_free((t_box *)x);				// free the ui box
+}
+
+void jucebox_deleteui(t_jucebox *x)
+{
+	PopupMenu::dismissAllActiveMenus();
+	
+	// there's some kind of component currently modal, but the host
+	// is trying to delete our plugin..
+	//	jassert (Component::getCurrentlyModalComponent() == 0);
+		
+	if(x->juceEditorComp) deleteAndZero (x->juceEditorComp);
+	if(x->juceWindowComp) deleteAndZero (x->juceWindowComp);
+}
+
+void jucebox_click(t_jucebox *x, MaxMSPPoint pt, short modifiers)
+{
+	post("jucebox_click x=%d y=%d", pt.h, pt.v);
 }
 
 void jucebox_update(t_jucebox* x)
