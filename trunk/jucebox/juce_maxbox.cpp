@@ -59,7 +59,7 @@ public:
 		addAndMakeVisible (editorComp_);
         setOpaque (true);
         setVisible (true);
-        setBroughtToFrontOnMouseClick (true);
+        //setBroughtToFrontOnMouseClick (true);
 		
 //#if ! JucePlugin_EditorRequiresKeyboardFocus
         setWantsKeyboardFocus (false);
@@ -86,7 +86,7 @@ public:
 			
 			
 			
-			//calcAndSetBounds();
+			calcAndSetBounds();
 			
 			//jucebox_updatezorder(ref);
 			
@@ -112,28 +112,16 @@ public:
 		
 		Rectangle windowRect(windowX, windowY, windowR-windowX, windowB-windowY);
 		Rectangle boxRect(boxX, boxY, boxR-boxX, boxB-boxY);
-		
-		
-		
-		post("window XYRB %d %d %d %d", windowX, windowY, windowR, windowB);
-		post("box XYRB %d %d %d %d", boxX, boxY, boxR, boxB);
-		
-//		int clipX = jmax(boxX, windowX);
-//		int clipY = jmax(boxY, windowY);
-//		int clipW = jmin(boxR, windowR) - boxX;
-//		int clipH = jmin(boxB, windowB) - boxY;
-//		
+				
+//		post("window XYRB %d %d %d %d", windowX, windowY, windowR, windowB);
+//		post("box XYRB %d %d %d %d", boxX, boxY, boxR, boxB);
+
 		int offsetX = boxX >= windowX ? 0 : boxX-windowX;
 		int offsetY = boxY >= windowY ? 0 : boxY-windowY;
-		
-		// need to control the peer and just the X Y pos of the editorComp
-		
-//		editorComp->setBounds (offsetX, offsetY, getWidth(), getHeight());
-//		setBounds(clipX, clipY, clipW, clipH);
-		
+				
 		Rectangle sectRect = windowRect.getIntersection(boxRect);
 		
-		editorComp->setTopLeftPosition(offsetX, offsetY);
+		editorComp->setBounds(offsetX, offsetY, boxR-boxX, boxB-boxY);
 		setBounds(sectRect);
 		
 		
@@ -151,7 +139,7 @@ public:
 
 	void paint (Graphics& g)
 	{
-		post("EditorComponentHolder::paint");
+		//post("EditorComponentHolder::paint");
 	}
 	
 	
@@ -450,6 +438,27 @@ void jucebox_update(t_jucebox* x)
 	else {
 		GrafPtr	gp = patcher_setport(x->ob.b_patcher);
 		// could display some dummy text in unlocked mode
+			
+			RGBColor ggryrgb = {32767, 32767, 32767};
+			RGBColor oldBackColor;
+			
+			GetBackColor(&oldBackColor);
+			RGBBackColor(&ggryrgb);
+			
+			EraseRect(&x->ob.b_rect);
+			
+			MoveTo(x->ob.b_rect.left + 4, x->ob.b_rect.bottom - 4); 
+			TextFont(0); 
+			TextSize(12); 
+			
+			String text;
+			
+			text << "juce_box";
+			
+			DrawText((char*)(const char*)text, 0, text.length());
+			
+			RGBBackColor(&oldBackColor);
+			
 		patcher_restoreport(gp); 
 	}
 	

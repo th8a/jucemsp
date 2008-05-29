@@ -190,6 +190,86 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
+				<string>A8C53F0C0DEE9D370025EB05</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>max.c</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>A8C53F0D0DEE9D370025EB05</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>max.c</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>A8C53F5B0DEEA0E20025EB05</string>
+						<key>history</key>
+						<array>
+							<string>A8C53F0E0DEE9D370025EB05</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {943, 774}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>15 58 943 815 0 0 1440 878 </string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>A8C53F120DEE9D370025EB05</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>commonsyms.h</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>A8C53F130DEE9D370025EB05</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>commonsyms.h</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>A8C53F5C0DEEA0E20025EB05</string>
+						<key>history</key>
+						<array>
+							<string>A8C53EFC0DEE9C7D0025EB05</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {943, 774}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>15 58 943 815 0 0 1440 878 </string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
 				<string>A8C53EA00DEE8D540025EB05</string>
 				<key>PBXProjectModuleLabel</key>
 				<string>ext_maxtypes.h</string>
@@ -204,7 +284,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>A8C53EEF0DEE98F70025EB05</string>
+						<string>A8C53F5D0DEEA0E20025EB05</string>
 						<key>history</key>
 						<array>
 							<string>A8C53EB40DEE91390025EB05</string>
@@ -363,7 +443,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>A8C53EEE0DEE98F70025EB05</string>
+										<string>A8C53F5A0DEEA0E20025EB05</string>
 										<key>history</key>
 										<array>
 											<string>A80F10970D53C63C00A3FA79</string>
@@ -386,7 +466,10 @@
 											<string>A8C53E4B0DEE31B60025EB05</string>
 											<string>A8C53E890DEE88240025EB05</string>
 											<string>A8C53EAF0DEE91390025EB05</string>
-											<string>A8C53EB00DEE91390025EB05</string>
+											<string>A8C53F000DEE9D370025EB05</string>
+											<string>A8C53F020DEE9D370025EB05</string>
+											<string>A8C53F3C0DEE9F880025EB05</string>
+											<string>A8C53F2D0DEE9F750025EB05</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -423,6 +506,12 @@
 											<string>A8C53E8C0DEE88240025EB05</string>
 											<string>A8C53EB10DEE91390025EB05</string>
 											<string>A8C53EB20DEE91390025EB05</string>
+											<string>A8C53F050DEE9D370025EB05</string>
+											<string>A8C53F060DEE9D370025EB05</string>
+											<string>A8C53F080DEE9D370025EB05</string>
+											<string>A8C53F090DEE9D370025EB05</string>
+											<string>A8C53F300DEE9F750025EB05</string>
+											<string>A8C53F3D0DEE9F880025EB05</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -618,8 +707,10 @@
 	<array>
 		<string>A857F62F0D2C0FBC004DDB2C</string>
 		<string>A8C53EA00DEE8D540025EB05</string>
-		<string>/Users/martinrobinson/development/maxmsp/my projects/juce_maxbox/juce_maxbox.xcodeproj</string>
 		<string>1C0AD2B3069F1EA900FABCE6</string>
+		<string>A8C53F120DEE9D370025EB05</string>
+		<string>A8C53F0C0DEE9D370025EB05</string>
+		<string>/Users/martinrobinson/development/maxmsp/my projects/juce_maxbox/juce_maxbox.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>175 52 1132 794 0 0 1440 878 </string>
@@ -645,7 +736,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>juce_maxbox.cpp</string>
+								<string>QuickdrawText.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
