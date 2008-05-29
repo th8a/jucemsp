@@ -204,7 +204,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>A8C53ED60DEE95370025EB05</string>
+						<string>A8C53EEF0DEE98F70025EB05</string>
 						<key>history</key>
 						<array>
 							<string>A8C53EB40DEE91390025EB05</string>
@@ -363,7 +363,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>A8C53ED50DEE95370025EB05</string>
+										<string>A8C53EEE0DEE98F70025EB05</string>
 										<key>history</key>
 										<array>
 											<string>A80F10970D53C63C00A3FA79</string>
@@ -434,14 +434,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {839, 572}}</string>
+								<string>{{0, 0}, {839, 748}}</string>
 								<key>RubberWindowFrame</key>
 								<string>175 52 1132 794 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>572pt</string>
+							<string>748pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -454,14 +454,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 577}, {839, 176}}</string>
+								<string>{{0, 753}, {839, 0}}</string>
 								<key>RubberWindowFrame</key>
 								<string>175 52 1132 794 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>176pt</string>
+							<string>0pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -617,9 +617,9 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>A857F62F0D2C0FBC004DDB2C</string>
-		<string>1C0AD2B3069F1EA900FABCE6</string>
 		<string>A8C53EA00DEE8D540025EB05</string>
 		<string>/Users/martinrobinson/development/maxmsp/my projects/juce_maxbox/juce_maxbox.xcodeproj</string>
+		<string>1C0AD2B3069F1EA900FABCE6</string>
 	</array>
 	<key>WindowString</key>
 	<string>175 52 1132 794 0 0 1440 878 </string>
@@ -1067,7 +1067,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C0AD2B3069F1EA900FABCE6</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

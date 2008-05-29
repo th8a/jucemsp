@@ -86,7 +86,7 @@ public:
 			
 			
 			
-			calcAndSetBounds();
+			//calcAndSetBounds();
 			
 			//jucebox_updatezorder(ref);
 			
@@ -110,16 +110,32 @@ public:
 			boxR = ref->ob.b_rect.right + windowX,
 			boxB = ref->ob.b_rect.bottom + windowY;
 		
+		Rectangle windowRect(windowX, windowY, windowR-windowX, windowB-windowY);
+		Rectangle boxRect(boxX, boxY, boxR-boxX, boxB-boxY);
+		
+		
+		
 		post("window XYRB %d %d %d %d", windowX, windowY, windowR, windowB);
 		post("box XYRB %d %d %d %d", boxX, boxY, boxR, boxB);
 		
-		int clipW = jmin(boxR, windowR) - boxX;
-		int clipH = jmin(boxB, windowB) - boxY;
+//		int clipX = jmax(boxX, windowX);
+//		int clipY = jmax(boxY, windowY);
+//		int clipW = jmin(boxR, windowR) - boxX;
+//		int clipH = jmin(boxB, windowB) - boxY;
+//		
+		int offsetX = boxX >= windowX ? 0 : boxX-windowX;
+		int offsetY = boxY >= windowY ? 0 : boxY-windowY;
 		
 		// need to control the peer and just the X Y pos of the editorComp
 		
-		editorComp->setBounds (0, 0, getWidth(), getHeight());
-		setBounds(boxX, boxY, clipW, clipH);
+//		editorComp->setBounds (offsetX, offsetY, getWidth(), getHeight());
+//		setBounds(clipX, clipY, clipW, clipH);
+		
+		Rectangle sectRect = windowRect.getIntersection(boxRect);
+		
+		editorComp->setTopLeftPosition(offsetX, offsetY);
+		setBounds(sectRect);
+		
 		
 	}
 	
