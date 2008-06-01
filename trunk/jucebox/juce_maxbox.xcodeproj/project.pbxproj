@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F5B62030919440900A62EB9 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5B62020919440900A62EB9 /* MaxAPI.framework */; };
-		8D01CCCC0486CAD60068D4B7 /* juce_maxbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */; settings = {ATTRIBUTES = (); }; };
+		8D01CCCC0486CAD60068D4B7 /* juce_maxboxwindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB77B2FE8417CDC02AAC07 /* juce_maxboxwindow.cpp */; settings = {ATTRIBUTES = (); }; };
 		8D01CCCE0486CAD60068D4B7 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
 		A80FD79E0DE2E06800AE5B01 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80FD79D0DE2E06800AE5B01 /* CoreMIDI.framework */; };
 		A80FD7A80DE2E07300AE5B01 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80FD7A70DE2E07300AE5B01 /* CoreServices.framework */; };
@@ -36,7 +36,7 @@
 
 /* Begin PBXFileReference section */
 		08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
-		08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = juce_maxbox.cpp; sourceTree = "<group>"; };
+		08FB77B2FE8417CDC02AAC07 /* juce_maxboxwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = juce_maxboxwindow.cpp; sourceTree = "<group>"; };
 		0F5B62020919440900A62EB9 /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = /Library/Frameworks/MaxAPI.framework; sourceTree = "<absolute>"; };
 		8D01CCD20486CAD60068D4B7 /* juce_maxbox.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = juce_maxbox.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		A80FD7640DE2E05700AE5B01 /* Juce.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Juce.xcodeproj; path = ../../../juce_code/juce/build/macosx/Juce.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -115,7 +115,7 @@
 		08FB77ADFE841716C02AAC07 /* Juce MaxBox Wrapper Common */ = {
 			isa = PBXGroup;
 			children = (
-				08FB77B2FE8417CDC02AAC07 /* juce_maxbox.cpp */,
+				08FB77B2FE8417CDC02AAC07 /* juce_maxboxwindow.cpp */,
 				A8C53DCC0DEE1F230025EB05 /* commonsyms.c */,
 			);
 			name = "Juce MaxBox Wrapper Common";
@@ -236,7 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D01CCCC0486CAD60068D4B7 /* juce_maxbox.cpp in Sources */,
+				8D01CCCC0486CAD60068D4B7 /* juce_maxboxwindow.cpp in Sources */,
 				A8C53DCD0DEE1F230025EB05 /* commonsyms.c in Sources */,
 				A8C5407D0DEF4F940025EB05 /* MaxBoxComponent.cpp in Sources */,
 			);
