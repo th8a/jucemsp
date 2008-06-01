@@ -42,12 +42,16 @@ typedef struct _jucebox
 } t_jucebox;
 
 static t_class *jucebox_class;
-void jucebox_setupattrs(t_class *c, t_symbol* prefixSym, Component* comp);
+void jucebox_setupattrs(t_class *c, t_symbol* prefixSym, Component* comp, int *paramIndex);
 void *jucebox_new(t_symbol *s, short ac, t_atom *av);
 t_max_err jucebox_attr_get(t_jucebox *x, void *attr, long *argc, t_atom **argv); 
+t_max_err jucebox_attr_geteach(t_jucebox *x, Component* comp, t_symbol* attrName, t_symbol *prefixSym, int* paramIndex, long *ac, t_atom **av);
 t_max_err jucebox_attr_set(t_jucebox *x, void *attr, long argc, t_atom *argv); 
+t_max_err jucebox_attr_seteach(t_jucebox *x, Component* comp, t_symbol* attrName, t_symbol *prefixSym, int* paramIndex, long ac, t_atom *av);
 void jucebox_sliderchanged(t_jucebox* x, Slider *slider);
+t_max_err jucebox_sliderchangedeach(t_jucebox* x, Component* comp, Slider *changedSlider, t_symbol *prefixSym, int* paramIndex);
 void jucebox_addjucecomponents(t_jucebox* x);
+void jucebox_addjucecomponentseach(t_jucebox* x, Component *comp);
 void *jucebox_menu(void *p, long x, long y, long font);
 void jucebox_psave(t_jucebox *x, void *w);
 void jucebox_free(t_jucebox* x);
@@ -184,7 +188,8 @@ int main()
 	class_addmethod(c, (method)object_obex_quickref, "quickref",	A_CANT, 0);
 		
 	Component* tempComp = createMaxBoxComponent(); //new EditorComponent();
-	jucebox_setupattrs(c, gensym(""), tempComp);
+	int paramIndex = 0;
+	jucebox_setupattrs(c, gensym(""), tempComp, &paramIndex);
 	delete tempComp;
 	
 	class_register(CLASS_BOX, c);
@@ -192,7 +197,7 @@ int main()
 	return 0;
 }
 
-void jucebox_setupattrs(t_class *c, t_symbol* prefixSym, Component* comp)
+void jucebox_setupattrs(t_class *c, t_symbol* prefixSym, Component* comp, int *paramIndex)
 {
 	long attrflags = 0;
 	t_object *attr;
@@ -203,6 +208,8 @@ void jucebox_setupattrs(t_class *c, t_symbol* prefixSym, Component* comp)
 	
 	// plugin parameter attributes
 	for(int i = 0; i < comp->getNumChildComponents(); i++) {
+		(*paramIndex)++;
+		
 		Component* child = comp->getChildComponent(i);
 				
 		String childAttrName(prefix + child->getName().replaceCharacter (' ', '_')
@@ -211,11 +218,23 @@ void jucebox_setupattrs(t_class *c, t_symbol* prefixSym, Component* comp)
 		
 		//post("procssing attr: %s", (char*)(const char*)childAttrName);
 		
-		attr = attr_offset_new((char*)(const char*)childAttrName, 
-							   _sym_float32, attrflags,
-							   (method)jucebox_attr_get, (method)jucebox_attr_set, 
-							   calcoffset(t_jucebox, params) + sizeof(float) * i); 
-		class_addattr(c, attr);
+		Slider * slider = dynamic_cast <Slider*> (child);
+		
+		if(slider != 0) {
+			attr = attr_offset_new((char*)(const char*)childAttrName, 
+								   _sym_float32, attrflags,
+								   (method)jucebox_attr_get, (method)jucebox_attr_set, 
+								   calcoffset(t_jucebox, params) + sizeof(float) * (*paramIndex)); 
+			class_addattr(c, attr);
+			
+			post("procssing attr: %s index=%d", (char*)(const char*)childAttrName, *paramIndex);
+		}
+		
+		GroupComponent * group = dynamic_cast <GroupComponent*> (child);
+		
+		if(group != 0 && group->getNumChildComponents() > 0) {
+			jucebox_setupattrs(c, gensym((char*)(const char*)childAttrName), group, paramIndex);
+		}
 	}
 }
 
@@ -288,10 +307,21 @@ t_max_err jucebox_attr_get(t_jucebox *x, void *attr, long *ac, t_atom **av)
 	
 	t_symbol *attrName = (t_symbol*)object_method(attr, _sym_getname); 
 	
-	String prefix(String::empty);
+	int paramIndex = 0;
 	
-	for(int i = 0; i < x->juceEditorComp->getNumChildComponents(); i++) {
-		Component* child = x->juceEditorComp->getChildComponent(i);
+	return jucebox_attr_geteach(x, x->juceEditorComp, attrName, gensym(""), &paramIndex, ac, av);
+}
+
+t_max_err jucebox_attr_geteach(t_jucebox *x, Component* comp, t_symbol* attrName, t_symbol *prefixSym, int* paramIndex, long *ac, t_atom **av)
+{
+	String prefix(prefixSym->s_name);
+	if(prefix.isNotEmpty())
+		prefix << "_";
+	
+	for(int i = 0; i < comp->getNumChildComponents(); i++) {
+		(*paramIndex)++;
+		
+		Component* child = comp->getChildComponent(i);
 		
 		String childAttrName(prefix + child->getName().replaceCharacter (' ', '_')
 							 .replaceCharacter ('.', '_')
@@ -299,14 +329,30 @@ t_max_err jucebox_attr_get(t_jucebox *x, void *attr, long *ac, t_atom **av)
 		
 		t_symbol *paramName = gensym((char*)(const char*)childAttrName);
 		
+		post("jucebox_attr_geteach attrName=%s paramName=%s", attrName->s_name, paramName->s_name);
+		
 		if(attrName == paramName) {
-			atom_setfloat(*av, x->params[i]);
+			
+			post("getting attr: %s index=%d", (char*)(const char*)childAttrName, *paramIndex);
+			
+			atom_setfloat(*av, x->params[*paramIndex]);
 			return MAX_ERR_NONE;
 		}
 		
+		GroupComponent * group = dynamic_cast <GroupComponent*> (child);
+		
+		if(group != 0 && group->getNumChildComponents() > 0) {
+			t_max_err err = jucebox_attr_geteach(x, group, 
+												 attrName,
+												 gensym((char*)(const char*)childAttrName), 
+												 paramIndex, ac, av);
+			
+			if(err == MAX_ERR_NONE)
+				return MAX_ERR_NONE; // we found it
+		}
 	}
 	
-	return MAX_ERR_GENERIC; 
+	return MAX_ERR_GENERIC; // we didn't find it
 }
 
 
@@ -315,64 +361,117 @@ t_max_err jucebox_attr_set(t_jucebox *x, void *attr, long ac, t_atom *av)
 	if (ac && av) { 
 		t_symbol *attrName = (t_symbol*)object_method(attr, _sym_getname); 
 		
-		String prefix(String::empty);
+		int paramIndex = 0;
 		
-		for(int i = 0; i < x->juceEditorComp->getNumChildComponents(); i++) {
-			Slider* child = dynamic_cast <Slider*> (x->juceEditorComp->getChildComponent(i));
-			
-			if(child != 0) {
-				String childAttrName(prefix + child->getName().replaceCharacter (' ', '_')
-									 .replaceCharacter ('.', '_')
-									 .retainCharacters (T(VALIDCHARS)));
+		return jucebox_attr_seteach(x, x->juceEditorComp, attrName, gensym(""), &paramIndex, ac, av);
+	} 
+	
+	return MAX_ERR_GENERIC; 
+}
+
+t_max_err jucebox_attr_seteach(t_jucebox *x, Component* comp, t_symbol* attrName, t_symbol *prefixSym, int* paramIndex, long ac, t_atom *av)
+{
+	String prefix(prefixSym->s_name);
+	if(prefix.isNotEmpty())
+		prefix << "_";
+	
+	for(int i = 0; i < comp->getNumChildComponents(); i++) {
+		(*paramIndex)++;
+		
+		Component* child = comp->getChildComponent(i);
+		
+		String childAttrName(prefix + child->getName().replaceCharacter (' ', '_')
+							 .replaceCharacter ('.', '_')
+							 .retainCharacters (T(VALIDCHARS)));
+		
+		t_symbol *paramName = gensym((char*)(const char*)childAttrName);
+		
+		Slider* slider = dynamic_cast <Slider*> (child);
+		
+		if(slider != 0) {
+			if(attrName == paramName) {
+				post("setting attr: %s index=%d", (char*)(const char*)childAttrName, *paramIndex);
 				
-				t_symbol *paramName = gensym((char*)(const char*)childAttrName);
+				x->params[*paramIndex] = atom_getfloat(av);			
 				
-				if(attrName == paramName) {
-					x->params[i] = atom_getfloat(av);			
-					
-					child->setValue(x->params[i], false);
-					
-					if(child->getValue() != x->params[i])
-						x->params[i] = child->getValue();
-					
-					return MAX_ERR_NONE;
-				}
+				slider->setValue(x->params[*paramIndex], false);
+				
+				if(slider->getValue() != x->params[*paramIndex])
+					x->params[*paramIndex] = slider->getValue();
+								
+				return MAX_ERR_NONE;
 			}
-			
 		}
 		
-	} 
-	return MAX_ERR_GENERIC; 
+		GroupComponent * group = dynamic_cast <GroupComponent*> (child);
+		
+		if(group != 0 && group->getNumChildComponents() > 0) {
+			t_max_err err = jucebox_attr_seteach(x, group, attrName, paramName, paramIndex, ac, av);
+			
+			if(err == MAX_ERR_NONE)
+				return MAX_ERR_NONE;  // we found it
+		}
+	}
+	
+	return MAX_ERR_GENERIC; // we didn't find it
 }
 
 void jucebox_sliderchanged(t_jucebox* x, Slider *slider)
 {
-	String prefix(String::empty);
+	int paramIndex = 0;
+	jucebox_sliderchangedeach(x, x->juceEditorComp, slider, gensym(""), &paramIndex);
+}
+
+t_max_err jucebox_sliderchangedeach(t_jucebox* x, Component* comp, Slider *changedSlider, t_symbol *prefixSym, int* paramIndex)
+{
+	String prefix(prefixSym->s_name);
+	if(prefix.isNotEmpty())
+		prefix << "_";
 	
-	for(int i = 0; i < x->juceEditorComp->getNumChildComponents(); i++) {
-		Slider* child = dynamic_cast <Slider*> (x->juceEditorComp->getChildComponent(i));
+	for(int i = 0; i < comp->getNumChildComponents(); i++) {
+		(*paramIndex)++;
 		
-		if(child == slider) {
-			String childAttrName(prefix + child->getName().replaceCharacter (' ', '_')
-														  .replaceCharacter ('.', '_')
-														  .retainCharacters (T(VALIDCHARS)));
+		Component* child = comp->getChildComponent(i);
+		
+		String childAttrName(prefix + child->getName().replaceCharacter (' ', '_')
+							 .replaceCharacter ('.', '_')
+							 .retainCharacters (T(VALIDCHARS)));
+		
+		t_symbol *paramName = gensym((char*)(const char*)childAttrName);
+		
+		Slider* slider = dynamic_cast <Slider*> (child);
+		
+		if(changedSlider == slider) {
+			post("jucebox_sliderchanged %s index=%d", paramName->s_name, *paramIndex);
 			
-			t_symbol *paramName = gensym((char*)(const char*)childAttrName);
-			
-			//post("jucebox_sliderchanged %s", paramName->s_name);
-			
-			x->params[i] = child->getValue();
+			x->params[*paramIndex] = slider->getValue();
 			
 			//object_attr_getdump(x, paramName, 0, 0L); weird I get "der" from the outlet!
 			
 			t_atom atom;
-			atom_setfloat(&atom, x->params[i]);
+			atom_setfloat(&atom, x->params[*paramIndex]);
 			outlet_anything(x->dumpOut, paramName, 1, &atom);
 			
-			break;
+			return MAX_ERR_NONE;
+		}
+		
+		GroupComponent * group = dynamic_cast <GroupComponent*> (child);
+		
+		post("jucebox_sliderchangedeach group=%p", group);
+		
+		if(group != 0 && group->getNumChildComponents() > 0) {
+			
+			post("jucebox_sliderchangedeach in group");
+			
+			t_max_err err = jucebox_sliderchangedeach(x, group, changedSlider, paramName, paramIndex);
+			
+			if(err == MAX_ERR_NONE)
+				return MAX_ERR_NONE;  // we found it
 		}
 		
 	}
+	
+	return MAX_ERR_GENERIC; // we didn't find it
 }
 
 void jucebox_addjucecomponents(t_jucebox* x)
@@ -401,11 +500,24 @@ void jucebox_addjucecomponents(t_jucebox* x)
 
 	x->hiRoot = hiRoot;
 		
-	for(int i = 0; i < x->juceEditorComp->getNumChildComponents(); i++) {
-		Slider* child = dynamic_cast <Slider*> (x->juceEditorComp->getChildComponent(i));
+	jucebox_addjucecomponentseach(x, x->juceEditorComp);
+}
+
+void jucebox_addjucecomponentseach(t_jucebox* x, Component *comp)
+{
+	for(int i = 0; i < comp->getNumChildComponents(); i++) {
+		Component * child = comp->getChildComponent(i);
 		
-		if(child != 0)
-			child->addListener(x->juceWindowComp);
+		Slider* slider = dynamic_cast <Slider*> (child);
+		
+		if(slider != 0)
+			slider->addListener(x->juceWindowComp);
+		
+		GroupComponent * group = dynamic_cast <GroupComponent*> (child);
+				
+		if(group != 0 && group->getNumChildComponents() > 0) {
+			jucebox_addjucecomponentseach(x, group);
+		}
 	}
 }
 

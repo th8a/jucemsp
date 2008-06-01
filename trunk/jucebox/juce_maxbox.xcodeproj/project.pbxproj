@@ -159,9 +159,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8D01CCC60486CAD60068D4B7 /* maxobject */ = {
+		8D01CCC60486CAD60068D4B7 /* juce_maxbox */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0FF6670A096B494E00E9E0B4 /* Build configuration list for PBXNativeTarget "maxobject" */;
+			buildConfigurationList = 0FF6670A096B494E00E9E0B4 /* Build configuration list for PBXNativeTarget "juce_maxbox" */;
 			buildPhases = (
 				8D01CCC70486CAD60068D4B7 /* Headers */,
 				8D01CCC90486CAD60068D4B7 /* Resources */,
@@ -173,7 +173,7 @@
 			);
 			dependencies = (
 			);
-			name = maxobject;
+			name = juce_maxbox;
 			productInstallPath = "$(HOME)/Library/Bundles";
 			productName = MaxExternal;
 			productReference = 8D01CCD20486CAD60068D4B7 /* juce_maxbox.mxo */;
@@ -195,7 +195,7 @@
 				},
 			);
 			targets = (
-				8D01CCC60486CAD60068D4B7 /* maxobject */,
+				8D01CCC60486CAD60068D4B7 /* juce_maxbox */,
 			);
 		};
 /* End PBXProject section */
@@ -348,7 +348,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0FF6670A096B494E00E9E0B4 /* Build configuration list for PBXNativeTarget "maxobject" */ = {
+		0FF6670A096B494E00E9E0B4 /* Build configuration list for PBXNativeTarget "juce_maxbox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0FF6670B096B494E00E9E0B4 /* Debug */,
