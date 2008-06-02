@@ -417,7 +417,7 @@ void jucemsp_dblclick(t_jucemsp *x)
 { 
 	//post("jucemsp_dblclick");
 	
-	if(!x->windowIsVisible) {
+	if(!x->windowIsVisible && maxversion() < 0x0500) {
 		
 		wind_vis(x->window);
 		syswindow_hide(wind_syswind(x->window));
@@ -467,7 +467,7 @@ void jucemsp_invis(t_jucemsp *x)
 	//post("jucemsp_invis");
 	
 	x->windowIsVisible = false;
-	delete x->juceWindowComp; // do this?
+	deleteAndZero (x->juceWindowComp); // do this?
 }
 
 void jucemsp_assist(t_jucemsp *x, void *b, long inletOrOutlet, long inletOutletIndex, char *s)
@@ -540,10 +540,16 @@ void *jucemsp_new(t_symbol *s, long argc, t_atom *argv)
 		
 		x->juceEditorComp = 0L;
 		x->juceWindowComp = 0L;
-		x->window = wind_new (x, 50, 50, 150, 150, WCLOSE | WCOLOR); 
-		wind_settitle(x->window, x->name->s_name, 0);
+		x->window = 0L;
 		
-		x->windowIsVisible = false;
+		if(maxversion() < 0x0500) {
+			x->window = wind_new (x, 50, 50, 150, 150, WCLOSE | WCOLOR); 
+			wind_settitle(x->window, x->name->s_name, 0);
+			x->windowIsVisible = false;
+		}
+		else {
+			post("%s: GUI editor not yet supported in Max 5", x->name->s_name);
+		}
 	}
 	
 	return(x);								// return pointer to the new instance 
@@ -561,17 +567,20 @@ void jucemsp_deleteui(t_jucemsp *x)
 	if (x->juceEditorComp != 0) {
 		x->juceEditorComp->removeComponentListener(x->juceListener);
 		x->juceAudioProcessor->editorBeingDeleted (x->juceEditorComp);
+		deleteAndZero (x->juceEditorComp);
 	}
-	
-	deleteAndZero (x->juceEditorComp);
-	deleteAndZero (x->juceWindowComp);
+		
+	if(x->juceWindowComp != 0) 
+		deleteAndZero (x->juceWindowComp);
 }
 
 void jucemsp_free(t_jucemsp *x)
 {
 	dsp_free((t_pxobject*)x);
 	
-	wind_close(x->window);
+//	if(maxversion() < 0x0500) {
+//		wind_close(x->window);
+//	}
 	
 	x->juceAudioProcessor->removeListener(x->juceListener);
 	
@@ -579,10 +588,11 @@ void jucemsp_free(t_jucemsp *x)
 	delete x->midiEvents;
 	delete x->juceListener;
 	
-	jucemsp_deleteui(x);
+	if(maxversion() < 0x0500) {
+		jucemsp_deleteui(x);
+		wind_free((t_object*)x->window);
+	}
 	
-	wind_free((t_object*)x->window);
-		
 	delete x->juceAudioProcessor;
 }
 
