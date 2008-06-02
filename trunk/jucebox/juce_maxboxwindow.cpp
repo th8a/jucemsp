@@ -23,11 +23,15 @@ typedef MaxMSPPoint *		MaxMSPPointPtr;
 #define VALIDCHARS "ABCDEFGHIJKLMNOPQRTSUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789"
 
 extern Component* createMaxBoxComponent();
+static int maxBoxDefWidth;
+static int maxBoxDefHeight;
+static String maxBoxName;
 
 typedef struct _jucebox
 {
 #ifdef JUCE_BOX
 	t_box		ob;
+	bool		isInitialised;
 #else
 	t_object	o;
 	t_wind*		window;
@@ -35,7 +39,6 @@ typedef struct _jucebox
 #endif
 
 	void		*obex;
-//	void		*qelem;	
 	Rect 		rect;
 	
 	Component* juceEditorComp;
@@ -65,7 +68,6 @@ void jucebox_free(t_jucebox* x);
 void jucebox_deleteui(t_jucebox *x);
 void jucebox_click(t_jucebox *x, MaxMSPPoint pt, short modifiers);
 void jucebox_update(t_jucebox* x);
-//void jucebox_qfn(t_jucebox* x);
 void jucebox_dblclick(t_jucebox *x);
 void jucebox_invis(t_jucebox *x);
 
@@ -111,9 +113,25 @@ public:
 	
 	void componentMovedOrResized (Component &component, bool wasMoved, bool wasResized)
 	{
-		//post("EditorComponentHolder::componentMovedOrResized");
+#ifdef JUCE_BOX
 		box_size(ref, editorComp->getWidth(), editorComp->getHeight());
-		//setSize(editorComp->getWidth(), editorComp->getHeight());
+#else
+		if (ref->juceEditorComp != 0 && wasResized)
+		{
+			const int w = jmax (32, ref->juceEditorComp->getWidth());
+			const int h = jmax (32, ref->juceEditorComp->getHeight());
+			
+			syswindow_size(wind_syswind(ref->window), w, h, true);
+			
+			if (ref->juceWindowComp->getWidth() != w
+				|| ref->juceWindowComp->getHeight() != h)
+			{
+				ref->juceWindowComp->setSize (w, h);
+			}
+			
+			ref->juceEditorComp->repaint();
+		}
+#endif
 	}
 	
 #ifdef JUCE_BOX
@@ -143,26 +161,28 @@ public:
 #ifdef JUCE_BOX
 	void calcAndSetBounds()
 	{
-		int windowX = ref->ob.b_patcher->p_wind->w_x1,
-		windowY = ref->ob.b_patcher->p_wind->w_y1,
-		windowR = ref->ob.b_patcher->p_wind->w_x2 - SBARWIDTH,
-		windowB = ref->ob.b_patcher->p_wind->w_y2 - SBARWIDTH;
-		
-		int boxX = ref->ob.b_rect.left + windowX,
-			boxY = ref->ob.b_rect.top + windowY,
-			boxR = ref->ob.b_rect.right + windowX,
-			boxB = ref->ob.b_rect.bottom + windowY;
-		
-		Rectangle windowRect(windowX, windowY, windowR-windowX, windowB-windowY);
-		Rectangle boxRect(boxX, boxY, boxR-boxX, boxB-boxY);
-				
-		int offsetX = boxX >= windowX ? 0 : boxX-windowX;
-		int offsetY = boxY >= windowY ? 0 : boxY-windowY;
-				
-		Rectangle sectRect = windowRect.getIntersection(boxRect);
-		
-		editorComp->setBounds(offsetX, offsetY, boxR-boxX, boxB-boxY);
-		setBounds(sectRect);
+		if(ref->isInitialised) {
+			int windowX = ref->ob.b_patcher->p_wind->w_x1,
+			windowY = ref->ob.b_patcher->p_wind->w_y1,
+			windowR = ref->ob.b_patcher->p_wind->w_x2 - SBARWIDTH,
+			windowB = ref->ob.b_patcher->p_wind->w_y2 - SBARWIDTH;
+			
+			int boxX = ref->ob.b_rect.left + windowX,
+				boxY = ref->ob.b_rect.top + windowY,
+				boxR = ref->ob.b_rect.right + windowX,
+				boxB = ref->ob.b_rect.bottom + windowY;
+			
+			Rectangle windowRect(windowX, windowY, windowR-windowX, windowB-windowY);
+			Rectangle boxRect(boxX, boxY, boxR-boxX, boxB-boxY);
+					
+			int offsetX = boxX >= windowX ? 0 : boxX-windowX;
+			int offsetY = boxY >= windowY ? 0 : boxY-windowY;
+					
+			Rectangle sectRect = windowRect.getIntersection(boxRect);
+			
+			editorComp->setBounds(offsetX, offsetY, boxR-boxX, boxB-boxY);
+			setBounds(sectRect);
+		}
 	}
 #endif
 	
@@ -197,9 +217,7 @@ int main()
 	
 	initialiseJuce_GUI();
 
-//	long attrflags = 0;
 	t_class *c;
-//	t_object *attr;
 	
 	common_symbols_init();
 	
@@ -219,18 +237,23 @@ int main()
 	class_obexoffset_set(c, calcoffset(t_jucebox, obex));
 	
 #ifdef JUCE_BOX
-	class_addmethod(c, (method)jucebox_psave,		"psave",		A_CANT, 0L);
+	class_addmethod(c, (method)jucebox_psave,			"psave",		A_CANT, 0L);
 #else
-	class_addmethod(c, (method)jucebox_dblclick,	 "dblclick",	A_CANT, 0); 
-	class_addmethod(c, (method)jucebox_invis,		 "invis",		A_CANT, 0); 
+	class_addmethod(c, (method)jucebox_dblclick,		"dblclick",		A_CANT, 0); 
+	class_addmethod(c, (method)jucebox_invis,			"invis",		A_CANT, 0); 
 #endif
 	
-	class_addmethod(c, (method)jucebox_click,		"click",		A_CANT, 0L);
-	class_addmethod(c, (method)jucebox_update,		"update",		A_CANT, 0L);
-	class_addmethod(c, (method)object_obex_dumpout,  "dumpout",		A_CANT,	0);  
-	class_addmethod(c, (method)object_obex_quickref, "quickref",	A_CANT, 0);
+	class_addmethod(c, (method)jucebox_click,			"click",		A_CANT, 0L);
+	class_addmethod(c, (method)jucebox_update,			"update",		A_CANT, 0L);
+	class_addmethod(c, (method)object_obex_dumpout,		"dumpout",		A_CANT,	0);  
+	class_addmethod(c, (method)object_obex_quickref,	"quickref",		A_CANT, 0);
 		
 	Component* tempComp = createMaxBoxComponent(); //new EditorComponent();
+	maxBoxDefWidth = tempComp->getWidth();
+	maxBoxDefHeight = tempComp->getHeight();
+	maxBoxName = tempComp->getName();
+	if(maxBoxName.isEmpty())
+		maxBoxName = String("Juce Component");
 	int paramIndex = 0;
 	jucebox_setupattrs(c, gensym(""), tempComp, &paramIndex);
 	delete tempComp;
@@ -260,12 +283,27 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 	x = (t_jucebox*)object_alloc(jucebox_class);
 	
 	if(x) {		
+		
+		x->isInitialised = false;
+		
 		patcher = argv[0].a_w.w_obj;					// patcher
 		x_coord = argv[1].a_w.w_long;					// x coord
 		y_coord = argv[2].a_w.w_long;					// y coord
 		width = argv[3].a_w.w_long;						// width
 		height = argv[4].a_w.w_long;					// height
 
+		
+		if(width == -1 || height == -1) {
+			if(maxBoxDefWidth <= 0 || maxBoxDefHeight <= 0) {
+				width = DEFWIDTH;
+				height = DEFHEIGHT;
+			}
+			else {
+				width = maxBoxDefWidth;
+				height = maxBoxDefHeight;
+			}
+		}
+		
 		width = CLIP(width, MINWIDTH, MAXWIDTH); 		// constrain to min and max size
 		height = CLIP(height, MINHEIGHT, MAXHEIGHT);	// constrain to min and max size
 
@@ -284,18 +322,18 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 		
 		// Cache rect for comparisons when the user decides to re-size the object
 		x->rect = x->ob.b_rect;
-
-		// Create our queue element for defering calls to the draw function
-//		x->qelem = qelem_new(x, (method)jucebox_qfn);
 		
+		// need to move this earlier for getting the default size but we crash...
 		x->juceWindowComp = 0L;
 		x->juceEditorComp = 0L;
 		
 		jucebox_addjucecomponents(x);
 		jucebox_addjucecomponentseach(x, x->juceEditorComp);
 		
+		
 		// Finish it up...
 		box_ready((t_box *)x);
+		x->isInitialised = true;
 	}
 	else
 		error("juce_maxbox - could not create instance");
@@ -310,8 +348,8 @@ void *jucebox_menu(void *p, long x, long y, long font)
 	SETOBJ(argv, (t_object *)p);				// patcher
 	SETLONG(argv+1, x);							// x coord
 	SETLONG(argv+2, y);							// y coord
-	SETLONG(argv+3, DEFWIDTH);					// width
-	SETLONG(argv+4, DEFHEIGHT);					// height
+	SETLONG(argv+3, -1);					// width
+	SETLONG(argv+4, -1);					// height
 	
 	return jucebox_new(gensym("juce_maxbox"), 5, argv);
 }
@@ -371,9 +409,6 @@ void jucebox_addjucecomponents(t_jucebox* x)
 void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 {
 	t_jucebox *x;
-//	void *patcher;
-//	long x_coord, y_coord, width, height;
-//	short flags;
 	
 	x = (t_jucebox*)object_alloc(jucebox_class);
 	
@@ -386,12 +421,26 @@ void *jucebox_new(t_symbol *s, short argc, t_atom *argv)
 		x->juceWindowComp = 0L;
 		x->juceEditorComp = 0L;
 		
-		x->window = wind_new (x, 50, 50, DEFWIDTH+50, DEFHEIGHT+50, WCLOSE | WCOLOR); 
-		//wind_vis(x->window);
-		//syswindow_hide(wind_syswind(x->window));
+		int width, height;
+		
+		if(maxBoxDefWidth <= 0 || maxBoxDefHeight <= 0) {
+			width = DEFWIDTH;
+			height = DEFHEIGHT;
+		}
+		else {
+			width = maxBoxDefWidth;
+			height = maxBoxDefHeight;
+		}
+		
+		width = CLIP(width, MINWIDTH, MAXWIDTH); 		// constrain to min and max size
+		height = CLIP(height, MINHEIGHT, MAXHEIGHT);	// constrain to min and max size
+		
+		x->window = wind_new (x, 50, 50, width+50, height+50, WCLOSE | WCOLOR); 
+		wind_settitle(x->window, (char*)(const char*)maxBoxName, 0);
 		x->windowIsVisible = false;
 		
 		jucebox_addjucecomponents(x);
+		jucebox_addjucecomponentseach(x, x->juceEditorComp);
 		
 		attr_args_process(x,argc,argv);		// Handle attribute args
 	}
@@ -405,12 +454,9 @@ void jucebox_dblclick(t_jucebox *x)
 { 	
 	
 	if(!x->windowIsVisible) {
-		
 		wind_vis(x->window);
 		syswindow_hide(wind_syswind(x->window));
-		
-		//jucebox_addjucecomponents(x);
-		
+				
 		//Mac only here...
 		HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->window));
 		x->juceWindowComp->addToDesktop(0, (void*)hiRoot);
@@ -423,8 +469,6 @@ void jucebox_dblclick(t_jucebox *x)
 				
 		x->windowIsVisible = true;
 		syswindow_show(wind_syswind(x->window));
-		
-		
 		
 		//x->juceEditorComp->addComponentListener(x->juceListener);
 	}
@@ -447,22 +491,20 @@ void jucebox_addjucecomponents(t_jucebox* x)
 	
 	x->juceEditorComp = createMaxBoxComponent(); // new EditorComponent();
 	
-	x->juceEditorComp->setBounds(0, 0, DEFWIDTH, DEFHEIGHT);
+	//Rectangle defaultRect = x->juceEditorComp->getBounds();
+	
+	int width = x->window->w_x2 - x->window->w_x1;
+	int height = x->window->w_y2 - x->window->w_y1;
+	
+	x->juceEditorComp->setBounds(0, 0, width, height);
+	
 	x->juceEditorComp->setOpaque (true);
 	x->juceEditorComp->setVisible (true);
 	
 	x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, x);
-	x->juceWindowComp->setBounds(0, WINDOWTITLEBARHEIGHT, DEFWIDTH, DEFHEIGHT);
+	x->juceWindowComp->setBounds(0, WINDOWTITLEBARHEIGHT, width, height);
 	
-	// Mac only here...
-//	HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->window));
-//	x->juceWindowComp->addToDesktop(0, (void*)hiRoot);
-//		
-//	x->hiRoot = hiRoot;
-	
-	jucebox_addjucecomponentseach(x, x->juceEditorComp);
-	
-	//x->juceEditorComp->addComponentListener(x->juceListener);
+	x->juceEditorComp->addComponentListener(x->juceWindowComp);
 }
 
 #endif
@@ -488,9 +530,7 @@ void jucebox_setupattrs(t_class *c, t_symbol* prefixSym, Component* comp, int *p
 		String childAttrName(prefix + child->getName().replaceCharacter (' ', '_')
 							 .replaceCharacter ('.', '_')
 							 .retainCharacters (T(VALIDCHARS)));
-		
-		//post("procssing attr: %s", (char*)(const char*)childAttrName);
-		
+				
 		Slider * slider = dynamic_cast <Slider*> (child);
 		
 		if(slider != 0) {
@@ -499,8 +539,6 @@ void jucebox_setupattrs(t_class *c, t_symbol* prefixSym, Component* comp, int *p
 								   (method)jucebox_attr_get, (method)jucebox_attr_set, 
 								   calcoffset(t_jucebox, params) + sizeof(float) * (*paramIndex)); 
 			class_addattr(c, attr);
-			
-			//post("procssing attr: %s index=%d", (char*)(const char*)childAttrName, *paramIndex);
 		}
 		
 		GroupComponent * group = dynamic_cast <GroupComponent*> (child);
@@ -547,13 +585,8 @@ t_max_err jucebox_attr_geteach(t_jucebox *x, Component* comp, t_symbol* attrName
 							 .retainCharacters (T(VALIDCHARS)));
 		
 		t_symbol *paramName = gensym((char*)(const char*)childAttrName);
-		
-		//post("jucebox_attr_geteach attrName=%s paramName=%s", attrName->s_name, paramName->s_name);
-		
+				
 		if(attrName == paramName) {
-			
-			//post("getting attr: %s index=%d", (char*)(const char*)childAttrName, *paramIndex);
-			
 			atom_setfloat(*av, x->params[*paramIndex]);
 			return MAX_ERR_NONE;
 		}
@@ -608,9 +641,7 @@ t_max_err jucebox_attr_seteach(t_jucebox *x, Component* comp, t_symbol* attrName
 		Slider* slider = dynamic_cast <Slider*> (child);
 		
 		if(slider != 0) {
-			if(attrName == paramName) {
-				//post("setting attr: %s index=%d", (char*)(const char*)childAttrName, *paramIndex);
-				
+			if(attrName == paramName) {				
 				x->params[*paramIndex] = atom_getfloat(av);			
 				
 				slider->setValue(x->params[*paramIndex], false);
@@ -660,13 +691,9 @@ t_max_err jucebox_sliderchangedeach(t_jucebox* x, Component* comp, Slider *chang
 		
 		Slider* slider = dynamic_cast <Slider*> (child);
 		
-		if(changedSlider == slider) {
-			//post("jucebox_sliderchanged %s index=%d", paramName->s_name, *paramIndex);
-			
+		if(changedSlider == slider) {			
 			x->params[*paramIndex] = slider->getValue();
-			
-			//object_attr_getdump(x, paramName, 0, 0L); weird I get "der" from the outlet!
-			
+						
 			t_atom atom;
 			atom_setfloat(&atom, x->params[*paramIndex]);
 			outlet_anything(x->dumpOut, paramName, 1, &atom);
@@ -675,13 +702,8 @@ t_max_err jucebox_sliderchangedeach(t_jucebox* x, Component* comp, Slider *chang
 		}
 		
 		GroupComponent * group = dynamic_cast <GroupComponent*> (child);
-		
-		//post("jucebox_sliderchangedeach group=%p", group);
-		
+				
 		if(group != 0 && group->getNumChildComponents() > 0) {
-			
-			//post("jucebox_sliderchangedeach in group");
-			
 			t_max_err err = jucebox_sliderchangedeach(x, group, changedSlider, paramName, paramIndex);
 			
 			if(err == MAX_ERR_NONE)
@@ -718,13 +740,10 @@ void jucebox_addjucecomponentseach(t_jucebox* x, Component *comp)
 void jucebox_free(t_jucebox* x)
 {
 	jucebox_deleteui(x);
-	
-//	qelem_free(x->qelem);				// delete our qelem
-	
+		
 #ifdef JUCE_BOX
 	box_free((t_box *)x);				// free the ui box
 #else
-	//wind_close(x->window);
 	wind_free((t_object*)x->window);
 #endif
 	
@@ -751,9 +770,7 @@ void jucebox_update(t_jucebox* x)
 {
 #ifdef JUCE_BOX
 	box_invalnow(&x->ob);
-	
-	//post("jucebox_update");
-	
+		
 	short width_old = x->rect.right - x->rect.left;
 	short height_old = x->rect.bottom - x->rect.top;
 	short width_new = x->ob.b_rect.right - x->ob.b_rect.left;
@@ -768,16 +785,11 @@ void jucebox_update(t_jucebox* x)
 		
 	if(box_ownerlocked((t_box*)x)) {
 		if(!x->juceWindowComp) jucebox_addjucecomponents(x);
-		
-//		x->juceWindowComp->setBounds(x->ob.b_rect.left + x->ob.b_patcher->p_wind->w_x1, 
-//									 x->ob.b_rect.top + x->ob.b_patcher->p_wind->w_y1, 
-//									 width_new, height_new);
-		
+				
 		x->juceWindowComp->calcAndSetBounds();
 	}
 	else {
 		GrafPtr	gp = patcher_setport(x->ob.b_patcher);
-		// could display some dummy text in unlocked mode
 			
 			RGBColor ggryrgb = {32767, 32767, 32767};
 			RGBColor oldBackColor;
@@ -806,10 +818,7 @@ void jucebox_update(t_jucebox* x)
 #endif
 }
 
-//void jucebox_qfn(t_jucebox* x)
-//{
-//	
-//}
+
 
 
 

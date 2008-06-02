@@ -17,6 +17,10 @@ public:
 		group->addAndMakeVisible(dial2 = new Slider("Dial2"));
 		dial2->setSliderStyle(Slider::RotaryVerticalDrag);
 		dial2->setRange(0.0, 1.0, 0.01);
+		
+		addAndMakeVisible(resizer = new ResizableCornerComponent(this, 0));
+		
+		setSize(300, 300);
 	}
 
 	~EditorComponent()
@@ -31,6 +35,8 @@ public:
 		group->setBounds(10, 55, 250, 80);
 		dial1->setBounds(10, 10, 100, 60);
 		dial2->setBounds(120, 10, 100, 60);
+		
+		resizer->setBounds(getWidth()-12, getHeight()-12, 12, 12);
 	}
 
 	void paint (Graphics& g)
@@ -43,6 +49,8 @@ private:
 	GroupComponent *group;
 	Slider* dial1;
 	Slider* dial2;
+	
+	ResizableCornerComponent* resizer;
 };
 
 Component* createMaxBoxComponent()
