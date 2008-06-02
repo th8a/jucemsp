@@ -21,6 +21,7 @@
 		A80FE1680DE8BE0C00AE5B01 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80FE1670DE8BE0C00AE5B01 /* OpenGL.framework */; };
 		A80FE2A00DE9395000AE5B01 /* JucePluginCharacteristics.h in Headers */ = {isa = PBXBuildFile; fileRef = A80FE29F0DE9395000AE5B01 /* JucePluginCharacteristics.h */; };
 		A80FE4B00DE9523F00AE5B01 /* commonsyms.c in Sources */ = {isa = PBXBuildFile; fileRef = A80FE4AF0DE9523F00AE5B01 /* commonsyms.c */; };
+		A88A8C460DF444FB00DF4080 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88A8C450DF444FB00DF4080 /* AppKit.framework */; };
 		A894AE930DEB3B57009B3526 /* MSPEditorComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */; };
 		A894AE940DEB3B57009B3526 /* MSPEditorComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A894AE920DEB3B57009B3526 /* MSPEditorComponent.cpp */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		A80FE1670DE8BE0C00AE5B01 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		A80FE29F0DE9395000AE5B01 /* JucePluginCharacteristics.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = JucePluginCharacteristics.h; sourceTree = "<group>"; };
 		A80FE4AF0DE9523F00AE5B01 /* commonsyms.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = commonsyms.c; path = "../../c74support/max-includes/common/commonsyms.c"; sourceTree = SOURCE_ROOT; };
+		A88A8C450DF444FB00DF4080 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		A894AE910DEB3B57009B3526 /* MSPEditorComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSPEditorComponent.h; sourceTree = "<group>"; };
 		A894AE920DEB3B57009B3526 /* MSPEditorComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MSPEditorComponent.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,6 +71,7 @@
 				A80FE0B50DE8BDD700AE5B01 /* CoreAudio.framework in Frameworks */,
 				A80FE1550DE8BDED00AE5B01 /* IOKit.framework in Frameworks */,
 				A80FE1680DE8BE0C00AE5B01 /* OpenGL.framework in Frameworks */,
+				A88A8C460DF444FB00DF4080 /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				A80FDFBA0DE7FEF800AE5B01 /* Juce.xcodeproj */,
+				A88A8C450DF444FB00DF4080 /* AppKit.framework */,
 				0FF3253F09473DCC00B01934 /* MaxAudioAPI.framework */,
 				0F5B62020919440900A62EB9 /* MaxAPI.framework */,
 				08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */,
@@ -163,9 +167,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8D01CCC60486CAD60068D4B7 /* plus~ */ = {
+		8D01CCC60486CAD60068D4B7 /* juce_mspobject~ */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0FFBC540097463A900D78707 /* Build configuration list for PBXNativeTarget "plus~" */;
+			buildConfigurationList = 0FFBC540097463A900D78707 /* Build configuration list for PBXNativeTarget "juce_mspobject~" */;
 			buildPhases = (
 				8D01CCC70486CAD60068D4B7 /* Headers */,
 				8D01CCC90486CAD60068D4B7 /* Resources */,
@@ -177,7 +181,7 @@
 			);
 			dependencies = (
 			);
-			name = "plus~";
+			name = "juce_mspobject~";
 			productInstallPath = "$(HOME)/Library/Bundles";
 			productName = MSPExternal;
 			productReference = 8D01CCD20486CAD60068D4B7 /* juce_mspobject~.mxo */;
@@ -199,7 +203,7 @@
 				},
 			);
 			targets = (
-				8D01CCC60486CAD60068D4B7 /* plus~ */,
+				8D01CCC60486CAD60068D4B7 /* juce_mspobject~ */,
 			);
 		};
 /* End PBXProject section */
@@ -354,7 +358,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0FFBC540097463A900D78707 /* Build configuration list for PBXNativeTarget "plus~" */ = {
+		0FFBC540097463A900D78707 /* Build configuration list for PBXNativeTarget "juce_mspobject~" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0FFBC541097463A900D78707 /* Debug */,

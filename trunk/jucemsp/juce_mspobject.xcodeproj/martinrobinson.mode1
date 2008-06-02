@@ -243,7 +243,7 @@
 						<dict>
 							<key>PBXSmartGroupTreeModuleColumnWidthsKey</key>
 							<array>
-								<real>271</real>
+								<real>184</real>
 							</array>
 							<key>PBXSmartGroupTreeModuleColumnsKey_v4</key>
 							<array>
@@ -268,13 +268,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>8</integer>
-									<integer>4</integer>
+									<integer>2</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {271, 736}}</string>
+							<string>{{0, 0}, {184, 736}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -286,19 +286,19 @@
 					<key>GeometryConfiguration</key>
 					<dict>
 						<key>Frame</key>
-						<string>{{0, 0}, {288, 754}}</string>
+						<string>{{0, 0}, {201, 754}}</string>
 						<key>GroupTreeTableConfiguration</key>
 						<array>
 							<string>MainColumn</string>
-							<real>271</real>
+							<real>184</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>224 83 1303 795 0 0 1440 878 </string>
+						<string>8 83 1303 795 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
 					<key>Proportion</key>
-					<string>288pt</string>
+					<string>201pt</string>
 				</dict>
 				<dict>
 					<key>Dock</key>
@@ -311,7 +311,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MSPEditorComponent.h</string>
+								<string>juce_mspobject.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -319,11 +319,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>MSPEditorComponent.h</string>
+										<string>juce_mspobject.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>A894B27C0DEBEE7E009B3526</string>
+										<string>A88A8CFA0DF4458E00DF4080</string>
 										<key>history</key>
 										<array>
 											<string>A80FE5720DE974D500AE5B01</string>
@@ -336,13 +336,13 @@
 											<string>A894AF580DEB5C3B009B3526</string>
 											<string>A894AF5A0DEB5C3B009B3526</string>
 											<string>A894AF8F0DEB73A8009B3526</string>
-											<string>A894AF920DEB73A8009B3526</string>
-											<string>A894B1880DEBD6A2009B3526</string>
-											<string>A894B1890DEBD6A2009B3526</string>
-											<string>A894B18A0DEBD6A2009B3526</string>
-											<string>A894B2740DEBEE7E009B3526</string>
-											<string>A894B2750DEBEE7E009B3526</string>
-											<string>A894B2760DEBEE7E009B3526</string>
+											<string>A8C53DFE0DEE25860025EB05</string>
+											<string>A8C541C20DF08B970025EB05</string>
+											<string>A8C541C30DF08B970025EB05</string>
+											<string>A88A896A0DF353B700DF4080</string>
+											<string>A88A8CF30DF4458E00DF4080</string>
+											<string>A88A8CF40DF4458E00DF4080</string>
+											<string>A88A8CF50DF4458E00DF4080</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -362,12 +362,11 @@
 											<string>A894AF610DEB5C3B009B3526</string>
 											<string>A894AF630DEB5C3B009B3526</string>
 											<string>A894AF650DEB5C3B009B3526</string>
-											<string>A894B1930DEBD6A2009B3526</string>
-											<string>A894B2770DEBEE7E009B3526</string>
-											<string>A894B2780DEBEE7E009B3526</string>
-											<string>A894B2790DEBEE7E009B3526</string>
-											<string>A894B27A0DEBEE7E009B3526</string>
-											<string>A894B27B0DEBEE7E009B3526</string>
+											<string>A88A896B0DF353B700DF4080</string>
+											<string>A88A8CF60DF4458E00DF4080</string>
+											<string>A88A8CF70DF4458E00DF4080</string>
+											<string>A88A8CF80DF4458E00DF4080</string>
+											<string>A88A8CF90DF4458E00DF4080</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -379,9 +378,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1010, 624}}</string>
+								<string>{{0, 0}, {1097, 624}}</string>
 								<key>RubberWindowFrame</key>
-								<string>224 83 1303 795 0 0 1440 878 </string>
+								<string>8 83 1303 795 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -399,9 +398,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 629}, {1010, 125}}</string>
+								<string>{{0, 629}, {1097, 125}}</string>
 								<key>RubberWindowFrame</key>
-								<string>224 83 1303 795 0 0 1440 878 </string>
+								<string>8 83 1303 795 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -410,7 +409,7 @@
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>1010pt</string>
+					<string>1097pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -425,9 +424,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>A894B27D0DEBEE7E009B3526</string>
+				<string>A88A8C3F0DF444EF00DF4080</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>A894B27E0DEBEE7E009B3526</string>
+				<string>A88A8C400DF444EF00DF4080</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -565,7 +564,7 @@
 		<string>/Users/martinrobinson/development/maxmsp/my projects/juce_mspobject~/juce_mspobject.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>224 83 1303 795 0 0 1440 878 </string>
+	<string>8 83 1303 795 0 0 1440 878 </string>
 	<key>WindowTools</key>
 	<array>
 		<dict>
@@ -603,6 +602,8 @@
 							<string>303pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -642,7 +643,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>A857F64B0D2C103B004DDB2C</string>
-				<string>A894B27F0DEBEE7E009B3526</string>
+				<string>A88A8C410DF444EF00DF4080</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -653,7 +654,7 @@
 			<key>WindowToolGUID</key>
 			<string>A857F64B0D2C103B004DDB2C</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

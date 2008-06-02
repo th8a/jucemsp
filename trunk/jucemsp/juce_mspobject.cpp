@@ -142,7 +142,7 @@ public:
 	
     void paint (Graphics& g)
     {
-		post("EditorComponentHolder::paint");
+		//post("EditorComponentHolder::paint");
     }
 	
 private:
@@ -448,7 +448,7 @@ void jucemsp_dblclick(t_jucemsp *x)
 		x->windowIsVisible = true;
 		syswindow_show(wind_syswind(x->window));
 		
-		x->juceEditorComp->addComponentListener(x->juceListener);
+		x->juceEditorComp->addComponentListener(x->juceListener); // harmless to do this more than once...
 	}
 	
 	syswindow_move(wind_syswind(x->window), x->window->w_x1, x->window->w_y1, true);
@@ -467,6 +467,7 @@ void jucemsp_invis(t_jucemsp *x)
 	//post("jucemsp_invis");
 	
 	x->windowIsVisible = false;
+	delete x->juceWindowComp; // do this?
 }
 
 void jucemsp_assist(t_jucemsp *x, void *b, long inletOrOutlet, long inletOutletIndex, char *s)
