@@ -101,6 +101,7 @@
 			A88A8D160DF4485300DF4080 /* PBXTextBookmark */ = A88A8D160DF4485300DF4080 /* PBXTextBookmark */;
 			A88A8D1F0DF448B100DF4080 /* PBXTextBookmark */ = A88A8D1F0DF448B100DF4080 /* PBXTextBookmark */;
 			A88A8D220DF448F100DF4080 /* PBXTextBookmark */ = A88A8D220DF448F100DF4080 /* PBXTextBookmark */;
+			A88A8DA10DF4688D00DF4080 /* PBXTextBookmark */ = A88A8DA10DF4688D00DF4080 /* PBXTextBookmark */;
 			A894AC4D0DEB013C009B3526 = A894AC4D0DEB013C009B3526 /* PBXTextBookmark */;
 			A894AC730DEB07D2009B3526 = A894AC730DEB07D2009B3526 /* PBXTextBookmark */;
 			A894AC760DEB07D2009B3526 = A894AC760DEB07D2009B3526 /* PBXTextBookmark */;
@@ -134,7 +135,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1050, 8414}}";
 			sepNavSelRange = "{16336, 0}";
-			sepNavVisRect = "{{0, 7301}, {1050, 592}}";
+			sepNavVisRect = "{{0, 7803}, {1050, 592}}";
 			sepNavWindowFrame = "{{15, 2}, {943, 871}}";
 		};
 	};
@@ -463,6 +464,16 @@
 		rType = 0;
 		vrLen = 1192;
 		vrLoc = 14814;
+	};
+	A88A8DA10DF4688D00DF4080 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		name = "juce_mspobject.cpp: jucemsp_deleteui";
+		rLen = 0;
+		rLoc = 16336;
+		rType = 0;
+		vrLen = 900;
+		vrLoc = 15827;
 	};
 	A894A8520DEAAFA2009B3526 /* MaxMSPRuntime46 */ = {
 		isa = PBXExecutable;
