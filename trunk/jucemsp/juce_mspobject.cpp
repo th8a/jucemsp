@@ -1,10 +1,16 @@
-#include "../../../juce_code/juce/juce.h"
-#include "JucePluginCharacteristics.h"
+//#include "../../../juce_code/juce/juce.h"
+//#include "../../../juce_code/juce/src/juce_WithoutMacros.h"
+
 #include "ext.h"
 #include "z_dsp.h"
 #include "ext_strings.h"     // String Functions
 #include "commonsyms.h"      // Common symbols used by the Max 4.5 API
 #include "ext_obex.h"        // Max Object Extensions
+
+// moved this after ext.h since in Windows we got linker errors
+#define DONT_AUTOLINK_TO_JUCE_LIBRARY
+#include "../../../juce_code/juce/juce.h"
+#include "JucePluginCharacteristics.h"
 
 #define VALIDCHARS "ABCDEFGHIJKLMNOPQRTSUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789"
 
@@ -441,10 +447,13 @@ void jucemsp_dblclick(t_jucemsp *x)
 		
 		syswindow_move(wind_syswind(x->window), mx, my + WINDOWTITLEBARHEIGHT, false);
 		
-		// Mac only here...!
+#ifdef  WIN_VERSION
+		x->juceWindowComp->addToDesktop(0, (void*)wind_syswind(x->window));
+#else
 		HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->window));
 		x->juceWindowComp->addToDesktop(0, (void*)hiRoot);
-		
+#endif
+
 		x->windowIsVisible = true;
 		syswindow_show(wind_syswind(x->window));
 		

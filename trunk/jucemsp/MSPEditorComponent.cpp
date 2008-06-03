@@ -7,6 +7,7 @@
  *
  */
 
+#define DONT_AUTOLINK_TO_JUCE_LIBRARY
 #include "../../../juce_code/juce/juce.h"
 #include "MSPEditorComponent.h"
 

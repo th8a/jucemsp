@@ -5,8 +5,12 @@
  *
  */
 
-#include "../../../juce_code/juce/juce.h"
+//#include "../../../juce_code/juce/juce.h"
 #include "ext.h"
+
+// moved this after ext.h since in Windows we got linker errors
+#define DONT_AUTOLINK_TO_JUCE_LIBRARY
+#include "../../../juce_code/juce/juce.h"
 #include "MSPAudioProcessor.h"
 #include "MSPEditorComponent.h"
 

@@ -1,0 +1,6 @@
+;juce_mspobject~.def
+
+LIBRARY juce_mspobject~.mxe
+
+EXPORTS
+	main
