@@ -459,7 +459,7 @@ void jucemsp_dblclick(t_jucemsp *x)
 		DWORD val = GetWindowLong (editorWnd, GWL_STYLE);
 		val = (val & ~WS_POPUP) | WS_CHILD;
 		SetWindowLong (editorWnd, GWL_STYLE, val);
-#else
+#else   // MAC
 		x->juceWindowComp->setBounds(0, WINDOWTITLEBARHEIGHT, w, h);
 		HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->window));
 		x->juceWindowComp->addToDesktop(0, (void*)hiRoot);

@@ -89,6 +89,7 @@
 			A810057D0DF5CBCC00C720EF /* PBXTextBookmark */ = A810057D0DF5CBCC00C720EF /* PBXTextBookmark */;
 			A810057E0DF5CBCC00C720EF /* PBXTextBookmark */ = A810057E0DF5CBCC00C720EF /* PBXTextBookmark */;
 			A810057F0DF5CBCC00C720EF /* PBXTextBookmark */ = A810057F0DF5CBCC00C720EF /* PBXTextBookmark */;
+			A81005820DF5CBCC00C720EF /* PBXTextBookmark */ = A81005820DF5CBCC00C720EF /* PBXTextBookmark */;
 			A88A896A0DF353B700DF4080 = A88A896A0DF353B700DF4080 /* PBXTextBookmark */;
 			A88A896B0DF353B700DF4080 = A88A896B0DF353B700DF4080 /* PBXTextBookmark */;
 			A88A8CF30DF4458E00DF4080 = A88A8CF30DF4458E00DF4080 /* PBXTextBookmark */;
@@ -131,8 +132,8 @@
 	08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1050, 8722}}";
-			sepNavSelRange = "{4587, 21}";
-			sepNavVisRect = "{{0, 2007}, {1050, 592}}";
+			sepNavSelRange = "{13145, 0}";
+			sepNavVisRect = "{{0, 6042}, {1050, 592}}";
 			sepNavWindowFrame = "{{15, 2}, {943, 871}}";
 		};
 	};
@@ -322,6 +323,16 @@
 		vrLen = 1003;
 		vrLoc = 4255;
 	};
+	A81005820DF5CBCC00C720EF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
+		name = "juce_mspobject.cpp: 462";
+		rLen = 0;
+		rLoc = 13145;
+		rType = 0;
+		vrLen = 1383;
+		vrLoc = 12182;
+	};
 	A857F6410D2C0FF4004DDB2C /* Source Control */ = {
 		isa = PBXSourceControlManager;
 		fallbackIsa = XCSourceControlManager;
@@ -385,7 +396,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "wind_settitle(x->window, x->name->s_name, 0);";
 		rLen = 45;
-		rLoc = 15594;
+		rLoc = 15603;
 		rType = 0;
 		vrLen = 1229;
 		vrLoc = 14565;
@@ -432,7 +443,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: jucemsp_deleteui";
 		rLen = 0;
-		rLoc = 16336;
+		rLoc = 16345;
 		rType = 0;
 		vrLen = 901;
 		vrLoc = 15826;
@@ -446,7 +457,7 @@
 		fRef = 08FB77B2FE8417CDC02AAC07 /* juce_mspobject.cpp */;
 		name = "juce_mspobject.cpp: jucemsp_deleteui";
 		rLen = 0;
-		rLoc = 16336;
+		rLoc = 16345;
 		rType = 0;
 		vrLen = 901;
 		vrLoc = 15826;
