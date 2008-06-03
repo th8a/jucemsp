@@ -435,10 +435,10 @@ void jucemsp_dblclick(t_jucemsp *x)
 		const int h = x->juceEditorComp->getHeight();
 		
 		x->juceEditorComp->setOpaque (true);
-		x->juceEditorComp->setVisible (true);
+		x->juceEditorComp->setVisible (false);
 		
 		x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp);
-		x->juceWindowComp->setBounds(0, WINDOWTITLEBARHEIGHT, w, h);
+		
 		
 		syswindow_size(wind_syswind(x->window), w, h, true);	
 		
@@ -448,11 +448,24 @@ void jucemsp_dblclick(t_jucemsp *x)
 		syswindow_move(wind_syswind(x->window), mx, my + WINDOWTITLEBARHEIGHT, false);
 		
 #ifdef  WIN_VERSION
-		x->juceWindowComp->addToDesktop(0, (void*)wind_syswind(x->window));
+		x->juceWindowComp->setBounds(0, 0, w, h);
+		x->juceEditorComp->addToDesktop (0);
+
+		HWND hostWindow = wind_gethwnd(x->window);
+		HWND editorWnd = (HWND) x->juceEditorComp->getWindowHandle();
+
+		SetParent (editorWnd, hostWindow);
+
+		DWORD val = GetWindowLong (editorWnd, GWL_STYLE);
+		val = (val & ~WS_POPUP) | WS_CHILD;
+		SetWindowLong (editorWnd, GWL_STYLE, val);
 #else
+		x->juceWindowComp->setBounds(0, WINDOWTITLEBARHEIGHT, w, h);
 		HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->window));
 		x->juceWindowComp->addToDesktop(0, (void*)hiRoot);
 #endif
+
+		x->juceEditorComp->setVisible (true);
 
 		x->windowIsVisible = true;
 		syswindow_show(wind_syswind(x->window));
