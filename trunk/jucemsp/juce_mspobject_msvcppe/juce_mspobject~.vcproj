@@ -225,7 +225,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\juce_LibrarySource.cpp"
+				RelativePath=".\juce_LibrarySource.cpp"
 				>
 			</File>
 			<File
