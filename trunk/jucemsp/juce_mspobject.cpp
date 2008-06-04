@@ -7,9 +7,7 @@
 #include "commonsyms.h"      // Common symbols used by the Max 4.5 API
 #include "ext_obex.h"        // Max Object Extensions
 
-// moved this after ext.h since in Windows we got linker errors
-#define DONT_AUTOLINK_TO_JUCE_LIBRARY
-#include "../../../juce_code/juce/juce.h"
+#include "../../../juce_code/juce/juce_amalgamated.h"
 #include "JucePluginCharacteristics.h"
 
 #define VALIDCHARS "ABCDEFGHIJKLMNOPQRTSUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789"
