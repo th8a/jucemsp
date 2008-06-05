@@ -1,0 +1,6 @@
+;juce_maxwindow.def
+
+LIBRARY juce_maxwindow.mxe
+
+EXPORTS
+	main

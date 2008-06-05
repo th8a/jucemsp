@@ -1,4 +1,4 @@
-#include "../../../juce_code/juce/juce.h"
+#include "../../../juce_code/juce/juce_amalgamated.h"
 
 class EditorComponent : public Component
 {

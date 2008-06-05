@@ -1,8 +1,10 @@
-#include "../../../juce_code/juce/juce.h"
+
 #include "ext.h"
 #include "ext_common.h"
 #include "commonsyms.h"      // Common symbols used by the Max 4.5 API
 #include "ext_obex.h"
+
+#include "../../../juce_code/juce/juce_amalgamated.h"
 
 // Point conflicts with the Juce::Point, perhaps use a namespace for this
 struct MaxMSPPoint {
@@ -43,7 +45,7 @@ typedef struct _jucebox
 	
 	Component* juceEditorComp;
 	class EditorComponentHolder* juceWindowComp;
-	HIViewRef hiRoot;
+	//HIViewRef hiRoot;
 	
 	t_object*	dumpOut;
 	
@@ -456,11 +458,30 @@ void jucebox_dblclick(t_jucebox *x)
 	if(!x->windowIsVisible) {
 		wind_vis(x->window);
 		syswindow_hide(wind_syswind(x->window));
-				
-		//Mac only here...
+		
+		x->juceEditorComp->setVisible (false);
+
+#ifdef  WIN_VERSION
+		const int w = x->juceEditorComp->getWidth();
+		const int h = x->juceEditorComp->getHeight();
+		x->juceWindowComp->setBounds(0, 0, w, h);
+		x->juceEditorComp->addToDesktop (0);
+
+		HWND hostWindow = wind_gethwnd(x->window);
+		HWND editorWnd = (HWND) x->juceEditorComp->getWindowHandle();
+
+		SetParent (editorWnd, hostWindow);
+
+		DWORD val = GetWindowLong (editorWnd, GWL_STYLE);
+		val = (val & ~WS_POPUP) | WS_CHILD;
+		SetWindowLong (editorWnd, GWL_STYLE, val);
+#else
 		HIViewRef hiRoot = HIViewGetRoot((WindowRef)wind_syswind(x->window));
 		x->juceWindowComp->addToDesktop(0, (void*)hiRoot);
-		x->hiRoot = hiRoot;
+		//x->hiRoot = hiRoot;
+#endif
+
+		x->juceEditorComp->setVisible (true);
 		
 		int mx, my;
 		Desktop::getMousePosition(mx,my);
