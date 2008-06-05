@@ -401,7 +401,7 @@ void jucebox_addjucecomponents(t_jucebox* x)
 	
 	x->juceWindowComp->addToDesktop(0);//, (void*)hiRoot);
 		
-	x->hiRoot = hiRoot;
+	//x->hiRoot = hiRoot;
 }
 
 #else
