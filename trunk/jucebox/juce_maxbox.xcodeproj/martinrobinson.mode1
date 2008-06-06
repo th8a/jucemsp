@@ -265,7 +265,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>6</integer>
+									<integer>5</integer>
 									<integer>4</integer>
 									<integer>0</integer>
 								</array>
@@ -301,6 +301,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -318,7 +320,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>A82E8D830DF83CFE00BA7D1F</string>
+										<string>A831F4430DF83E8200C56A0A</string>
 										<key>history</key>
 										<array>
 											<string>A80F10970D53C63C00A3FA79</string>
@@ -344,7 +346,7 @@
 											<string>A8C53F3C0DEE9F880025EB05</string>
 											<string>A88A8B1A0DF4066200DF4080</string>
 											<string>A88A8B4D0DF43C5F00DF4080</string>
-											<string>A82E8D7D0DF83CED00BA7D1F</string>
+											<string>A831F4420DF83E8200C56A0A</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -393,8 +395,6 @@
 							<string>653pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -431,9 +431,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>A82E8D840DF83CFE00BA7D1F</string>
+				<string>A831F4440DF83E8200C56A0A</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>A82E8D850DF83CFE00BA7D1F</string>
+				<string>A831F4450DF83E8200C56A0A</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -567,7 +567,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>A857F62F0D2C0FBC004DDB2C</string>
 		<string>/Users/martinrobinson/development/maxmsp/my projects/juce_maxbox/juce_maxbox.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -587,14 +586,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>juce_maxboxwindow.cpp</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -603,7 +600,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1135, 549}}</string>
 								<key>RubberWindowFrame</key>
-								<string>367 103 1135 687 0 0 1440 878 </string>
+								<string>363 103 1135 687 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -627,7 +624,7 @@
 								<key>Frame</key>
 								<string>{{0, 554}, {1135, 92}}</string>
 								<key>RubberWindowFrame</key>
-								<string>367 103 1135 687 0 0 1440 878 </string>
+								<string>363 103 1135 687 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXBuildResultsModule</string>
@@ -650,14 +647,14 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>A857F62F0D2C0FBC004DDB2C</string>
-				<string>A82E8D7F0DF83CED00BA7D1F</string>
+				<string>A82E8D950DF83D6100BA7D1F</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.build</string>
 			<key>WindowString</key>
-			<string>367 103 1135 687 0 0 1440 878 </string>
+			<string>363 103 1135 687 0 0 1440 878 </string>
 			<key>WindowToolGUID</key>
 			<string>A857F62F0D2C0FBC004DDB2C</string>
 			<key>WindowToolIsVisible</key>
