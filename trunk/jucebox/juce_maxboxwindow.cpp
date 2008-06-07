@@ -467,6 +467,8 @@ void jucebox_dblclick(t_jucebox *x)
 		x->juceWindowComp->setBounds(0, 0, w, h);
 		x->juceEditorComp->addToDesktop (0);
 
+		//x->juceWindowComp->addToDesktop (0);
+
 		HWND hostWindow = wind_gethwnd(x->window);
 		HWND editorWnd = (HWND) x->juceEditorComp->getWindowHandle();
 
